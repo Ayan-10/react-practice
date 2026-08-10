@@ -1,0 +1,27 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: #f5f6f8;
+  color: #1a1a2e;
+}
+.app-shell { max-width: 900px; margin: 0 auto; padding: 24px; }
+.app-shell h1 { font-size: 22px; }
+.module-menu { list-style: none; padding: 0; display: grid; gap: 10px; }
+.module-menu a {
+  display: block; padding: 14px 16px; background: #fff; border: 1px solid #e2e4e9;
+  border-radius: 10px; text-decoration: none; color: #1a1a2e; font-weight: 500;
+}
+.module-menu a:hover { border-color: #6c5ce7; box-shadow: 0 2px 8px rgba(108,92,231,.12); }
+.module-menu small { color: #7a7a8c; font-weight: 400; display: block; margin-top: 4px; }
+.back-link { display: inline-block; margin-bottom: 16px; color: #6c5ce7; text-decoration: none; }
+.card {
+  background: #fff; border: 1px solid #e2e4e9; border-radius: 10px; padding: 16px;
+}
+button { cursor: pointer; font: inherit; }
+input, select { font: inherit; padding: 8px; border: 1px solid #cfd2da; border-radius: 8px; }
+.btn {
+  padding: 8px 14px; border: 1px solid #6c5ce7; background: #6c5ce7; color: #fff; border-radius: 8px;
+}
+.btn.secondary { background: #fff; color: #6c5ce7; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
