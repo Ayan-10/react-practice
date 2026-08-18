@@ -9,17 +9,24 @@ npm install
 
 ## Practice a module
 ```bash
-npm run dev            # opens a menu of all modules in the browser
-npm test -- m03        # run ONE module's tests (replace m03 with any module)
-npm test               # run all modules
+npm run dev            # dev server at http://localhost:5173 — a menu of all modules
+npm test -- m03        # run ONE module's tests once (replace m03 with any module)
+npm test               # run all modules once
+npm run test:watch     # re-run on save while you work
 ```
 
-Each module folder in `src/modules/` has:
-- `PROMPT.md` — the interview-style task + time box + hints
-- `index.jsx` — the component to fix (starts broken/stubbed)
-- `index.test.jsx` — tests that must pass
+**See the UI:** open http://localhost:5173, click a module to open its mini-app, use
+`← All modules` to go back.
 
-Reference solutions live in `solutions/`. **Attempt first**, then compare to learn the faster/cleaner approach.
+Each module folder in `src/modules/` is a full mini-app:
+- `PROMPT.md` — the interview-style task + time box + hints (names the exact file to edit)
+- `components/<Feature>.jsx` — 👈 **the ONE file you fix** (starts broken)
+- `App.jsx` / `index.jsx` / `pages/` / `data/` / `styles.css` — already working; don't touch
+- `index.test.jsx` — the tests that must pass
+
+Reference solutions live in `solutions/<module>.jsx`. **Attempt first**, then open the solution to
+compare. To self-check, copy the solution over the feature file, run the test, then restore your
+version (see the root [`README.md`](../../README.md#4-view-the-solution-after-you-attempt)).
 
 ## Modules
 | # | Task | Topic |

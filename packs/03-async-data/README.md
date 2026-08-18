@@ -9,21 +9,26 @@ infinite scroll, optimistic updates, retry, dependent fetches, a reusable
 
 ```bash
 npm install
-npm run dev     # open the app (renders fine; behaviour is what's broken/missing)
-npm test        # run all module tests (they FAIL until you implement each module)
+npm run dev     # dev server at http://localhost:5173 (renders fine; behaviour is what's missing)
+npm test        # run all module tests once (they FAIL until you implement each module)
 ```
+
+**See the UI:** open http://localhost:5173, click a module to open its mini-app, use
+`← All modules` to go back.
 
 Run a single module's tests:
 
 ```bash
-npx vitest run src/modules/m01-fetch-states
+npm test -- m01-fetch-states           # or: npx vitest run src/modules/m01-fetch-states
+npm run test:watch                     # re-run on save while you work
 ```
 
 ## Workflow
 
-1. Pick a module folder under `src/modules/`.
-2. Read its `PROMPT.md` (interview-style spec + hints).
-3. Edit `index.jsx` to make `index.test.jsx` pass.
+1. Pick a module folder under `src/modules/` and open its mini-app in the browser.
+2. Read its `PROMPT.md` (interview-style spec + hints; it names the file to edit).
+3. Edit **`components/<Feature>.jsx`** — the ONE marked file — to make `index.test.jsx` pass.
+   (`App.jsx`, `index.jsx`, `pages/`, `data/` already work; don't touch them.)
 4. Stuck? Compare with `solutions/<module>.jsx` (peek only after a real attempt).
 
 ## Modules

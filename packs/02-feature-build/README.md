@@ -10,10 +10,18 @@ npm install
 
 ## Practice a module
 ```bash
-npm run dev            # menu of all modules in the browser
-npm test -- m01        # run ONE module's tests
-npm test               # run all
+npm run dev            # dev server at http://localhost:5173 — a menu of all modules
+npm test -- m01        # run ONE module's tests once
+npm test               # run all once
+npm run test:watch     # re-run on save while you work
 ```
+
+**See the UI:** open http://localhost:5173, click a module to open its mini-app, use
+`← All modules` to go back.
+
+**Workflow:** read the module's `PROMPT.md` (it names the file to edit) → implement the feature in
+`components/<Feature>.jsx` (the only file you touch; `App.jsx`/`pages`/`data` already work) →
+re-run tests until green → compare with `solutions/<module>.jsx`.
 
 ## Modules
 | # | Task | Source | Topic |
