@@ -1,0 +1,114 @@
+/* StatusMonitor mini-app styles — scoped-ish via .sm- prefixes. */
+
+.sm-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.sm-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.sm-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #2f9e44;
+  white-space: nowrap;
+}
+
+.sm-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.sm-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.sm-nav-links a:hover {
+  color: #2f9e44;
+}
+
+.sm-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.sm-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.sm-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.sm-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #2f9e44;
+  text-decoration: none;
+}
+
+.sm-monitor {
+  border: 1px solid #e2e6ea;
+  border-radius: 10px;
+  padding: 18px;
+  background: #fff;
+  max-width: 320px;
+}
+.sm-feature-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+.sm-value {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #2f9e44;
+}
+.sm-count {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sm-history {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sm-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e2e6ea;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #fff;
+}
+.sm-card-when {
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+.sm-card-status {
+  font-weight: 600;
+}
+
+.sm-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

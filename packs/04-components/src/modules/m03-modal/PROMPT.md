@@ -1,21 +1,37 @@
-# m03 — Modal / dialog
+# m03 — ImageGallery · Modal (lightbox)
 
 **Time box:** ~15 min
 
-Build a Modal. A trigger button opens it; it can be closed by the close button,
-by clicking the backdrop, or by pressing Escape. Clicking the modal content must
-NOT close it.
+You're given a complete **ImageGallery** mini-app: a navbar, a gallery page
+(Home) with a lightbox modal, and an Albums route — all working. The feature to
+focus on is the modal.
+
+> 👉 The file to edit is **`components/Modal.jsx`**. The dev menu / tests mount
+> the whole app.
+
+## Folder
+
+```
+m03-modal/
+  App.jsx                    app root (navbar + routes)
+  index.jsx                  entry (re-exports App)
+  components/
+    Navbar.jsx  Footer.jsx
+    Modal.jsx                👈 THE FEATURE
+  pages/    Home.jsx  Albums.jsx
+  data/photos.js             local photo dataset
+  styles.css
+```
 
 ## Requirements
 
-- Trigger: `data-testid="open-btn"`.
-- When open, render `data-testid="backdrop"` containing `data-testid="modal"`.
-- Close via: `data-testid="close-btn"`, clicking the backdrop, or pressing `Escape`.
-- Clicking inside `data-testid="modal"` must NOT close it.
-- When closed, neither backdrop nor modal is in the DOM.
+- `data-testid="open-btn"` opens the modal.
+- Open state renders a `data-testid="backdrop"` wrapping a `data-testid="modal"`.
+- Close on: `data-testid="close-btn"`, a backdrop click, and Escape.
+- A click INSIDE the modal content must NOT close it (stop propagation).
 
-## Gotchas
+## Run
 
-- Backdrop click closes; stop propagation on the inner modal's click so it
-  doesn't bubble to the backdrop.
-- Add the Escape keydown listener only while open, and clean it up.
+```
+npx vitest run src/modules/m03-modal/
+```

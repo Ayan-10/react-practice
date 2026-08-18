@@ -1,0 +1,37 @@
+/* ApplyFlow mini-app styles — scoped-ish via .af- prefixes. */
+
+.af-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.af-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.af-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #1971c2; white-space: nowrap; }
+.af-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.af-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.af-nav-links a:hover { color: #1971c2; }
+
+.af-main { padding: 20px; min-height: 60vh; }
+.af-page-title { margin: 0 0 4px; font-size: 22px; }
+.af-page-sub { margin: 0 0 16px; color: #6b7280; }
+.af-back { display: inline-block; margin-bottom: 12px; color: #1971c2; text-decoration: none; }
+
+.af-wizard { max-width: 420px; }
+.af-step-indicator { margin: 0 0 12px; font-weight: 600; color: #1971c2; }
+.af-form { display: flex; flex-direction: column; gap: 14px; }
+.af-field { display: flex; flex-direction: column; gap: 6px; }
+.af-field span { font-size: 13px; color: #495057; }
+.af-field input { width: 100%; }
+.af-error { color: #c92a2a; font-size: 13px; }
+.af-review p { margin: 4px 0; }
+
+.af-actions { display: flex; gap: 10px; margin-top: 8px; }
+.af-submitting { color: #6b7280; font-size: 13px; margin: 8px 0 0; }
+.af-success { color: #2b8a3e; font-weight: 600; }
+
+.af-faq-list { list-style: none; padding: 0; margin: 0; }
+.af-faq-item { padding: 12px 0; border-bottom: 1px solid #eceff2; }
+.af-faq-q { margin: 0 0 4px; font-weight: 600; }
+.af-faq-a { margin: 0; color: #6b7280; }
+
+.af-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

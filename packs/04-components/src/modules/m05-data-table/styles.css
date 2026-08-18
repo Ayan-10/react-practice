@@ -1,0 +1,104 @@
+/* SalesTable mini-app styles — scoped-ish via .st- prefixes. */
+
+.st-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.st-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.st-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #087f5b;
+  white-space: nowrap;
+}
+
+.st-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.st-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.st-nav-links a:hover {
+  color: #087f5b;
+}
+
+.st-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.st-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.st-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.st-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #087f5b;
+  text-decoration: none;
+}
+
+.st-filter {
+  width: 100%;
+  max-width: 320px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.st-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 520px;
+  background: #fff;
+}
+.st-table th,
+.st-table td {
+  border: 1px solid #e2e6ea;
+  padding: 8px 12px;
+  text-align: left;
+}
+.st-table th button {
+  border: none;
+  background: none;
+  font-weight: 700;
+  cursor: pointer;
+  color: #087f5b;
+  padding: 0;
+}
+
+.st-summary {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+.st-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

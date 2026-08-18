@@ -1,0 +1,188 @@
+/* ReaderApp mini-app styles — scoped-ish via .ra- prefixes. */
+
+.ra-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+  background: #ffffff;
+  min-height: 100vh;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ra-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.ra-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #6d28d9;
+  white-space: nowrap;
+}
+
+.ra-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.ra-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.ra-nav-links a:hover {
+  color: #6d28d9;
+}
+
+.ra-theme-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ra-theme-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #777;
+}
+.ra-toggle-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #6d28d9;
+  background: #fff;
+  color: #6d28d9;
+  font-size: 13px;
+  cursor: pointer;
+}
+.ra-toggle-btn:hover {
+  background: #6d28d9;
+  color: #fff;
+}
+
+/* Pages */
+.ra-main {
+  min-height: 60vh;
+}
+.ra-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.ra-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.ra-page-sub {
+  margin: 0 0 16px;
+  color: #777;
+}
+.ra-blurb {
+  line-height: 1.6;
+}
+.ra-inline-link,
+.ra-inline-link:visited {
+  color: #6d28d9;
+}
+.ra-back,
+.ra-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #6d28d9;
+  text-decoration: none;
+}
+
+/* Library list */
+.ra-book-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.ra-book {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border: 1px solid #eceef1;
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: #fff;
+}
+.ra-book-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+.ra-book-author {
+  font-size: 13px;
+  color: #777;
+}
+
+/* Footer */
+.ra-footer {
+  border-top: 1px solid #e2e6ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Dark theme — activated when the root reflects data-theme="dark".
+   ───────────────────────────────────────────────────────────────────────── */
+.ra-app[data-theme="dark"] {
+  background: #14121f;
+  color: #ece9f5;
+}
+[data-theme="dark"] .ra-navbar {
+  background: #1c1830;
+  border-bottom-color: #2b2545;
+}
+[data-theme="dark"] .ra-brand {
+  color: #c4b5fd;
+}
+[data-theme="dark"] .ra-nav-links a {
+  color: #cfc9e0;
+}
+[data-theme="dark"] .ra-nav-links a:hover {
+  color: #c4b5fd;
+}
+[data-theme="dark"] .ra-theme-label {
+  color: #a79fc0;
+}
+[data-theme="dark"] .ra-toggle-btn {
+  background: #1c1830;
+  border-color: #c4b5fd;
+  color: #c4b5fd;
+}
+[data-theme="dark"] .ra-toggle-btn:hover {
+  background: #c4b5fd;
+  color: #1c1830;
+}
+[data-theme="dark"] .ra-page-sub,
+[data-theme="dark"] .ra-book-author {
+  color: #a79fc0;
+}
+[data-theme="dark"] .ra-inline-link,
+[data-theme="dark"] .ra-inline-link:visited,
+[data-theme="dark"] .ra-back,
+[data-theme="dark"] .ra-back:visited {
+  color: #c4b5fd;
+}
+[data-theme="dark"] .ra-book {
+  background: #1c1830;
+  border-color: #2b2545;
+}
+[data-theme="dark"] .ra-footer {
+  border-top-color: #2b2545;
+  color: #8a83a3;
+}

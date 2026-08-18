@@ -1,0 +1,120 @@
+/* RateWidget mini-app styles — scoped-ish via .rw- prefixes. */
+
+.rw-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.rw-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.rw-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #e8590c;
+  white-space: nowrap;
+}
+
+.rw-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.rw-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.rw-nav-links a:hover {
+  color: #e8590c;
+}
+
+.rw-main {
+  min-height: 60vh;
+}
+.rw-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.rw-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.rw-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.rw-back,
+.rw-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #e8590c;
+  text-decoration: none;
+}
+
+/* Feature: star rating */
+.rw-rating {
+  margin-top: 8px;
+}
+.rw-stars {
+  display: inline-flex;
+  gap: 4px;
+}
+.rw-star {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+  color: #d0d5dd;
+  padding: 2px;
+}
+.rw-star.filled {
+  color: #f59f00;
+}
+.rw-value {
+  margin: 12px 0 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.rw-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.rw-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid #eceef1;
+  border-radius: 10px;
+  background: #fff;
+}
+.rw-list-stars {
+  color: #f59f00;
+}
+
+.rw-footer {
+  border-top: 1px solid #e2e6ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

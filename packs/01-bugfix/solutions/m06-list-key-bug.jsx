@@ -1,43 +1,29 @@
-// SOLUTION — m06. Use a stable unique key (person.id), not the index.
+// SOLUTION — m06 TaskBoard list-key identity.
+// This is the FIXED version of components/TaskList.jsx. Attempt it yourself
+// first, then compare. To self-check: copy this over components/TaskList.jsx.
 import { useState } from "react";
+import TaskRow from "./TaskRow.jsx";
+import { loadTasks } from "../data/tasks.js";
 
-const INITIAL = [
-  { id: "u1", name: "Alice" },
-  { id: "u2", name: "Bob" },
-  { id: "u3", name: "Carol" },
-];
-
-export default function ListKeyBug() {
-  const [people, setPeople] = useState(INITIAL);
+export default function TaskList() {
+  const [tasks, setTasks] = useState(() => loadTasks());
 
   function remove(id) {
-    setPeople((prev) => prev.filter((p) => p.id !== id));
+    setTasks((prev) => prev.filter((t) => t.id !== id));
   }
 
   return (
-    <div className="card">
-      <h2>People notes</h2>
-      <ul>
-        {people.map((person) => (
-          <PersonRow key={person.id} person={person} onRemove={() => remove(person.id)} />
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function PersonRow({ person, onRemove }) {
-  const [note, setNote] = useState("");
-  return (
-    <li data-testid={`row-${person.id}`} style={{ marginBottom: 8 }}>
-      <strong data-testid={`name-${person.id}`}>{person.name}</strong>{" "}
-      <input
-        data-testid={`note-${person.id}`}
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
-        placeholder="note"
-      />{" "}
-      <button data-testid={`remove-${person.id}`} onClick={onRemove}>Delete</button>
-    </li>
+    <ul className="tb-task-list" data-testid="task-list">
+      {tasks.map((task) => (
+        // FIX: use the STABLE unique task id as the key (not the array index),
+        // so React keeps each TaskRow instance — and its "done" checkbox state —
+        // matched to the same task across deletions.
+        <TaskRow
+          key={task.id}
+          task={task}
+          onRemove={() => remove(task.id)}
+        />
+      ))}
+    </ul>
   );
 }

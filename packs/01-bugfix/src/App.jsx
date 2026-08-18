@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, MemoryRouter } from "react-router-dom";
 
 // Each module exports a default React component. Register it here so it
 // shows up in the dev menu and gets a route. Tests import modules directly,
@@ -16,15 +16,15 @@ import M10 from "./modules/m10-derived-state/index.jsx";
 
 const MODULES = [
   { path: "m01", title: "m01 · SearchBar closes on outside click", topic: "refs, event listeners, effect cleanup, router", el: <M01 /> },
-  { path: "m02", title: "m02 · Stale closure in setInterval", topic: "functional updates / refs", el: <M02 /> },
-  { path: "m03", title: "m03 · useEffect infinite loop", topic: "object deps / memoization", el: <M03 /> },
-  { path: "m04", title: "m04 · Direct state mutation (no re-render)", topic: "immutable updates", el: <M04 /> },
-  { path: "m05", title: "m05 · Missing effect dependency", topic: "dependency arrays", el: <M05 /> },
-  { path: "m06", title: "m06 · List key bug (index as key)", topic: "keys / list identity", el: <M06 /> },
-  { path: "m07", title: "m07 · Controlled/uncontrolled input", topic: "controlled inputs", el: <M07 /> },
-  { path: "m08", title: "m08 · Form reloads page on submit", topic: "preventDefault", el: <M08 /> },
-  { path: "m09", title: "m09 · Memory leak / setState after unmount", topic: "cleanup", el: <M09 /> },
-  { path: "m10", title: "m10 · Derived state stored in state (stale)", topic: "derive during render", el: <M10 /> },
+  { path: "m02", title: "m02 · FocusTimer stale closure in setInterval", topic: "functional updates / refs", el: <M02 /> },
+  { path: "m03", title: "m03 · ShopFilters useEffect infinite loop", topic: "object deps / memoization", el: <M03 /> },
+  { path: "m04", title: "m04 · PlaylistBuilder — direct state mutation (no re-render)", topic: "immutable updates", el: <M04 /> },
+  { path: "m05", title: "m05 · WeatherDash — missing effect dependency", topic: "dependency arrays / effect re-runs", el: <M05 /> },
+  { path: "m06", title: "m06 · TaskBoard — checkbox leaks (index as key)", topic: "keys / list identity", el: <M06 /> },
+  { path: "m07", title: "m07 · ProfileSettings — controlled/uncontrolled input", topic: "controlled inputs", el: <M07 /> },
+  { path: "m08", title: "m08 · NewsletterSignup — form reloads page on submit", topic: "preventDefault", el: <M08 /> },
+  { path: "m09", title: "m09 · LiveFeed — subscription memory leak", topic: "effect cleanup", el: <M09 /> },
+  { path: "m10", title: "m10 · ExpenseTracker — derived state stored in state", topic: "derive during render", el: <M10 /> },
 ];
 
 function Menu() {
@@ -57,7 +57,11 @@ export default function App() {
           element={
             <div className="app-shell">
               <Link className="back-link" to="/">← All modules</Link>
-              {m.el}
+              {/* Each module is a self-contained mini-app. It renders its own
+                  <Routes> and uses absolute links (to="/", to="/saved", …), so
+                  we give it its own MemoryRouter to keep that navigation
+                  internal — it never collides with the pack's own URL. */}
+              <MemoryRouter initialEntries={["/"]}>{m.el}</MemoryRouter>
             </div>
           }
         />

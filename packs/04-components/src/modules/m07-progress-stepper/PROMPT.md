@@ -1,9 +1,29 @@
-# m07 — Progress stepper
+# m07 — OnboardWizard · Progress stepper (back / next + progress bar)
 
 **Time box:** ~12 min
 
-Build a stepper that shows progress through N steps. Next/Back move between steps
-and a progress bar reflects completion percentage.
+You're given a complete **OnboardWizard** mini-app: a navbar, an onboarding flow
+(Home), and a Help route — all working. The ONE thing to build is the stepper
+that shows progress through N steps.
+
+> 👉 The file to edit is **`components/Stepper.jsx`**. Everything else already
+> works. The dev menu / tests mount the whole app.
+
+Next/Back move between steps and a progress bar reflects completion percentage.
+
+## Folder
+
+```
+m07-progress-stepper/
+  App.jsx                    app root (navbar + routes)
+  index.jsx                  entry (re-exports App)
+  components/
+    Navbar.jsx  Footer.jsx
+    Stepper.jsx              👈 BUILD THIS
+  pages/    Home.jsx  Help.jsx
+  data/steps.js              local onboarding steps
+  styles.css
+```
 
 ## Requirements
 
@@ -20,3 +40,9 @@ and a progress bar reflects completion percentage.
 
 - Clamp the index within `[0, N-1]`.
 - Progress at the first step is 0%, at the last step is 100%.
+
+## Run
+
+```
+npx vitest run src/modules/m07-progress-stepper/
+```

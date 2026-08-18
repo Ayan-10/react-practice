@@ -1,0 +1,132 @@
+/* SneakerShop mini-app styles — scoped-ish via .ss- prefixes. */
+
+.ss-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.ss-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.ss-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #d6336c;
+  white-space: nowrap;
+}
+
+.ss-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.ss-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.ss-nav-links a:hover {
+  color: #d6336c;
+}
+
+/* Pages */
+.ss-main {
+  min-height: 60vh;
+}
+.ss-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.ss-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.ss-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.ss-back,
+.ss-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #d6336c;
+  text-decoration: none;
+}
+
+/* Feature: fetch states / product list */
+.ss-listing {
+  margin-top: 8px;
+}
+.ss-feature-title {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+.ss-status {
+  padding: 24px;
+  text-align: center;
+  color: #777;
+  font-size: 15px;
+}
+.ss-status.ss-error {
+  color: #c0392b;
+}
+
+/* Listing grid */
+.ss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+.ss-card {
+  display: block;
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+.ss-card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+.ss-card-body {
+  padding: 12px 14px;
+}
+.ss-card-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.ss-card-brand {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #777;
+}
+.ss-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Footer */
+.ss-footer {
+  border-top: 1px solid #e2e6ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

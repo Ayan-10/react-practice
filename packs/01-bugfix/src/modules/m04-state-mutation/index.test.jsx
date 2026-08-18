@@ -1,32 +1,81 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import StateMutation from "./index.jsx";
+import { MemoryRouter } from "react-router-dom";
+import App from "./index.jsx";
 
-describe("Tags — immutable updates", () => {
-  it("adds a new tag to the list", async () => {
-    const user = userEvent.setup();
-    render(<StateMutation />);
-    expect(screen.getAllByTestId("tag-item")).toHaveLength(2);
-    await user.type(screen.getByTestId("tag-input"), "redux");
-    await user.click(screen.getByTestId("add-tag"));
-    expect(screen.getAllByTestId("tag-item")).toHaveLength(3);
-    expect(screen.getByText("redux")).toBeInTheDocument();
+// Mount the WHOLE PlaylistBuilder app (navbar + library + playlist panel),
+// exactly like a user would see it. The only thing broken is the add/remove
+// state update, which lives in components/PlaylistPanel.jsx.
+function renderApp() {
+  return render(
+    <MemoryRouter initialEntries={["/"]}>
+      <App />
+    </MemoryRouter>
+  );
+}
+
+describe("m04 · PlaylistBuilder — immutable state updates", () => {
+  // (1) App renders — PASSES on the stub.
+  it("app renders: navbar + library grid are visible", () => {
+    renderApp();
+    expect(screen.getByTestId("navbar")).toBeInTheDocument();
+    expect(screen.getByTestId("home-page")).toBeInTheDocument();
+    // Library grid shows the song cards.
+    expect(screen.getAllByTestId("song-card").length).toBeGreaterThan(0);
   });
 
-  it("clears the input after adding", async () => {
-    const user = userEvent.setup();
-    render(<StateMutation />);
-    await user.type(screen.getByTestId("tag-input"), "vite");
-    await user.click(screen.getByTestId("add-tag"));
-    expect(screen.getByTestId("tag-input")).toHaveValue("");
+  // (2) Neutral — PASSES on the stub. The playlist starts empty.
+  it("starts with an empty playlist", () => {
+    renderApp();
+    expect(screen.getByTestId("playlist-count")).toHaveTextContent("0");
+    expect(screen.getByTestId("playlist-empty")).toBeInTheDocument();
+    expect(screen.queryAllByTestId("playlist-item")).toHaveLength(0);
   });
 
-  it("removes a tag when its × is clicked", async () => {
+  // (3) BUG test — FAILS on the stub, PASSES on the solution.
+  it("adds a song to the playlist when + Add is clicked", async () => {
     const user = userEvent.setup();
-    render(<StateMutation />);
-    await user.click(screen.getByTestId("remove-hooks"));
-    expect(screen.getAllByTestId("tag-item")).toHaveLength(1);
-    expect(screen.queryByText("hooks")).not.toBeInTheDocument();
+    renderApp();
+    await user.click(screen.getByTestId("add-s1"));
+
+    await waitFor(() =>
+      expect(screen.getAllByTestId("playlist-item")).toHaveLength(1)
+    );
+    const playlist = screen.getByTestId("playlist");
+    expect(within(playlist).getByText("Midnight City")).toBeInTheDocument();
+    expect(screen.getByTestId("playlist-count")).toHaveTextContent("1");
+  });
+
+  // (3) BUG test — FAILS on the stub, PASSES on the solution.
+  it("increments the navbar playlist count as songs are added", async () => {
+    const user = userEvent.setup();
+    renderApp();
+    expect(screen.getByTestId("nav-count")).toHaveTextContent("Playlist · 0");
+    await user.click(screen.getByTestId("add-s1"));
+    await user.click(screen.getByTestId("add-s2"));
+
+    await waitFor(() =>
+      expect(screen.getByTestId("nav-count")).toHaveTextContent("Playlist · 2")
+    );
+    expect(screen.getAllByTestId("playlist-item")).toHaveLength(2);
+  });
+
+  // (3) BUG test — FAILS on the stub, PASSES on the solution.
+  it("removes a song from the playlist when × is clicked", async () => {
+    const user = userEvent.setup();
+    renderApp();
+    await user.click(screen.getByTestId("add-s3"));
+
+    await waitFor(() =>
+      expect(screen.getAllByTestId("playlist-item")).toHaveLength(1)
+    );
+
+    await user.click(screen.getByTestId("remove-s3"));
+
+    await waitFor(() =>
+      expect(screen.queryAllByTestId("playlist-item")).toHaveLength(0)
+    );
+    expect(screen.getByTestId("playlist-count")).toHaveTextContent("0");
   });
 });

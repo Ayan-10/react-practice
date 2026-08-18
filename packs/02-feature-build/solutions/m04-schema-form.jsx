@@ -1,13 +1,12 @@
-// SOLUTION — m04 Schema-driven form.
+// SOLUTION — m04 JobApply schema-driven form.
+// Copy this over components/SchemaForm.jsx to self-check.
 import { useState } from "react";
+import { APPLICATION_SCHEMA } from "../data/schema.js";
 
-export const defaultSchema = [
-  { name: "name", label: "Name", type: "text", required: true },
-  { name: "email", label: "Email", type: "email", required: true },
-  { name: "age", label: "Age", type: "number", required: false },
-];
-
-export default function SchemaForm({ schema = defaultSchema, onSubmit = () => {} }) {
+export default function SchemaForm({
+  schema = APPLICATION_SCHEMA,
+  onSubmit = () => {},
+}) {
   const [values, setValues] = useState(
     Object.fromEntries(schema.map((f) => [f.name, ""]))
   );
@@ -27,7 +26,7 @@ export default function SchemaForm({ schema = defaultSchema, onSubmit = () => {}
         continue;
       }
       if (f.type === "email" && val !== "" && !val.includes("@")) {
-        next[f.name] = "Invalid email";
+        next[f.name] = "Enter a valid email";
       }
     }
     return next;
@@ -40,19 +39,26 @@ export default function SchemaForm({ schema = defaultSchema, onSubmit = () => {}
     if (Object.keys(next).length > 0) return;
     const payload = {};
     for (const f of schema) {
-      payload[f.name] = f.type === "number" ? Number(values[f.name]) : values[f.name];
+      payload[f.name] =
+        f.type === "number" ? Number(values[f.name]) : values[f.name];
     }
     onSubmit(payload);
   }
 
   return (
-    <form className="card" style={{ maxWidth: 420 }} onSubmit={handleSubmit}>
-      <h2>Sign up</h2>
+    <form
+      className="ja-form"
+      style={{ maxWidth: 420 }}
+      onSubmit={handleSubmit}
+      data-testid="apply-form"
+    >
+      <h2 className="ja-form-title">Apply now</h2>
       {schema.map((field) => (
-        <div key={field.name} style={{ marginBottom: 12 }}>
-          <label>
+        <div key={field.name} className="ja-field">
+          <label className="ja-label">
             {field.label}
             <input
+              className="ja-input"
               data-testid={`field-${field.name}`}
               name={field.name}
               type={field.type === "number" ? "number" : "text"}
@@ -61,13 +67,15 @@ export default function SchemaForm({ schema = defaultSchema, onSubmit = () => {}
             />
           </label>
           {errors[field.name] && (
-            <p data-testid={`error-${field.name}`} style={{ color: "crimson", margin: "4px 0 0" }}>
+            <p className="ja-error" data-testid={`error-${field.name}`}>
               {errors[field.name]}
             </p>
           )}
         </div>
       ))}
-      <button className="btn" type="submit" data-testid="submit">Submit</button>
+      <button className="ja-btn" type="submit" data-testid="submit">
+        Submit
+      </button>
     </form>
   );
 }

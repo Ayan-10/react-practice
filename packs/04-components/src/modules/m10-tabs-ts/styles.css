@@ -1,0 +1,119 @@
+/* SettingsTabs mini-app styles — scoped-ish via .se- prefixes. */
+
+.se-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.se-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.se-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #2b8a3e;
+  white-space: nowrap;
+}
+
+.se-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.se-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.se-nav-links a:hover {
+  color: #2b8a3e;
+}
+
+.se-main {
+  min-height: 60vh;
+}
+.se-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.se-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.se-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.se-back,
+.se-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #2b8a3e;
+  text-decoration: none;
+}
+
+/* Feature: tabs */
+.se-tabs {
+  margin-top: 8px;
+}
+.se-tab-strip {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #e2e6ea;
+  margin-bottom: 16px;
+}
+.se-tab {
+  border: none;
+  background: transparent;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #667085;
+  border-bottom: 2px solid transparent;
+}
+.se-tab.active {
+  color: #2b8a3e;
+  border-bottom-color: #2b8a3e;
+}
+.se-panel {
+  padding: 16px;
+  border: 1px solid #eceef1;
+  border-radius: 12px;
+  background: #fff;
+  min-height: 60px;
+}
+
+.se-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.se-list-item {
+  padding: 10px 14px;
+  border: 1px solid #eceef1;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.se-footer {
+  border-top: 1px solid #e2e6ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

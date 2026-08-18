@@ -1,31 +1,39 @@
-// SOLUTION — m08 Search filter.
+// SOLUTION — m08 ContactsApp search filter. Copy over components/ContactList.jsx to self-check.
 import { useState } from "react";
-import { fallbackProducts } from "../../shared/api.js";
+import { CONTACTS } from "../data/contacts.js";
 
-const PRODUCTS = fallbackProducts;
-
-export default function SearchFilter() {
-  const [products] = useState(PRODUCTS);
+export default function ContactList() {
+  const [contacts] = useState(CONTACTS);
   const [query, setQuery] = useState("");
 
   const q = query.toLowerCase().trim();
-  const filtered = products.filter((p) => p.title.toLowerCase().includes(q));
+  const filtered = contacts.filter((c) => c.name.toLowerCase().includes(q));
 
   return (
-    <div>
-      <h2>Search products</h2>
+    <div className="ca-feature" data-testid="contact-feature">
+      <h2 className="ca-feature-title">Contacts</h2>
+
       <input
+        className="ca-search"
         data-testid="search-input"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Type to filter"
+        placeholder="Search by name…"
       />
-      <ul>
-        {filtered.map((p) => (
-          <li key={p.id} data-testid="product-item">{p.title}</li>
+
+      <ul className="ca-list" data-testid="contact-list">
+        {filtered.map((c) => (
+          <li key={c.id} className="ca-item" data-testid="contact-item">
+            {c.name}
+          </li>
         ))}
       </ul>
-      {filtered.length === 0 && <p data-testid="no-results">No results</p>}
+
+      {filtered.length === 0 && (
+        <p className="ca-no-results" data-testid="no-results">
+          No contacts found
+        </p>
+      )}
     </div>
   );
 }

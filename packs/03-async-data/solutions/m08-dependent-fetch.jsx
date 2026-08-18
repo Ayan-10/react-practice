@@ -1,22 +1,23 @@
-// SOLUTION — m08 Dependent fetch (user -> posts).
+// SOLUTION — m08 TeamDirectory dependent fetch (member → projects).
+// Copy this over components/DependentFetch.jsx to self-check.
 import { useEffect, useState } from "react";
-import { fetchUsers, fetchPostsByUser } from "../../shared/api.js";
+import { loadUsers as defaultLoadUsers, loadPosts as defaultLoadPosts } from "../data/team.js";
 
 export default function DependentFetch({
-  loadUsers = fetchUsers,
-  loadPosts = fetchPostsByUser,
+  loadUsers = defaultLoadUsers,
+  loadPosts = defaultLoadPosts,
 }) {
   const [users, setUsers] = useState([]);
   const [selected, setSelected] = useState("");
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    let active = true;
-    loadUsers().then((u) => {
-      if (active) setUsers(u);
+    let alive = true;
+    loadUsers().then((list) => {
+      if (alive) setUsers(list);
     });
     return () => {
-      active = false;
+      alive = false;
     };
   }, [loadUsers]);
 
@@ -25,35 +26,40 @@ export default function DependentFetch({
       setPosts([]);
       return;
     }
-    let active = true;
-    loadPosts(selected).then((p) => {
-      if (active) setPosts(p);
+    let alive = true;
+    loadPosts(selected).then((list) => {
+      if (alive) setPosts(list);
     });
     return () => {
-      active = false;
+      alive = false;
     };
   }, [selected, loadPosts]);
 
   return (
-    <div>
-      <h2>User posts</h2>
+    <div className="td-feature">
+      <h2 className="td-feature-title">Member projects</h2>
       <select
+        className="td-select"
         data-testid="user-select"
         value={selected}
         onChange={(e) => setSelected(e.target.value)}
       >
-        <option value="">-- pick --</option>
+        <option value="">-- pick a member --</option>
         {users.map((u) => (
-          <option key={u.id} value={u.id}>{u.name}</option>
+          <option key={u.id} value={u.id}>
+            {u.name}
+          </option>
         ))}
       </select>
 
       {!selected ? (
-        <p data-testid="no-selection">Pick a user</p>
+        <p data-testid="no-selection" className="td-hint">
+          Pick a user to see their projects.
+        </p>
       ) : (
-        <div data-testid="posts" className="grid" style={{ marginTop: 12 }}>
+        <div data-testid="posts" className="td-grid">
           {posts.map((p) => (
-            <div key={p.id} className="card" data-testid="post-item">
+            <div key={p.id} className="td-card" data-testid="post-item">
               {p.title}
             </div>
           ))}

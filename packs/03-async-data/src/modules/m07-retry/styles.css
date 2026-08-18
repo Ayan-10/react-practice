@@ -1,0 +1,121 @@
+/* CryptoTicker mini-app styles — scoped-ish via .ct- prefixes. */
+
+.ct-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.ct-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.ct-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #f7931a;
+  white-space: nowrap;
+}
+
+.ct-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.ct-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.ct-nav-links a:hover {
+  color: #f7931a;
+}
+
+.ct-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.ct-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.ct-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.ct-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #f7931a;
+  text-decoration: none;
+}
+
+.ct-feature-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.ct-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.ct-card {
+  border: 1px solid #e2e6ea;
+  border-radius: 10px;
+  padding: 14px;
+  background: #fff;
+}
+.ct-card-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.ct-card-symbol {
+  margin: 0 0 8px;
+  color: #6b7280;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+.ct-card-meta {
+  margin: 0;
+  color: #344054;
+  font-variant-numeric: tabular-nums;
+}
+
+.ct-error-box {
+  padding: 16px;
+  border: 1px solid #f5c2c7;
+  border-radius: 10px;
+  background: #fff5f5;
+}
+.ct-error-box p {
+  margin: 0 0 12px;
+  color: #c92a2a;
+}
+.ct-retry {
+  border: 1px solid #f7931a;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #f7931a;
+}
+
+.ct-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

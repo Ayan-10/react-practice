@@ -1,0 +1,157 @@
+/* TravelWallet mini-app styles — scoped-ish via .tw- prefixes. */
+
+.tw-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.tw-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.tw-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #2d6cdf;
+  white-space: nowrap;
+}
+
+.tw-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.tw-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.tw-nav-links a:hover {
+  color: #2d6cdf;
+}
+
+/* Pages */
+.tw-main {
+  min-height: 60vh;
+}
+.tw-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.tw-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.tw-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.tw-back,
+.tw-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #2d6cdf;
+  text-decoration: none;
+}
+
+/* Feature: currency converter */
+.tw-feature {
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  padding: 20px;
+  background: #fff;
+  max-width: 420px;
+}
+.tw-feature-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+}
+.tw-amount {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cfd6de;
+  font-size: 16px;
+}
+.tw-select-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+.tw-select {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cfd6de;
+  font-size: 15px;
+  background: #fff;
+}
+.tw-arrow {
+  color: #2d6cdf;
+  font-weight: 700;
+}
+.tw-loading {
+  margin: 8px 0 0;
+  color: #999;
+  font-size: 13px;
+}
+.tw-result {
+  margin: 12px 0 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2d6cdf;
+}
+
+/* Second page: currency reference list */
+.tw-currency-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.tw-currency-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #eceef1;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: #fff;
+}
+.tw-currency-symbol {
+  font-size: 20px;
+  width: 28px;
+  text-align: center;
+  color: #2d6cdf;
+}
+.tw-currency-code {
+  font-weight: 700;
+  width: 48px;
+}
+.tw-currency-label {
+  color: #777;
+}
+
+/* Footer */
+.tw-footer {
+  border-top: 1px solid #e2e6ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

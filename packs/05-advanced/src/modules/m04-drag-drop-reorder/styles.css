@@ -1,0 +1,33 @@
+/* TaskFlow mini-app styles — scoped-ish via .df- prefixes. */
+
+.df-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.df-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.df-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #7048e8; white-space: nowrap; }
+.df-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.df-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.df-nav-links a:hover { color: #7048e8; }
+
+.df-main { padding: 20px; min-height: 60vh; }
+.df-page-title { margin: 0 0 4px; font-size: 22px; }
+.df-page-sub { margin: 0 0 16px; color: #6b7280; }
+.df-back { display: inline-block; margin-bottom: 12px; color: #7048e8; text-decoration: none; }
+
+.df-reorder { max-width: 420px; }
+.df-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.df-item {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  background: #fff; border: 1px solid #e2e6ea; border-radius: 8px; cursor: grab;
+}
+.df-item:active { cursor: grabbing; }
+.df-grip { color: #b0b6c0; }
+.df-item-title { flex: 1; }
+.df-order { color: #6b7280; margin: 14px 0 0; font-variant-numeric: tabular-nums; }
+
+.df-archive-list { list-style: disc; padding-left: 20px; margin: 0; display: grid; gap: 8px; }
+.df-archive-item { color: #374151; }
+
+.df-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

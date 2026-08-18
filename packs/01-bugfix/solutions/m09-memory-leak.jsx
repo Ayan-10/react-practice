@@ -1,29 +1,31 @@
-// SOLUTION — m09. Guard against setState after unmount with a cleanup flag.
+// SOLUTION — m09 LiveFeed. The fix for components/FeedTicker.jsx: capture the
+// unsubscribe returned by subscribe(...) and RETURN a cleanup function from the
+// effect that calls it, so the interval stops and subscriberCount() drops back
+// to 0 when the component unmounts.
+// Copy this file over components/FeedTicker.jsx to self-check.
 import { useState, useEffect } from "react";
-import { fetchProducts } from "../../shared/api.js";
+import { subscribe, SEED_EVENTS } from "../data/feed.js";
 
-export default function MemoryLeak({ onCommit }) {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function FeedTicker() {
+  const [events, setEvents] = useState(SEED_EVENTS);
 
   useEffect(() => {
-    let active = true;
-    fetchProducts({ limit: 4 }).then(({ products }) => {
-      if (!active) return; // unmounted — ignore
-      setProducts(products);
-      setLoading(false);
-      onCommit?.();
-    });
-    return () => {
-      active = false;
-    };
-  }, [onCommit]);
+    // ✅ FIX: keep the unsubscribe handle and return it as cleanup.
+    const unsubscribe = subscribe((evt) => {
+      setEvents((prev) => [evt, ...prev].slice(0, 8));
+    }, 1000);
 
-  if (loading) return <p data-testid="loading">Loading…</p>;
+    return () => unsubscribe();
+  }, []);
+
   return (
-    <ul data-testid="products">
-      {products.map((p) => (
-        <li key={p.id} data-testid="product">{p.title}</li>
+    <ul className="lf-ticker" data-testid="feed-ticker">
+      {events.map((evt) => (
+        <li key={evt.id} className="lf-item" data-testid="feed-item">
+          <span className={`lf-badge lf-badge-${evt.kind}`}>{evt.kind}</span>
+          <span className="lf-item-text">{evt.text}</span>
+          <span className="lf-item-at">{evt.at}</span>
+        </li>
       ))}
     </ul>
   );

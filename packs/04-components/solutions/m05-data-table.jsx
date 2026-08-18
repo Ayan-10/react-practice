@@ -1,52 +1,62 @@
-// SOLUTION — m05 Data table (sort + filter).
-import { useMemo, useState } from "react";
+// SOLUTION — m05 SalesTable data table.
+// Copy this over components/DataTable.jsx to self-check.
+import { useState } from "react";
+import { SALES_ROWS } from "../data/sales.js";
 
-const DEFAULT_ROWS = [
-  { id: 1, name: "Mouse", price: 25, rating: 4.5 },
-  { id: 2, name: "Keyboard", price: 75, rating: 4.8 },
-  { id: 3, name: "Monitor", price: 200, rating: 4.2 },
-];
-
-export default function DataTable({ rows = DEFAULT_ROWS }) {
+/**
+ * THE FEATURE — m05 SalesTable data table.
+ *
+ * `rows` defaults to the local offline dataset so the feature renders on its
+ * own. Supports name filtering (case-insensitive) and click-to-sort headers
+ * (first click ascending, second click on the same column descending).
+ *
+ * REQUIRED data-testids: filter, sort-name, sort-price, sort-rating,
+ * row-<id> (per visible row).
+ */
+export default function DataTable({ rows = SALES_ROWS }) {
   const [filter, setFilter] = useState("");
   const [sortKey, setSortKey] = useState(null);
-  const [dir, setDir] = useState("asc");
+  const [sortDir, setSortDir] = useState("asc");
 
   function onSort(key) {
     if (sortKey === key) {
-      setDir((d) => (d === "asc" ? "desc" : "asc"));
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
     } else {
       setSortKey(key);
-      setDir("asc");
+      setSortDir("asc");
     }
   }
 
-  const visible = useMemo(() => {
-    const f = filter.trim().toLowerCase();
-    let out = rows.filter((r) => r.name.toLowerCase().includes(f));
-    if (sortKey) {
-      out = [...out].sort((a, b) => {
-        const av = a[sortKey];
-        const bv = b[sortKey];
-        let cmp;
-        if (typeof av === "string") cmp = av.localeCompare(bv);
-        else cmp = av - bv;
-        return dir === "asc" ? cmp : -cmp;
-      });
-    }
-    return out;
-  }, [rows, filter, sortKey, dir]);
+  const filtered = rows.filter((r) =>
+    r.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  const visible = [...filtered];
+  if (sortKey) {
+    visible.sort((a, b) => {
+      const av = a[sortKey];
+      const bv = b[sortKey];
+      let cmp;
+      if (typeof av === "string") {
+        cmp = av.localeCompare(bv);
+      } else {
+        cmp = av - bv;
+      }
+      return sortDir === "asc" ? cmp : -cmp;
+    });
+  }
 
   return (
     <div>
       <h2>Products</h2>
       <input
+        className="st-filter"
         data-testid="filter"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
         placeholder="Filter by name..."
       />
-      <table>
+      <table className="st-table">
         <thead>
           <tr>
             <th><button data-testid="sort-name" onClick={() => onSort("name")}>Name</button></th>

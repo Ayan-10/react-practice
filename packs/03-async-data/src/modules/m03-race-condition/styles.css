@@ -1,0 +1,117 @@
+.ce-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  font-family: system-ui, sans-serif;
+  color: #1f2933;
+}
+
+.ce-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: #0b7285;
+  color: #fff;
+}
+
+.ce-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.ce-nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.ce-nav-link {
+  color: #e3fafc;
+  text-decoration: none;
+}
+
+.ce-nav-link:hover {
+  text-decoration: underline;
+}
+
+.ce-main {
+  flex: 1;
+  padding: 1.25rem;
+}
+
+.ce-home-title,
+.ce-favorites-title {
+  margin: 0 0 0.25rem;
+}
+
+.ce-home-lead {
+  margin: 0 0 1rem;
+  color: #52606d;
+}
+
+.ce-details {
+  border: 1px solid #d2dce5;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 28rem;
+}
+
+.ce-details-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.ce-btn {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #0b7285;
+  background: #e3fafc;
+  color: #0b7285;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.ce-btn:hover {
+  background: #c5f6fa;
+}
+
+.ce-details-body {
+  min-height: 1.5rem;
+  font-weight: 600;
+}
+
+.ce-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.ce-card {
+  border: 1px solid #d2dce5;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  min-width: 12rem;
+}
+
+.ce-card-name {
+  margin: 0 0 0.25rem;
+}
+
+.ce-card-desc {
+  margin: 0;
+  color: #52606d;
+}
+
+.ce-back-link {
+  color: #0b7285;
+}
+
+.ce-footer {
+  padding: 0.75rem 1rem;
+  background: #f0f4f8;
+  color: #52606d;
+  text-align: center;
+}

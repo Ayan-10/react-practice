@@ -1,0 +1,39 @@
+/* HelpHint mini-app styles — scoped-ish via .hh- prefixes. */
+
+.hh-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.hh-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.hh-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #d00000; white-space: nowrap; }
+.hh-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.hh-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.hh-nav-links a:hover { color: #d00000; }
+
+.hh-main { padding: 20px; min-height: 60vh; }
+.hh-page-title { margin: 0 0 4px; font-size: 22px; }
+.hh-page-sub { margin: 0 0 16px; color: #6b7280; }
+.hh-back { display: inline-block; margin-bottom: 12px; color: #d00000; text-decoration: none; }
+
+.hh-form { display: grid; gap: 12px; max-width: 360px; }
+.hh-field { display: grid; gap: 6px; }
+.hh-label-text {
+  font-weight: 600; border-bottom: 1px dotted #94a3b8; cursor: help;
+}
+.hh-trigger { display: inline-flex; }
+.hh-input { width: 100%; }
+
+.hh-tooltip {
+  position: fixed; top: 12px; left: 12px; max-width: 240px;
+  background: #14212b; color: #fff; padding: 8px 10px; border-radius: 8px;
+  font-size: 13px; line-height: 1.4; box-shadow: 0 6px 20px rgba(0,0,0,.25); z-index: 9999;
+}
+
+.hh-doc-list { list-style: none; padding: 0; margin: 0; }
+.hh-doc-item {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 10px 0; border-bottom: 1px solid #eceff2;
+}
+
+.hh-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

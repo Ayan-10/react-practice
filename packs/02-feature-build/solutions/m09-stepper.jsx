@@ -1,7 +1,7 @@
-// SOLUTION — m09 Stepper.
+// SOLUTION — m09 CheckoutFlow wizard. Copy over components/CheckoutWizard.jsx to self-check.
 import { useState } from "react";
 
-export default function Stepper({ onSubmit = () => {} }) {
+export default function CheckoutWizard({ onSubmit = () => {} }) {
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,28 +22,70 @@ export default function Stepper({ onSubmit = () => {} }) {
   }
 
   return (
-    <div className="card" style={{ maxWidth: 420 }}>
-      <p data-testid="step-indicator">Step {step} of 3</p>
+    <div className="cf-wizard">
+      <p className="cf-step-indicator" data-testid="step-indicator">
+        Step {step} of 3
+      </p>
 
       {step === 1 && (
-        <input data-testid="field-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+        <label className="cf-label">
+          Full name
+          <input
+            className="cf-input"
+            data-testid="field-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Jane Doe"
+          />
+        </label>
       )}
+
       {step === 2 && (
-        <input data-testid="field-email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+        <label className="cf-label">
+          Email
+          <input
+            className="cf-input"
+            data-testid="field-email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="jane@example.com"
+          />
+        </label>
       )}
+
       {step === 3 && (
-        <div>
-          <p>Name: <span data-testid="review-name">{name}</span></p>
-          <p>Email: <span data-testid="review-email">{email}</span></p>
+        <div className="cf-review">
+          <p>
+            Name: <span data-testid="review-name">{name}</span>
+          </p>
+          <p>
+            Email: <span data-testid="review-email">{email}</span>
+          </p>
         </div>
       )}
 
-      {error && <p data-testid="step-error" style={{ color: "crimson" }}>{error}</p>}
+      {error && (
+        <p className="cf-error" data-testid="step-error">
+          {error}
+        </p>
+      )}
 
-      <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
-        {step > 1 && <button data-testid="back-btn" onClick={back}>Back</button>}
-        {step < 3 && <button className="btn" data-testid="next-btn" onClick={next}>Next</button>}
-        {step === 3 && <button className="btn" data-testid="submit-btn" onClick={handleSubmit}>Submit</button>}
+      <div className="cf-wizard-actions">
+        {step > 1 && (
+          <button className="cf-btn cf-btn-ghost" data-testid="back-btn" onClick={back}>
+            Back
+          </button>
+        )}
+        {step < 3 && (
+          <button className="cf-btn" data-testid="next-btn" onClick={next}>
+            Next
+          </button>
+        )}
+        {step === 3 && (
+          <button className="cf-btn" data-testid="submit-btn" onClick={handleSubmit}>
+            Place order
+          </button>
+        )}
       </div>
     </div>
   );

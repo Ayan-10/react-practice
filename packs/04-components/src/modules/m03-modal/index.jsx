@@ -1,22 +1,10 @@
-import { useState } from "react";
-
-/**
- * MODULE m03 — Modal / dialog. Read PROMPT.md.
- */
-export default function ModalDemo() {
-  const [open, setOpen] = useState(false);
-
-  // TODO: close on Escape (add/remove a keydown listener while open).
-
-  return (
-    <div>
-      <h2>Modal</h2>
-      <button data-testid="open-btn" onClick={() => setOpen(true)}>
-        Open
-      </button>
-
-      {/* TODO: when open, render a backdrop (closes on click) containing the
-          modal (does NOT close on click), with a close button and Escape support. */}
-    </div>
-  );
-}
+// Entry point for the m03 mini-app (ImageGallery).
+// The whole project lives in this folder:
+//   App.jsx               – app root (layout + routes)
+//   components/           – Navbar, Modal (👈 THE feature), Footer
+//   pages/                – Home, Albums
+//   data/photos.js        – local photo dataset (offline)
+//   styles.css
+//
+// 👉 The feature lives in components/Modal.jsx. Read PROMPT.md.
+export { default } from "./App.jsx";

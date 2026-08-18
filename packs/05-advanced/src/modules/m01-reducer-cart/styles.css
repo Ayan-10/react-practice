@@ -1,0 +1,41 @@
+/* BudgetBuddy mini-app styles — scoped-ish via .bb- prefixes. */
+
+.bb-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.bb-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.bb-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #7048e8; white-space: nowrap; }
+.bb-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.bb-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.bb-nav-links a:hover { color: #7048e8; }
+
+.bb-main { padding: 20px; min-height: 60vh; }
+.bb-page-title { margin: 0 0 4px; font-size: 22px; }
+.bb-page-sub { margin: 0 0 16px; color: #6b7280; }
+.bb-back { display: inline-block; margin-bottom: 12px; color: #7048e8; text-decoration: none; }
+.bb-h2 { font-size: 16px; margin: 0 0 8px; }
+
+.bb-cart { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 640px) { .bb-cart { grid-template-columns: 1fr; } }
+
+.bb-product-list, .bb-lines, .bb-saved-list { list-style: none; padding: 0; margin: 0; }
+.bb-product, .bb-line, .bb-saved-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eceff2;
+}
+.bb-product-name, .bb-line-name { flex: 1; }
+.bb-product-price { color: #6b7280; }
+
+.bb-basket-head { display: flex; align-items: center; justify-content: space-between; }
+.bb-empty { color: #6b7280; }
+.bb-line-qty { display: inline-flex; align-items: center; gap: 8px; }
+.bb-step { width: 24px; height: 24px; border: 1px solid #d0d5dd; background: #fff; border-radius: 6px; }
+.bb-line-sub { width: 60px; text-align: right; font-variant-numeric: tabular-nums; }
+
+.bb-summary {
+  display: flex; justify-content: space-between; margin-top: 12px; padding-top: 12px;
+  border-top: 2px solid #e2e6ea; font-variant-numeric: tabular-nums;
+}
+
+.bb-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

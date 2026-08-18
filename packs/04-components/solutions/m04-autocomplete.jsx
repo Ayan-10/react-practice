@@ -1,23 +1,31 @@
-// SOLUTION — m04 Autocomplete.
-import { useEffect, useRef, useState } from "react";
+// SOLUTION — m04 CommandPalette autocomplete.
+// Copy this over components/Autocomplete.jsx to self-check.
+import { useEffect, useState } from "react";
+import { loadCommands } from "../data/commands.js";
 
-const FRUITS = ["Apple", "Apricot", "Banana", "Blueberry", "Cherry", "Mango"];
-async function defaultSuggestions(q) {
-  const s = q.toLowerCase();
-  return FRUITS.filter((f) => f.toLowerCase().startsWith(s));
-}
-
-export default function Autocomplete({ getSuggestions = defaultSuggestions }) {
+/**
+ * THE FEATURE — m04 CommandPalette autocomplete.
+ *
+ * `getSuggestions(q)` returns a promise of matching options; it is injected as
+ * a prop so tests can supply deterministic data, and defaults to the local
+ * offline command loader.
+ *
+ * Behaviour:
+ *   - Typing fetches suggestions and shows them in a list.
+ *   - ArrowUp/ArrowDown move the highlight; Enter selects the highlighted one.
+ *   - Clicking an option selects it. Selecting fills the input and closes the
+ *     list.
+ *
+ * REQUIRED data-testids: ac-input, ac-list, option-<i>.
+ */
+export default function Autocomplete({ getSuggestions = loadCommands }) {
   const [query, setQuery] = useState("");
   const [options, setOptions] = useState([]);
   const [highlight, setHighlight] = useState(0);
-  const skipFetch = useRef(false); // suppress refetch right after a selection
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (skipFetch.current) {
-      skipFetch.current = false;
-      return;
-    }
+    if (!open) return;
     const q = query.trim();
     if (!q) {
       setOptions([]);
@@ -32,45 +40,53 @@ export default function Autocomplete({ getSuggestions = defaultSuggestions }) {
     return () => {
       active = false;
     };
-  }, [query, getSuggestions]);
+  }, [query, open, getSuggestions]);
 
   function select(value) {
-    skipFetch.current = true;
     setQuery(value);
+    setOpen(false);
     setOptions([]);
   }
 
+  function onChange(e) {
+    setQuery(e.target.value);
+    setOpen(true);
+  }
+
   function onKeyDown(e) {
-    if (options.length === 0) return;
+    if (!open || options.length === 0) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setHighlight((h) => (h + 1) % options.length);
+      setHighlight((h) => Math.min(options.length - 1, h + 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setHighlight((h) => (h - 1 + options.length) % options.length);
+      setHighlight((h) => Math.max(0, h - 1));
     } else if (e.key === "Enter") {
       e.preventDefault();
       select(options[highlight]);
     }
   }
 
+  const showList = open && options.length > 0;
+
   return (
     <div>
       <h2>Autocomplete</h2>
       <input
+        className="cp-input"
         data-testid="ac-input"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={onChange}
         onKeyDown={onKeyDown}
-        placeholder="Type a fruit..."
+        placeholder="Type a command..."
       />
-      {options.length > 0 && (
-        <ul data-testid="ac-list" className="ac-list">
+      {showList && (
+        <ul data-testid="ac-list" className="cp-list">
           {options.map((opt, i) => (
             <li
               key={opt}
               data-testid={`option-${i}`}
-              className={i === highlight ? "highlight" : ""}
+              className={i === highlight ? "cp-option highlight" : "cp-option"}
               onClick={() => select(opt)}
             >
               {opt}

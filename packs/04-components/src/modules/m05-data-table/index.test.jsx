@@ -1,7 +1,35 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect } from "vitest";
-import DataTable from "./index.jsx";
+import { MemoryRouter } from "react-router-dom";
+
+// The WHOLE SalesTable mini-app (navbar + table home + a second route).
+import App from "./index.jsx";
+// The feature, imported DIRECTLY so we can drive it with fixture rows.
+import DataTable from "./components/DataTable.jsx";
+
+function renderApp(initialEntries = ["/"]) {
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <App />
+    </MemoryRouter>
+  );
+}
+
+describe("m05 · SalesTable — app renders", () => {
+  it("renders navbar and the home page", () => {
+    renderApp();
+    expect(screen.getByTestId("navbar")).toBeInTheDocument();
+    expect(screen.getByTestId("home-page")).toBeInTheDocument();
+  });
+
+  it("navigates to the Summary route via the navbar", async () => {
+    const user = userEvent.setup();
+    renderApp();
+    await user.click(screen.getByTestId("nav-summary"));
+    expect(await screen.findByTestId("summary-page")).toBeInTheDocument();
+  });
+});
 
 const rows = [
   { id: 1, name: "Banana", price: 30, rating: 4.1 },
@@ -15,7 +43,7 @@ function orderedIds() {
     .map((el) => el.getAttribute("data-testid"));
 }
 
-describe("m05 — data table", () => {
+describe("m05 · SalesTable — data table feature", () => {
   it("sorts ascending then descending by price", async () => {
     const user = userEvent.setup();
     render(<DataTable rows={rows} />);

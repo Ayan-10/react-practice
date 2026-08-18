@@ -1,0 +1,106 @@
+/* TeamDirectory mini-app styles — scoped-ish via .td- prefixes. */
+
+.td-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.td-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.td-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #1c7ed6;
+  white-space: nowrap;
+}
+
+.td-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.td-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.td-nav-links a:hover {
+  color: #1c7ed6;
+}
+
+.td-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.td-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.td-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.td-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #1c7ed6;
+  text-decoration: none;
+}
+
+.td-feature-title {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+.td-select {
+  padding: 6px 10px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.td-hint {
+  margin-top: 12px;
+  color: #6b7280;
+}
+
+.td-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.td-card {
+  border: 1px solid #e2e6ea;
+  border-radius: 10px;
+  padding: 14px;
+  background: #fff;
+}
+.td-card-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.td-card-team {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.td-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

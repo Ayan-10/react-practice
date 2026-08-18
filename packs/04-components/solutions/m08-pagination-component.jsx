@@ -1,23 +1,29 @@
-// SOLUTION — m08 Reusable pagination.
+// SOLUTION — m08 SearchResults reusable pagination (components/Pagination.jsx).
 import { useState } from "react";
 
-const WINDOW = 5;
-
+/**
+ * THE FEATURE TO BUILD — m08 SearchResults reusable pagination.
+ *
+ * Controlled component: props totalPages, current, onChange. It renders a
+ * sliding WINDOW of up to 5 page buttons centered on `current`, clamped so it
+ * never runs off either end. Prev/Next step by one and disable at the bounds.
+ *
+ * REQUIRED data-testids: prev, next, page-<n> (active page gets a class
+ * containing "active").
+ */
 export function Pagination({ totalPages, current, onChange }) {
-  // Compute a 5-wide window centered on `current`, clamped to [1, totalPages].
-  const half = Math.floor(WINDOW / 2);
-  let start = Math.max(1, current - half);
-  let end = Math.min(totalPages, start + WINDOW - 1);
-  start = Math.max(1, end - WINDOW + 1); // re-clamp when near the end
-
-  const pages = [];
-  for (let n = start; n <= end; n++) pages.push(n);
+  const WINDOW = 5;
+  const size = Math.min(WINDOW, totalPages);
+  let start = current - Math.floor(WINDOW / 2);
+  start = Math.max(1, Math.min(start, totalPages - size + 1));
+  const pages = Array.from({ length: size }, (_, i) => start + i);
 
   return (
-    <div className="pagination">
+    <div className="sr-pagination">
       <button
+        className="sr-page-btn"
         data-testid="prev"
-        disabled={current === 1}
+        disabled={current <= 1}
         onClick={() => onChange(current - 1)}
       >
         Prev
@@ -26,15 +32,16 @@ export function Pagination({ totalPages, current, onChange }) {
         <button
           key={n}
           data-testid={`page-${n}`}
-          className={`page${n === current ? " active" : ""}`}
+          className={n === current ? "sr-page active" : "sr-page"}
           onClick={() => onChange(n)}
         >
           {n}
         </button>
       ))}
       <button
+        className="sr-page-btn"
         data-testid="next"
-        disabled={current === totalPages}
+        disabled={current >= totalPages}
         onClick={() => onChange(current + 1)}
       >
         Next
@@ -43,12 +50,14 @@ export function Pagination({ totalPages, current, onChange }) {
   );
 }
 
+// Demo wrapper so the module renders in the app (Home uses this).
 export default function PaginationDemo() {
   const [page, setPage] = useState(1);
   return (
-    <div>
-      <h2>Pagination</h2>
-      <p>Page {page}</p>
+    <div className="sr-demo">
+      <p className="sr-demo-page" data-testid="demo-page">
+        Page {page}
+      </p>
       <Pagination totalPages={10} current={page} onChange={setPage} />
     </div>
   );

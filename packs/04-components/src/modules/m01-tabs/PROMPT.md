@@ -1,18 +1,39 @@
-# m01 — Tabs
+# m01 — DocsViewer · Tabs
 
-**Time box:** ~12 min
+**Time box:** ~15 min
 
-Build a Tabs component. Given a `tabs` array of `{ id, label, content }`, render
-a tab strip and show only the active tab's panel.
+You're given a complete **DocsViewer** mini-app: a navbar, a tabbed docs page
+(Home), and a Changelog route — all working. The feature to focus on is the
+tab switcher.
+
+> 👉 The file to edit is **`components/Tabs.jsx`**. The dev menu / tests mount
+> the whole app.
+
+## Folder
+
+```
+m01-tabs/
+  App.jsx                    app root (navbar + routes)
+  index.jsx                  entry (re-exports App)
+  components/
+    Navbar.jsx  Footer.jsx
+    Tabs.jsx                 👈 THE FEATURE
+  pages/    Home.jsx  Changelog.jsx
+  data/docs.js               local tabs dataset
+  styles.css
+```
 
 ## Requirements
 
-- Render one button per tab: `data-testid="tab-<id>"`.
-- The active tab button has class `active`.
-- Show only the active tab's content in `data-testid="panel"`.
-- First tab is active by default. Clicking a tab activates it.
+- Each tab button has `data-testid="tab-<id>"`; the active one has a class
+  containing `active`.
+- Exactly one panel (`data-testid="panel"`) is visible, showing the active
+  tab's content.
+- Clicking a tab switches the visible panel.
+- `tabs` is a prop and defaults to the local `DOCS_TABS`.
 
-## Gotchas
+## Run
 
-- Only ONE panel is rendered at a time (the active one).
-- Track the active tab id in state, not the index, so it's robust to reordering.
+```
+npx vitest run src/modules/m01-tabs/
+```

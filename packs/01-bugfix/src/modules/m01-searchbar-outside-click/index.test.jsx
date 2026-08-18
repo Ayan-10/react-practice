@@ -1,74 +1,74 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, Routes, Route, Link } from "react-router-dom";
-import SearchBar from "./index.jsx";
+import { MemoryRouter } from "react-router-dom";
+import App from "./index.jsx";
 
-// Mock the shared API so tests are deterministic and offline.
-vi.mock("../../shared/api.js", () => ({
-  searchProducts: vi.fn(async () => [
-    { id: 1, title: "123 Test Avenue, Test City" },
-    { id: 2, title: "456 Sample Street, Sample City" },
-  ]),
-}));
-
-function renderWithRouter() {
+// Mount the WHOLE HouseFinder app (navbar + search + pages), exactly like a
+// user would see it. The only thing broken is the search dropdown's
+// close-behaviour, which lives in components/SearchBar.jsx.
+function renderApp() {
   return render(
     <MemoryRouter initialEntries={["/"]}>
-      <div data-testid="outside-area">
-        <SearchBar />
-        <Link to="/other">Go elsewhere</Link>
-        <Routes>
-          <Route path="/" element={<div>home</div>} />
-          <Route path="/other" element={<div>other page</div>} />
-        </Routes>
-      </div>
+      <App />
     </MemoryRouter>
   );
 }
 
-describe("SearchBar — outside click behaviour", () => {
-  beforeEach(() => vi.clearAllMocks());
-
-  it("shows the dropdown when typing", async () => {
-    const user = userEvent.setup();
-    renderWithRouter();
-    await user.type(screen.getByTestId("search-input"), "test");
-    expect(await screen.findByTestId("search-div")).toBeInTheDocument();
-    expect(screen.getAllByTestId("apartment-name-search-result")).toHaveLength(2);
+describe("m01 · HouseFinder — search dropdown close behaviour", () => {
+  it("app renders: navbar + listing grid are visible", () => {
+    renderApp();
+    expect(screen.getByTestId("navbar")).toBeInTheDocument();
+    expect(screen.getByTestId("home-page")).toBeInTheDocument();
+    // Listing grid shows the house cards.
+    expect(screen.getAllByTestId("house-card").length).toBeGreaterThan(0);
   });
 
-  it("keeps the dropdown open when clicking inside a result", async () => {
+  it("shows the dropdown when typing a query", async () => {
     const user = userEvent.setup();
-    renderWithRouter();
-    await user.type(screen.getByTestId("search-input"), "test");
-    const results = await screen.findAllByTestId("apartment-name-search-result");
-    await user.click(results[0]);
-    // Clicking inside the dropdown should NOT close it.
-    expect(screen.getByTestId("search-div")).toBeInTheDocument();
+    renderApp();
+    await user.type(screen.getByTestId("search-input"), "house");
+    const dropdown = await screen.findByTestId("search-div");
+    expect(dropdown).toBeInTheDocument();
+    expect(
+      within(dropdown).getAllByTestId("house-search-result").length
+    ).toBeGreaterThan(0);
   });
 
-  it("closes the dropdown when clicking completely outside the search area", async () => {
+  it("keeps the dropdown open when interacting inside it", async () => {
     const user = userEvent.setup();
-    renderWithRouter();
-    await user.type(screen.getByTestId("search-input"), "test");
+    renderApp();
+    await user.type(screen.getByTestId("search-input"), "cabin");
+    const dropdown = await screen.findByTestId("search-div");
+    // Clicking the search input again (inside the search area) must NOT close it.
+    await user.click(screen.getByTestId("search-input"));
+    expect(dropdown).toBeInTheDocument();
+  });
+
+  it("closes the dropdown when clicking outside the search area", async () => {
+    const user = userEvent.setup();
+    renderApp();
+    await user.type(screen.getByTestId("search-input"), "house");
     expect(await screen.findByTestId("search-div")).toBeInTheDocument();
 
-    await user.click(screen.getByTestId("outside-area"));
+    // Click somewhere clearly outside the navbar search — e.g. the page heading.
+    await user.click(screen.getByTestId("home-page"));
 
     await waitFor(() =>
       expect(screen.queryByTestId("search-div")).not.toBeInTheDocument()
     );
   });
 
-  it("closes the dropdown when navigating to a new page", async () => {
+  it("closes the dropdown when navigating to another route", async () => {
     const user = userEvent.setup();
-    renderWithRouter();
-    await user.type(screen.getByTestId("search-input"), "test");
+    renderApp();
+    await user.type(screen.getByTestId("search-input"), "house");
     expect(await screen.findByTestId("search-div")).toBeInTheDocument();
 
-    await user.click(screen.getByText("Go elsewhere"));
+    // Navigate to the Saved page via the navbar.
+    await user.click(screen.getByTestId("nav-saved"));
 
+    expect(await screen.findByTestId("saved-page")).toBeInTheDocument();
     await waitFor(() =>
       expect(screen.queryByTestId("search-div")).not.toBeInTheDocument()
     );

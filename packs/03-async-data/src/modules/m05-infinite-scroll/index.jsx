@@ -10,13 +10,26 @@ const PAGE_SIZE = 2;
  */
 export default function InfiniteList({ load = fetchProducts }) {
   const [items, setItems] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // TODO: load the first batch on mount.
-  // TODO: implement loadMore() that fetches the next batch (skip = items.length)
-  //       and APPENDS to items.
+  async function loadMore(skip) {
+    setLoading(true);
+    try {
+      const { products, total: t } = await load({ limit: PAGE_SIZE, skip });
+      setItems((prev) => [...prev, ...products]);
+      setTotal(t);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-  const hasMore = items.length < total || total === 0;
+  useEffect(() => {
+    loadMore(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const hasMore = total === null || items.length < total;
 
   return (
     <div>
@@ -29,8 +42,17 @@ export default function InfiniteList({ load = fetchProducts }) {
         ))}
       </div>
 
-      {/* TODO: show load-more while more remain, else show `end` */}
-      <button data-testid="load-more">Load more</button>
+      {hasMore ? (
+        <button
+          data-testid="load-more"
+          disabled={loading}
+          onClick={() => loadMore(items.length)}
+        >
+          {loading ? "Loading…" : "Load more"}
+        </button>
+      ) : (
+        <p data-testid="end">No more products</p>
+      )}
     </div>
   );
 }

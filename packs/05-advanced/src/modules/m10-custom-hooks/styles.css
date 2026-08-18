@@ -1,0 +1,33 @@
+/* HookBox mini-app styles — scoped-ish via .hb- prefixes. */
+
+.hb-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.hb-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.hb-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #0aa; white-space: nowrap; }
+.hb-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.hb-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.hb-nav-links a:hover { color: #0aa; }
+
+.hb-main { padding: 20px; min-height: 60vh; }
+.hb-page-title { margin: 0 0 4px; font-size: 22px; }
+.hb-page-sub { margin: 0 0 16px; color: #6b7280; }
+.hb-back { display: inline-block; margin-bottom: 12px; color: #0aa; text-decoration: none; }
+.hb-h2 { font-size: 15px; margin: 0 0 10px; }
+
+.hb-demo { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.hb-card {
+  background: #fff; border: 1px solid #e2e4e9; border-radius: 10px; padding: 16px;
+}
+.hb-input { width: 100%; }
+
+.hb-hook-list { list-style: none; padding: 0; margin: 0; }
+.hb-hook-item {
+  display: flex; align-items: baseline; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid #eceff2;
+}
+.hb-hook-item code { color: #0aa; font-weight: 700; }
+
+.hb-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

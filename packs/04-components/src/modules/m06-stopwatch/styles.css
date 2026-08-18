@@ -1,0 +1,124 @@
+/* GymTimer mini-app styles — scoped-ish via .gt- prefixes. */
+
+.gt-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.gt-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.gt-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #e8590c;
+  white-space: nowrap;
+}
+
+.gt-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.gt-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.gt-nav-links a:hover {
+  color: #e8590c;
+}
+
+.gt-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.gt-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.gt-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.gt-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #e8590c;
+  text-decoration: none;
+}
+
+.gt-stopwatch {
+  border: 1px solid #e2e6ea;
+  border-radius: 10px;
+  padding: 20px;
+  background: #fff;
+  max-width: 320px;
+}
+.gt-elapsed {
+  margin: 0 0 16px;
+  font-size: 48px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #e8590c;
+}
+.gt-controls {
+  display: flex;
+  gap: 8px;
+}
+.gt-btn {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #344054;
+}
+.gt-btn:hover {
+  border-color: #e8590c;
+  color: #e8590c;
+}
+
+.gt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  max-width: 360px;
+}
+.gt-list-item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #e2e6ea;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #fff;
+}
+.gt-list-name {
+  font-weight: 600;
+}
+.gt-list-meta {
+  color: #6b7280;
+  font-variant-numeric: tabular-nums;
+}
+
+.gt-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

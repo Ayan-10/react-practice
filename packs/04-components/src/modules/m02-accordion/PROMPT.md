@@ -1,21 +1,39 @@
-# m02 — Accordion
+# m02 — FaqPage · Accordion
 
-**Time box:** ~12 min
+**Time box:** ~15 min
 
-Build an accordion from `items` (`{ id, title, body }`). Clicking a header
-toggles its panel. Support a `multi` prop: when false (default) only ONE panel
-is open at a time; when true, multiple can be open.
+You're given a complete **FaqPage** mini-app: a navbar, an accordion FAQ page
+(Home), and a Contact route — all working. The feature to focus on is the
+accordion.
+
+> 👉 The file to edit is **`components/Accordion.jsx`**. The dev menu / tests
+> mount the whole app.
+
+## Folder
+
+```
+m02-accordion/
+  App.jsx                    app root (navbar + routes)
+  index.jsx                  entry (re-exports App)
+  components/
+    Navbar.jsx  Footer.jsx
+    Accordion.jsx            👈 THE FEATURE
+  pages/    Home.jsx  Contact.jsx
+  data/faqs.js               local FAQ dataset
+  styles.css
+```
 
 ## Requirements
 
-- Header buttons: `data-testid="header-<id>"`.
-- A panel is visible only when open: `data-testid="panel-<id>"` (absent from the
-  DOM when closed).
-- Default (single mode): opening one closes the others.
-- `multi` mode: each toggles independently.
-- All start closed.
+- Each item has a header `data-testid="header-<id>"`.
+- An open item renders a panel `data-testid="panel-<id>"`; closed items render
+  nothing.
+- `multi=false` (default): only one panel open at a time. `multi=true`:
+  panels toggle independently.
+- `items` is a prop and defaults to the local `FAQ_ITEMS`.
 
-## Gotchas
+## Run
 
-- Single mode: store a single open id (or null). Multi mode: store a Set of ids.
-- "Absent when closed" means conditionally render the panel, not just hide it.
+```
+npx vitest run src/modules/m02-accordion/
+```

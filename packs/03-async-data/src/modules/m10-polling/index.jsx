@@ -1,24 +1,10 @@
-import { useEffect, useState } from "react";
-
-const INTERVAL = 1000;
-
-/**
- * MODULE m10 — Polling. Read PROMPT.md.
- *
- * `load` resolves the latest value (a string/number).
- */
-export default function Poller({ load }) {
-  const [value, setValue] = useState("");
-  const [count, setCount] = useState(0);
-
-  // TODO: fetch once on mount, then every INTERVAL ms.
-  //       Update value + count on each result. Clear the interval on unmount.
-
-  return (
-    <div>
-      <h2>Live value</h2>
-      <p data-testid="value">{value}</p>
-      <p data-testid="poll-count">{count}</p>
-    </div>
-  );
-}
+// Entry point for the m10 mini-app (StatusMonitor).
+// The whole project lives in this folder:
+//   App.jsx                – app root (layout + routes)
+//   components/            – Navbar, Poller (👈 BUILD here), StatusCard, Footer
+//   pages/                 – Home, History
+//   data/status.js         – local dataset + default load() (offline)
+//   styles.css
+//
+// 👉 The feature to build lives in components/Poller.jsx. Read PROMPT.md.
+export { default } from "./App.jsx";

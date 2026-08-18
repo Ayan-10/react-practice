@@ -1,0 +1,33 @@
+/* SketchPad mini-app styles — scoped-ish via .ur- prefixes. */
+
+.ur-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.ur-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.ur-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #7048e8; white-space: nowrap; }
+.ur-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.ur-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.ur-nav-links a:hover { color: #7048e8; }
+
+.ur-main { padding: 20px; min-height: 60vh; }
+.ur-page-title { margin: 0 0 4px; font-size: 22px; }
+.ur-page-sub { margin: 0 0 16px; color: #6b7280; }
+.ur-back { display: inline-block; margin-bottom: 12px; color: #7048e8; text-decoration: none; }
+
+.ur-editor { max-width: 360px; display: grid; gap: 16px; }
+.ur-value-row { display: flex; align-items: baseline; justify-content: space-between; }
+.ur-value-label { color: #6b7280; }
+.ur-value { font-size: 40px; font-variant-numeric: tabular-nums; }
+.ur-controls { display: flex; gap: 8px; }
+.ur-controls .btn { flex: 1; }
+.ur-controls .btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.ur-session-list { list-style: none; padding: 0; margin: 0; }
+.ur-session-item {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 10px 0; border-bottom: 1px solid #eceff2;
+}
+
+.ur-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

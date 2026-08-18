@@ -1,22 +1,28 @@
-// SOLUTION — m06 Todo.
+// SOLUTION — m06 DailyPlanner todo list.
+// Copy this over components/TodoList.jsx to self-check.
 import { useState } from "react";
+import { SEED_TASKS } from "../data/tasks.js";
 
 let nextId = 1;
 
-export default function Todo() {
-  const [todos, setTodos] = useState([]);
+export default function TodoList() {
+  const [todos, setTodos] = useState(SEED_TASKS);
   const [text, setText] = useState("");
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("all"); // all | active | completed
 
   function addTodo() {
     const t = text.trim();
     if (!t) return;
-    setTodos((prev) => [...prev, { id: nextId++, text: t, done: false }]);
+    setTodos((prev) => [...prev, { id: `n${nextId++}`, text: t, done: false }]);
     setText("");
   }
+
   function toggle(id) {
-    setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+    setTodos((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
+    );
   }
+
   function remove(id) {
     setTodos((prev) => prev.filter((t) => t.id !== id));
   }
@@ -27,40 +33,78 @@ export default function Todo() {
   const itemsLeft = todos.filter((t) => !t.done).length;
 
   return (
-    <div className="card" style={{ maxWidth: 480 }}>
-      <h2>Todos</h2>
-      <div style={{ display: "flex", gap: 8 }}>
+    <div className="dp-feature" data-testid="todo-feature">
+      <h2 className="dp-feature-title">Todos</h2>
+
+      <div className="dp-add-row">
         <input
+          className="dp-input"
           data-testid="new-todo"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="What needs doing?"
         />
-        <button className="btn" data-testid="add-btn" onClick={addTodo}>Add</button>
+        <button className="dp-btn" data-testid="add-btn" onClick={addTodo}>
+          Add
+        </button>
       </div>
 
-      <ul>
+      <ul className="dp-list" data-testid="todo-list">
         {visible.map((t) => (
-          <li key={t.id} data-testid="todo-item" className={t.done ? "done" : ""}>
+          <li
+            key={t.id}
+            data-testid="todo-item"
+            className={`dp-item${t.done ? " done" : ""}`}
+          >
             <input
               type="checkbox"
               data-testid={`toggle-${t.id}`}
               checked={t.done}
               onChange={() => toggle(t.id)}
             />
-            <span data-testid={`label-${t.id}`} style={{ textDecoration: t.done ? "line-through" : "none" }}>
+            <span
+              className="dp-label"
+              data-testid={`label-${t.id}`}
+              style={{ textDecoration: t.done ? "line-through" : "none" }}
+            >
               {t.text}
             </span>
-            <button data-testid={`delete-${t.id}`} onClick={() => remove(t.id)}>×</button>
+            <button
+              className="dp-del"
+              data-testid={`delete-${t.id}`}
+              onClick={() => remove(t.id)}
+            >
+              ×
+            </button>
           </li>
         ))}
       </ul>
 
-      <div style={{ display: "flex", gap: 8 }}>
-        <button data-testid="filter-all" onClick={() => setFilter("all")}>All</button>
-        <button data-testid="filter-active" onClick={() => setFilter("active")}>Active</button>
-        <button data-testid="filter-completed" onClick={() => setFilter("completed")}>Completed</button>
-        <span data-testid="items-left">{itemsLeft} left</span>
+      <div className="dp-footer-row">
+        <button
+          className="dp-tab"
+          data-testid="filter-all"
+          onClick={() => setFilter("all")}
+        >
+          All
+        </button>
+        <button
+          className="dp-tab"
+          data-testid="filter-active"
+          onClick={() => setFilter("active")}
+        >
+          Active
+        </button>
+        <button
+          className="dp-tab"
+          data-testid="filter-completed"
+          onClick={() => setFilter("completed")}
+        >
+          Completed
+        </button>
+        <span className="dp-count" data-testid="items-left">
+          {itemsLeft} left
+        </span>
       </div>
     </div>
   );

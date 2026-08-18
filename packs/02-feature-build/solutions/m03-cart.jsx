@@ -1,10 +1,10 @@
-// SOLUTION — m03 Cart.
+// SOLUTION — m03 GroceryCart cart management.
+// Copy this over components/CartManager.jsx to self-check.
 import { useState } from "react";
-import { fallbackProducts } from "../../shared/api.js";
+import { PRODUCTS } from "../data/products.js";
+import ProductCard from "./ProductCard.jsx";
 
-const PRODUCTS = fallbackProducts;
-
-export default function Cart() {
+export default function CartManager() {
   const [products] = useState(PRODUCTS);
   const [cart, setCart] = useState([]);
 
@@ -12,14 +12,18 @@ export default function Cart() {
     setCart((prev) => {
       const existing = prev.find((l) => l.id === product.id);
       if (existing) {
-        return prev.map((l) => (l.id === product.id ? { ...l, qty: l.qty + 1 } : l));
+        return prev.map((l) =>
+          l.id === product.id ? { ...l, qty: l.qty + 1 } : l
+        );
       }
       return [...prev, { ...product, qty: 1 }];
     });
   }
 
   function inc(id) {
-    setCart((prev) => prev.map((l) => (l.id === id ? { ...l, qty: l.qty + 1 } : l)));
+    setCart((prev) =>
+      prev.map((l) => (l.id === id ? { ...l, qty: l.qty + 1 } : l))
+    );
   }
 
   function dec(id) {
@@ -34,33 +38,56 @@ export default function Cart() {
   const totalPrice = cart.reduce((s, l) => s + l.price * l.qty, 0);
 
   return (
-    <div>
-      <h2>Shop</h2>
-      <div className="grid">
+    <div className="gc-feature">
+      <h2 className="gc-feature-title">Fresh picks</h2>
+
+      <div className="gc-grid" data-testid="product-list">
         {products.map((p) => (
-          <div key={p.id} className="card">
-            <strong>{p.title}</strong>
-            <p>${p.price}</p>
-            <button className="btn" data-testid={`add-${p.id}`} onClick={() => addToCart(p)}>Add</button>
+          <ProductCard key={p.id} product={p} onAdd={addToCart} />
+        ))}
+      </div>
+
+      <h3 className="gc-cart-title">Your cart</h3>
+      <div className="gc-cart" data-testid="cart">
+        {cart.length === 0 && <p data-testid="empty">Cart is empty</p>}
+
+        {cart.map((line) => (
+          <div
+            key={line.id}
+            className="gc-cart-line"
+            data-testid={`cart-line-${line.id}`}
+          >
+            <span className="gc-cart-name">{line.title}</span>
+            <button
+              className="gc-qty-btn"
+              data-testid={`dec-${line.id}`}
+              onClick={() => dec(line.id)}
+            >
+              −
+            </button>
+            <span data-testid={`qty-${line.id}`}>{line.qty}</span>
+            <button
+              className="gc-qty-btn"
+              data-testid={`inc-${line.id}`}
+              onClick={() => inc(line.id)}
+            >
+              +
+            </button>
+            <span className="gc-line-price">
+              ${(line.price * line.qty).toFixed(2)}
+            </span>
           </div>
         ))}
       </div>
 
-      <h3 style={{ marginTop: 24 }}>Cart</h3>
-      <div data-testid="cart">
-        {cart.length === 0 && <p data-testid="empty">Cart is empty</p>}
-        {cart.map((line) => (
-          <div key={line.id} data-testid={`cart-line-${line.id}`} style={{ display: "flex", gap: 8 }}>
-            <span>{line.title}</span>
-            <button data-testid={`dec-${line.id}`} onClick={() => dec(line.id)}>-</button>
-            <span data-testid={`qty-${line.id}`}>{line.qty}</span>
-            <button data-testid={`inc-${line.id}`} onClick={() => inc(line.id)}>+</button>
-            <span>${(line.price * line.qty).toFixed(2)}</span>
-          </div>
-        ))}
+      <div className="gc-totals">
+        <p>
+          Items: <span data-testid="total-count">{totalCount}</span>
+        </p>
+        <p>
+          Total: $<span data-testid="total-price">{totalPrice.toFixed(2)}</span>
+        </p>
       </div>
-      <p>Items: <span data-testid="total-count">{totalCount}</span></p>
-      <p>Total: $<span data-testid="total-price">{totalPrice.toFixed(2)}</span></p>
     </div>
   );
 }

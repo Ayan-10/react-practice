@@ -1,0 +1,52 @@
+/* CrossWalk mini-app styles — scoped-ish via .sm- prefixes. */
+
+.sm-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.sm-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.sm-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #2f9e44; white-space: nowrap; }
+.sm-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.sm-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.sm-nav-links a:hover { color: #2f9e44; }
+
+.sm-main { padding: 20px; min-height: 60vh; }
+.sm-page-title { margin: 0 0 4px; font-size: 22px; }
+.sm-page-sub { margin: 0 0 16px; color: #6b7280; }
+.sm-back { display: inline-block; margin-bottom: 12px; color: #2f9e44; text-decoration: none; }
+
+.sm-light-wrap {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 16px;
+  padding: 20px; background: #fff; border: 1px solid #e2e6ea; border-radius: 12px;
+}
+.sm-light {
+  width: 120px; height: 120px; border-radius: 50%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; color: #fff; text-transform: capitalize;
+  font-weight: 700; box-shadow: 0 0 0 8px #1a1a2e inset;
+}
+.sm-light-green { background: #2f9e44; }
+.sm-light-yellow { background: #f59f00; }
+.sm-light-red { background: #e03131; }
+.sm-light-name { font-size: 18px; }
+.sm-light-label { font-size: 12px; font-weight: 500; opacity: .9; }
+
+.sm-controls { display: flex; align-items: center; gap: 14px; }
+.sm-walk {
+  padding: 6px 12px; border-radius: 8px; font-weight: 600; font-size: 14px;
+}
+.sm-walk-go { background: #d3f9d8; color: #2b8a3e; }
+.sm-walk-stop { background: #ffe3e3; color: #c92a2a; }
+
+.sm-rules-list { list-style: none; padding: 0; margin: 0; }
+.sm-rules-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #eceff2;
+}
+.sm-dot { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
+.sm-dot-green { background: #2f9e44; }
+.sm-dot-yellow { background: #f59f00; }
+.sm-dot-red { background: #e03131; }
+.sm-rules-state { flex: 1; text-transform: capitalize; font-weight: 500; }
+.sm-rules-label { color: #6b7280; }
+
+.sm-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

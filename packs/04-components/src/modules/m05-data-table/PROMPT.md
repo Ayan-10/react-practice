@@ -1,22 +1,40 @@
-# m05 — Data table (sort + filter)
+# m05 — SalesTable · Sortable / filterable data table
 
-**Time box:** ~18 min
+**Time box:** ~20 min
 
-Build a table over `rows` (`{ id, name, price, rating }`). Support clicking a
-column header to sort by it (toggle asc/desc), plus a text filter over `name`.
+You're given a complete **SalesTable** mini-app: a navbar, a sortable table
+(Home), and a Summary route — all working. The feature to focus on is the data
+table.
+
+> 👉 The file to edit is **`components/DataTable.jsx`**. The dev menu / tests
+> mount the whole app.
+
+## Folder
+
+```
+m05-data-table/
+  App.jsx                    app root (navbar + routes)
+  index.jsx                  entry (re-exports App)
+  components/
+    Navbar.jsx  Footer.jsx
+    DataTable.jsx            👈 THE FEATURE
+  pages/    Home.jsx  Summary.jsx
+  data/sales.js              local sales dataset
+  styles.css
+```
 
 ## Requirements
 
-- Rows: `data-testid="row-<id>"`; render them in current sorted/filtered order.
-- Header buttons: `data-testid="sort-name"`, `sort-price`, `sort-rating`.
-- Clicking a header sorts ascending by that column; clicking the SAME header
-  again toggles to descending.
-- Filter input `data-testid="filter"`: case-insensitive substring match on name;
-  only matching rows render.
-- Sorting and filtering compose (filter first, then sort — order-independent for
-  correctness).
+- A `data-testid="filter"` input filters rows by name (case-insensitive
+  substring).
+- Header buttons `data-testid="sort-name"`, `sort-price`, `sort-rating` sort by
+  that column. First click ascending; clicking the same header again toggles to
+  descending.
+- Each visible row has `data-testid="row-<id>"`, rendered in current sort order.
+- `rows` is a prop and defaults to the local `SALES_ROWS`.
 
-## Gotchas
+## Run
 
-- Don't mutate `rows`; copy before sorting (`[...rows].sort`).
-- Track both the sort key and direction.
+```
+npx vitest run src/modules/m05-data-table/
+```

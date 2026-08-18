@@ -1,8 +1,8 @@
-// SOLUTION — m02 Debounced search.
+// SOLUTION — m02 GifSearch debounced search. Copy over components/GifSearch.jsx to self-check.
 import { useEffect, useState } from "react";
-import { searchProducts } from "../../shared/api.js";
+import { searchGifs } from "../data/gifs.js";
 
-export default function DebouncedSearch({ search = searchProducts }) {
+export default function GifSearch({ search = searchGifs }) {
   const [query, setQuery] = useState("");
   const [debounced, setDebounced] = useState("");
   const [results, setResults] = useState([]);
@@ -30,18 +30,19 @@ export default function DebouncedSearch({ search = searchProducts }) {
   }, [debounced, search]);
 
   return (
-    <div>
-      <h2>Search</h2>
+    <div className="gs-search">
+      <h2 className="gs-search-title">Search GIFs</h2>
       <input
+        className="gs-search-input"
         data-testid="search-input"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search products..."
+        placeholder="Search GIFs..."
       />
-      <div data-testid="results" className="grid" style={{ marginTop: 12 }}>
-        {results.map((p) => (
-          <div key={p.id} className="card" data-testid="result-item">
-            {p.title}
+      <div data-testid="results" className="gs-results">
+        {results.map((g) => (
+          <div key={g.id} className="gs-result-item" data-testid="result-item">
+            {g.title}
           </div>
         ))}
       </div>

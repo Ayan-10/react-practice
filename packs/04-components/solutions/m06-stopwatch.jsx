@@ -1,6 +1,17 @@
-// SOLUTION — m06 Stopwatch.
-import { useEffect, useRef, useState } from "react";
+// SOLUTION — m06 GymTimer stopwatch (components/Stopwatch.jsx).
+import { useRef, useState } from "react";
 
+/**
+ * THE FEATURE TO BUILD — m06 GymTimer stopwatch.
+ *
+ * Count ticks (100ms each) with a useRef-held interval. start / stop / reset.
+ *   - start(): begin ticking; guard against double-start so two clicks don't
+ *     create two intervals (which would double-count).
+ *   - stop(): pause, preserving the current value.
+ *   - reset(): stop and return to 0.
+ *
+ * REQUIRED data-testids: elapsed, start, stop, reset.
+ */
 export default function Stopwatch() {
   const [ticks, setTicks] = useState(0);
   const timer = useRef(null);
@@ -24,15 +35,22 @@ export default function Stopwatch() {
     setTicks(0);
   }
 
-  useEffect(() => stop, []); // clear on unmount
-
   return (
-    <div>
-      <h2>Stopwatch</h2>
-      <p data-testid="elapsed">{ticks}</p>
-      <button data-testid="start" onClick={start}>Start</button>
-      <button data-testid="stop" onClick={stop}>Stop</button>
-      <button data-testid="reset" onClick={reset}>Reset</button>
+    <div className="gt-stopwatch">
+      <p className="gt-elapsed" data-testid="elapsed">
+        {ticks}
+      </p>
+      <div className="gt-controls">
+        <button className="gt-btn gt-start" data-testid="start" onClick={start}>
+          Start
+        </button>
+        <button className="gt-btn gt-stop" data-testid="stop" onClick={stop}>
+          Stop
+        </button>
+        <button className="gt-btn gt-reset" data-testid="reset" onClick={reset}>
+          Reset
+        </button>
+      </div>
     </div>
   );
 }

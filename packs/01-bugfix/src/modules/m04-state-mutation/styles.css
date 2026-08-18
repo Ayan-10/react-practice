@@ -1,0 +1,245 @@
+/* PlaylistBuilder mini-app styles — scoped-ish via .pl- prefixes. */
+
+.pl-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14142b;
+}
+
+.pl-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e4e9;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.pl-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #6c2bd9;
+  white-space: nowrap;
+}
+
+.pl-nav-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.pl-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.pl-nav-links a:hover {
+  color: #6c2bd9;
+}
+.pl-nav-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6c2bd9;
+  background: #f2ecfd;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* Pages */
+.pl-main {
+  min-height: 60vh;
+}
+.pl-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.pl-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.pl-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.pl-back,
+.pl-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #6c2bd9;
+  text-decoration: none;
+}
+
+/* Two-column layout: library + playlist panel */
+.pl-columns {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.pl-section-title {
+  margin: 0 0 14px;
+  font-size: 18px;
+}
+.pl-count {
+  display: inline-block;
+  min-width: 22px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  background: #6c2bd9;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+}
+
+/* Library grid */
+.pl-library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.pl-song-card {
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.pl-song-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+.pl-song-cover-link {
+  display: block;
+}
+.pl-song-cover {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+.pl-song-body {
+  padding: 12px 14px;
+}
+.pl-song-title-link {
+  text-decoration: none;
+  color: inherit;
+}
+.pl-song-title {
+  margin: 0 0 2px;
+  font-size: 15px;
+}
+.pl-song-artist {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #777;
+}
+.pl-song-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
+.pl-btn {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.pl-add-btn {
+  width: 100%;
+  padding: 8px 10px;
+  background: #6c2bd9;
+  color: #fff;
+  font-size: 14px;
+}
+.pl-add-btn:hover {
+  background: #5a22b8;
+}
+
+/* Playlist panel */
+.pl-panel {
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  padding: 16px;
+  background: #fbfaff;
+  position: sticky;
+  top: 72px;
+}
+.pl-playlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pl-empty {
+  color: #999;
+  font-size: 14px;
+  padding: 8px 0;
+}
+.pl-playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  border: 1px solid #eceef1;
+  border-radius: 10px;
+}
+.pl-playlist-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+.pl-playlist-artist {
+  font-size: 12px;
+  color: #888;
+  margin-right: auto;
+}
+.pl-remove-btn {
+  border: none;
+  background: none;
+  color: #d64550;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+.pl-remove-btn:hover {
+  color: #a5232d;
+}
+
+/* Detail */
+.pl-detail-cover {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  display: block;
+}
+.pl-detail-meta {
+  display: flex;
+  gap: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+/* Footer */
+.pl-footer {
+  border-top: 1px solid #e2e4e9;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

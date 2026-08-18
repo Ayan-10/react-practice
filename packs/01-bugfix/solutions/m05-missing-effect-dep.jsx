@@ -1,39 +1,49 @@
-// SOLUTION — m05. Add `query` to the dependency array.
+// SOLUTION — m05 WeatherDash WeatherPanel refetch-on-city-change.
+// This is the FIXED version of components/WeatherPanel.jsx. Attempt it yourself
+// first, then compare. To self-check: copy this over components/WeatherPanel.jsx.
+//
+// Fix: add `city` to the dependency array so the effect re-runs (and refetches)
+// whenever the selected city changes.
 import { useState, useEffect } from "react";
-import { searchProducts } from "../../shared/api.js";
+import { getWeather } from "../data/weather.js";
 
-export default function MissingEffectDep() {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+export default function WeatherPanel({ city }) {
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let active = true;
-    if (query.trim() === "") {
-      setResults([]);
-      return;
-    }
-    searchProducts(query).then((data) => {
-      if (active) setResults(data);
+    setLoading(true);
+    getWeather(city).then((data) => {
+      if (active) {
+        setWeather(data);
+        setLoading(false);
+      }
     });
     return () => {
       active = false;
     };
-  }, [query]); // <-- fixed
+  }, [city]); // <-- fixed: refetch whenever the selected city changes
 
   return (
-    <div className="card">
-      <h2>Product Search</h2>
-      <input
-        data-testid="query"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search products"
-      />
-      <ul data-testid="results">
-        {results.map((r) => (
-          <li key={r.id} data-testid="result-item">{r.title}</li>
-        ))}
-      </ul>
+    <div className="wd-panel" data-testid="weather-panel">
+      <p className="wd-panel-city">{city}</p>
+      {loading || !weather ? (
+        <p className="wd-panel-loading">Loading…</p>
+      ) : (
+        <>
+          <p className="wd-temp" data-testid="weather-temp">
+            {weather.temp}°C
+          </p>
+          <p className="wd-condition" data-testid="weather-condition">
+            {weather.condition}
+          </p>
+          <div className="wd-panel-meta">
+            <span>Humidity {weather.humidity}%</span>
+            <span>Wind {weather.wind} km/h</span>
+          </div>
+        </>
+      )}
     </div>
   );
 }

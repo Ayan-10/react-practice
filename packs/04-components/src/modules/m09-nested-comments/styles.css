@@ -1,0 +1,108 @@
+/* ForumThread mini-app styles — scoped-ish via .ft- prefixes. */
+
+.ft-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.ft-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.ft-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #7048e8;
+  white-space: nowrap;
+}
+
+.ft-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.ft-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.ft-nav-links a:hover {
+  color: #7048e8;
+}
+
+.ft-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.ft-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.ft-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.ft-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #7048e8;
+  text-decoration: none;
+}
+
+.ft-comments {
+  border: 1px solid #e2e6ea;
+  border-radius: 10px;
+  padding: 14px;
+  background: #fff;
+}
+.ft-comment {
+  margin: 6px 0;
+}
+.ft-comment-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ft-toggle {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1;
+}
+.ft-comment-text {
+  color: #344054;
+}
+.ft-comment-children {
+  border-left: 2px solid #eceff2;
+  padding-left: 8px;
+}
+
+.ft-rules {
+  padding-left: 20px;
+  color: #344054;
+}
+.ft-rule {
+  margin: 6px 0;
+}
+
+.ft-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

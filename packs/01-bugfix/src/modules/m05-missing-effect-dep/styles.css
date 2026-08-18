@@ -1,0 +1,159 @@
+/* WeatherDash mini-app styles — scoped-ish via .wd- prefixes. */
+
+.wd-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+}
+
+.wd-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.wd-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #0284c7;
+  white-space: nowrap;
+  margin-right: auto;
+}
+
+.wd-nav-links {
+  display: flex;
+  gap: 16px;
+  white-space: nowrap;
+}
+.wd-nav-links a {
+  text-decoration: none;
+  color: #475569;
+  font-weight: 500;
+}
+.wd-nav-links a:hover {
+  color: #0284c7;
+}
+
+/* Pages */
+.wd-main {
+  min-height: 60vh;
+}
+.wd-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.wd-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.wd-page-sub {
+  margin: 0 0 20px;
+  color: #64748b;
+}
+.wd-back,
+.wd-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #0284c7;
+  text-decoration: none;
+}
+
+/* City picker */
+.wd-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.wd-picker-label {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+.wd-select {
+  padding: 9px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+  outline: none;
+  max-width: 240px;
+}
+.wd-select:focus {
+  border-color: #0284c7;
+}
+
+/* Weather panel */
+.wd-panel {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f0f9ff, #ffffff);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.08);
+}
+.wd-panel-city {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0ea5e9;
+}
+.wd-panel-loading {
+  margin: 12px 0 0;
+  font-size: 16px;
+  color: #94a3b8;
+}
+.wd-temp {
+  margin: 6px 0 0;
+  font-size: 48px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #0c4a6e;
+}
+.wd-condition {
+  margin: 4px 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0369a1;
+}
+.wd-panel-meta {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Favorites */
+.wd-fav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.wd-fav-row {
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  background: #fff;
+  font-size: 15px;
+}
+
+/* Footer */
+.wd-footer {
+  border-top: 1px solid #e2e8f0;
+  padding: 20px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 13px;
+  margin-top: 40px;
+}

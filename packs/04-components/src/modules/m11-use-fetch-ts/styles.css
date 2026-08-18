@@ -1,0 +1,109 @@
+/* DataLoader mini-app styles — scoped-ish via .dl- prefixes. */
+
+.dl-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.dl-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.dl-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #1971c2;
+  white-space: nowrap;
+}
+
+.dl-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.dl-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.dl-nav-links a:hover {
+  color: #1971c2;
+}
+
+.dl-main {
+  min-height: 60vh;
+}
+.dl-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.dl-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.dl-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.dl-back,
+.dl-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #1971c2;
+  text-decoration: none;
+}
+
+/* Feature: useFetch / user list */
+.dl-listing {
+  margin-top: 8px;
+}
+.dl-feature-title {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+.dl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+.dl-card {
+  border: 1px solid #eceef1;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff;
+  font-weight: 600;
+}
+
+.dl-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.dl-list-item {
+  padding: 10px 14px;
+  border: 1px solid #eceef1;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.dl-footer {
+  border-top: 1px solid #e2e6ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

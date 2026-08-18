@@ -68,10 +68,10 @@ Track coverage here. Mark [x] when a scenario exists for it.
 - [ ] useEffect — data fetch, subscriptions, cleanup
 - [ ] useEffect dependency bugs (stale closures, infinite loops)
 - [ ] useRef — DOM refs, mutable values, previous value
-- [ ] useMemo / useCallback — memoization, perf
-- [ ] useReducer — complex state
-- [ ] useContext — theme/auth/global state
-- [ ] Custom hooks — extract & reuse logic
+- [x] useMemo / useCallback — memoization, perf (Pack 05 m03)
+- [x] useReducer — complex state (Pack 05 m01 cart, m02 undo/redo)
+- [x] useContext — theme/auth/global state (Pack 02 m10)
+- [x] Custom hooks — extract & reuse logic (Pack 03 m09 useFetch, Pack 05 m10 hooks lib)
 
 ### Async & Data
 - [ ] Fetch + loading/error/success states
@@ -86,20 +86,20 @@ Track coverage here. Mark [x] when a scenario exists for it.
 - [ ] Accordion / collapsible
 - [ ] Tabs
 - [ ] Modal / dialog
-- [ ] Tooltip
-- [ ] Pagination controls
+- [x] Tooltip (Pack 05 m09 — portal)
+- [x] Pagination controls (Pack 04 m08)
 - [ ] Autocomplete / search suggestions
 - [ ] Stopwatch / timer
 - [ ] Form with validation
 - [ ] Shopping cart (qty, total)
-- [ ] Carousel / image slider
-- [ ] Data table (sort/filter/search)
-- [ ] Traffic light / state machine
-- [ ] Toggle theme (dark/light)
-- [ ] Progress bar / stepper
-- [ ] Nested comments / tree
-- [ ] Drag & drop reorder (advanced)
-- [ ] Infinite scroll (advanced)
+- [x] Carousel / image slider (Pack 05 m08)
+- [x] Data table (sort/filter/search) (Pack 04 m05)
+- [x] Traffic light / state machine (Pack 05 m05)
+- [x] Toggle theme (dark/light) (Pack 02 m10)
+- [x] Progress bar / stepper (Pack 04 m07, Pack 05 m06 multi-step form)
+- [x] Nested comments / tree (Pack 04 m09)
+- [x] Drag & drop reorder (advanced) (Pack 05 m04)
+- [x] Infinite scroll (advanced) (Pack 03 m05)
 
 ### Common Bug-Fix Patterns (interviews love these)
 - [ ] Stale closure in event handler / effect
@@ -229,6 +229,91 @@ react-practice/
 - [x] m11 [TS] useFetch hook in TypeScript (generics)
 - [x] m12 [TS] Star rating in TypeScript (typed props/state)
 
+## 9b. MINI-APP CONVERSION (locked with user 2026-08-10) — THE CURRENT SHAPE
+
+**User correction:** the original modules were single component files (`index.jsx`). The
+user wants each module to be a **complete, independent, working React project** — a real
+OA / machine-coding round: you get working boilerplate (Navbar + pages/routes + multiple
+components + data + styling) and must fix ONE bug or build ONE feature in ONE file.
+User approved using any UI library where helpful. "Do the same for all of the modules."
+
+### Mini-app architecture (per module) — matches the verified m01 reference
+```
+mXX-slug/
+  App.jsx            app root: layout + <Routes> (NO own <Router>; relative routes)
+  index.jsx          entry: `export { default } from "./App.jsx";`
+  components/         Navbar.jsx, <the buggy/feature file>, cards, Footer, …
+  pages/             Home.jsx (+ a 2nd route + maybe a detail route)
+  data/              local dataset + async helper (offline; mirrors real fetch)
+  styles.css
+  index.test.jsx     mounts WHOLE app via <MemoryRouter>, drives bug/feature via UI
+  PROMPT.md          interview-style prompt + folder tree + testids + run cmd
+solutions/mXX-slug.jsx   the FIXED single file (copy over the target file to self-check)
+```
+
+**Invariants (all must hold):**
+- Whole app compiles + renders on the stub. Only the ONE target file is broken/stubbed.
+- Stub test run: the "app renders" + neutral tests PASS; only the bug/feature test(s) FAIL.
+- Solution (copy `solutions/mXX-slug.jsx` over the target file) → ALL tests PASS.
+- Each module has its OWN DISTINCT DOMAIN (see table). Preserve all `data-testid`s.
+- Mini-app uses relative routes; dev menu wraps each in its own `<MemoryRouter>` (App.jsx).
+- The target file to edit is named in PROMPT.md (👈), stays the ONLY thing broken.
+
+### Domain assignments (distinct app per module)
+**PACK 01 — Bug-Fix**
+- m01 HouseFinder — search dropdown won't close (outside-click/route) — ✅ DONE (reference)
+- m02 FocusTimer (pomodoro) — stale closure: timer stuck at +1
+- m03 ProductFilters (shop) — effect infinite loop from object dep
+- m04 PlaylistBuilder (music) — direct state mutation, no re-render on add
+- m05 WeatherDash — missing effect dep: city change doesn't refetch
+- m06 TaskBoard (kanban) — index-as-key: wrong row deleted/state leak
+- m07 ProfileSettings — controlled/uncontrolled input warning
+- m08 NewsletterSignup — form reloads page, missing preventDefault
+- m09 LiveFeed — memory leak: setState after unmount / no cleanup
+- m10 ExpenseTracker — derived-state-in-state goes stale after edit
+
+**PACK 02 — Feature-Build**
+- m01 StayFinder (rentals) — filter chips (amenities/country/rating, AND, Clear All)
+- m02 TravelWallet — currency converter (Frankfurter, dropdowns, live convert)
+- m03 GroceryCart — cart mgmt (add/remove/qty/total, real-time)
+- m04 JobApply — schema-driven form (render from schema, validate, store onSubmit)
+- m05 MovieRatings — star rating component (hover/click/controlled)
+- m06 DailyPlanner — todo list (add/toggle/delete/filter tabs)
+- m07 BookStore — sort control (price/rating/title)
+- m08 ContactsApp — search filter (client-side text filter)
+- m09 CheckoutFlow — multi-step form / stepper (next/back, progress, per-step validate)
+- m10 ReaderApp — theme toggle via Context (light/dark, persists)
+
+**PACK 03 — Async / Data**
+- m01 SneakerShop — fetch cards: loading/error/empty/success states
+- m02 GifSearch — debounced typeahead (debounce hook + fetch)
+- m03 CityExplorer — race condition fix (ignore stale responses)
+- m04 BlogList — pagination controls (page numbers, next/prev, disabled edges)
+- m05 PhotoWall — infinite scroll (load-more append + end marker)
+- m06 SocialLikes — optimistic update (toggle like, rollback on failure)
+- m07 CryptoTicker — retry on error + refetch button
+- m08 TeamDirectory — dependent fetch (select user → load posts)
+- m09 CountryStats — custom useFetch hook (loading/error/data)
+- m10 StatusMonitor — polling / auto-refresh with cleanup
+
+**PACK 04 — Components**
+- m01 DocsViewer — Tabs (active tab state, ARIA)
+- m02 FaqPage — Accordion (single/multi open)
+- m03 ImageGallery — Modal/dialog (open/close, Esc, backdrop, focus)
+- m04 CommandPalette — Autocomplete/combobox (fetch suggestions, keyboard nav)
+- m05 SalesTable — Data table (sort by column, search filter)
+- m06 GymTimer — Stopwatch/timer (start/stop/reset, useRef interval)
+- m07 OnboardWizard — Progress bar / stepper
+- m08 SearchResults — Pagination component (reusable, truncated pages)
+- m09 ForumThread — Nested comments / tree (recursive render, collapse)
+- m10 [TS] SettingsTabs — Tabs in TypeScript (typed props)
+- m11 [TS] DataLoader — useFetch hook in TypeScript (generics)
+- m12 [TS] RateWidget — Star rating in TypeScript (typed props/state)
+
+### Verify command (per module)
+`npx vitest run src/modules/<mXX>/ --pool=forks --poolOptions.forks.singleFork=true --reporter=dot --test-timeout=8000`
+Self-check: cp target file → /tmp backup; cp `solutions/mXX.jsx` over it; run (expect ALL pass); restore backup.
+
 ## 10. Workflow Per Session (for the user)
 
 1. `cd packs/<pack>` → `npm install` (once per pack) → `npm run dev` to open the module menu.
@@ -249,6 +334,11 @@ react-practice/
 | 2026-08-09 | Pack 03 | Async/Data (10) | ✅ built + verified | 23/23 solution tests pass; fake-timer tests use act() |
 | 2026-08-09 | Pack 04 | Components (12, incl. 3 TS) | ✅ built + verified | 38/38 solution tests pass; stubs 34 fail; TS via esbuild |
 | 2026-08-10 | Pack 01 / m03 | effect infinite loop | 🔧 fixed runner hang | stub's runaway loop hung the worker; added a render-count cap (`c<25`) so it fails fast & clean (848ms) without touching the dependency bug students must fix. Full pack now runs 10/10, no worker crash |
+| 2026-08-10 | Pack 01 (all 10) | MINI-APP CONVERSION | ✅ done + verified | m01-m10 converted to full mini-apps (App+pages+components+data+styles). Domains: HouseFinder, FocusTimer, ShopFilters, PlaylistBuilder, WeatherDash, TaskBoard, ProfileSettings, NewsletterSignup, LiveFeed, ExpenseTracker. Build green (131 modules). Full suite: 16 bug tests fail on stubs, all neutral pass; each solution → all pass. m07-m10 finished in main thread after batch subagents hit usage limit. m08 bug redesigned (jsdom doesn't reload → assert defaultPrevented). |
+| 2026-08-14 | Pack 02 (all 10) | MINI-APP CONVERSION | ✅ done + verified | m01-m10 converted to full feature-build mini-apps (App+pages+components+data+styles, each its own MemoryRouter in dev menu). Domains: StayFinder, TravelWallet, GroceryCart, JobApply, MovieRatings, DailyPlanner, BookStore, ContactsApp, CheckoutFlow, ReaderApp. Build green (130 modules). Full stub suite: 39 feature tests fail, all 22 app-render/nav neutral tests pass; each solution → its suite fully green (10/10 verified via self-check). NOTE: m03/m04/m06 solutions had to be rewritten from old single-file versions (wrong data source/import depth/markup) to match new scaffold — m05 was already correct. Feature files & solutions/ live at pack level (solutions/mXX-slug.jsx copied over components/<Feature>.jsx). Feature file→testid map: m01 FilterChips, m02 CurrencyConverter, m03 CartManager, m04 SchemaForm, m05 StarRating, m06 TodoList, m07 BookList, m08 ContactList, m09 CheckoutWizard, m10 ThemeContext. m07 title-asc test passes on stub (seed already alpha-ordered) but price/rating tests fail cleanly — distinction still valid. |
+| 2026-08-16 | ALL PACKS (01-04) | SOLVED IN-PLACE — full suite green | ✅ done + verified | Worked every module's target file directly to green (not just via solutions/). Final full-suite verification, all 4 packs: **01=48/48, 02=61/61, 03=30/30, 04=38/38 → 177/177 tests pass**; every pack `vite build` succeeds. Pack 01 bugfix: applied each module's documented fix (m10 ExpenseList = derive filtered/total in render instead of storing in state). Pack 02 feature-build: implemented m02 CurrencyConverter (useEffect fetchRate + loading + stale-guard), m03 CartManager (add/inc/dec/remove-at-0 + totals), m04 SchemaForm (controlled + validate + coerced payload + error-<name>), m05 StarRating (hover preview + onChange to page summary), m06 TodoList (add/toggle/delete/filter/items-left), m07 BookList ([...books].sort by price/rating/title), m08 ContactList (case-insensitive filter + no-results), m09 CheckoutWizard (per-step validate + back + submit), m10 ThemeContext (real useState provider + toggle). Packs 03 & 04 were already fully implemented and green from prior session work. |
+| 2026-08-18 | Pack 05 (new, 10 modules) | ADVANCED / GAP-FILL PACK | ✅ built + verified | New `packs/05-advanced` created to close coverage gaps the user flagged (useReducer, useMemo/useCallback, DnD, state machine, custom hooks were unchecked in §5). JS-only, same mini-app architecture as Packs 01-04 (App + relative Routes + Navbar/Footer + Feature stub + Home + second page + data + styles + PROMPT + test + solutions/). Each feature ships as a `// TODO` stub that still compiles/renders (matches real OA shape: boilerplate app + one clearly-marked file to implement). Modules: m01 BudgetBuddy(useReducer cart, .bb-), m02 SketchPad(undo/redo reducer history, .ur-), m03 PrimeLab(useMemo/useCallback/React.memo perf w/ compute-count proof, .ml-), m04 TaskFlow(HTML5 drag&drop reorder + pure reorder() helper, .df-), m05 CrossWalk(finite state machine traffic light + pure nextState, .sm-), m06 ApplyFlow(3-step form, cross-field confirm-email validation, async submit success/error, .af-), m07 QuickCmd(keyboard listbox: arrow/Home/End/Enter/Esc roving focus, .km-), m08 SnapGallery(carousel next/prev/dots wrap-around, .cg-), m09 HelpHint(tooltip via createPortal on hover+focus, aria-describedby, .hh-), m10 HookBox(custom hooks lib: useToggle/usePrevious/useDebounce/useLocalStorage in components/hooks.js + wired Demo.jsx, .hb-). Verified: all 10 stubs run (33 pass app-render/no-op + 39 fail feature = 72 tests, NO compile errors); each solution swapped in → its module fully green (8+10+5+7+6+8+8+6+6+8 all pass); `vite build` green (125 modules). m01 built by hand as template; m02-m10 by 3 parallel subagents then independently re-verified. Pack 05 is LOWER priority than 01-04 (added after user asked to reconfirm coverage). |
+| 2026-08-17 | Pack 03 m06-m10 + Pack 04 (all 12) | MINI-APP CONVERSION | ✅ done + verified | CORRECTION to 2026-08-16 entry: "green from prior work" meant tests passed, NOT that modules were mini-apps — Pack 03 m06-m10 and ALL of Pack 04 were still single `index.jsx` files. Converted all 17 to full mini-apps (App.jsx + relative Routes + components/{Navbar,Footer,Feature} + pages/{Home,second} + data/ + styles.css + rewritten index.test.jsx mounting whole app + a direct-feature block). Test files fully rewritten (full-rewrite approved). Pack 03 domains: m06 SocialLikes(.sl-/LikeButton), m07 CryptoTicker(.ct-/RetryList), m08 TeamDirectory(.td-/DependentFetch), m09 CountryStats(.cs-/UserList+useFetch), m10 StatusMonitor(.sm-/Poller). Pack 04 domains: m01 DocsViewer(Tabs), m02 FaqPage(Accordion), m03 ImageGallery(Modal), m04 CommandPalette(Autocomplete), m05 SalesTable(DataTable), m06 GymTimer(.gt-/Stopwatch), m07 OnboardWizard(Stepper), m08 SearchResults(.sr-/Pagination), m09 ForumThread(.ft-/Comments), m10 [TS] SettingsTabs(Tabs.tsx), m11 [TS] DataLoader(UserList.tsx+useFetch<T>), m12 [TS] RateWidget(StarRating.tsx). Solutions/ kept as self-check copies (m09 realigned to new .ft- feature; m10/m11 solutions inline their data as self-contained copies). **Final full-suite: 01=48, 02=61, 03=41, 04=62 → 212/212 tests pass; all 4 `vite build` green; Pack 04 `tsc --noEmit` exit 0.** m06/m07 conversions done in main thread + 4 parallel subagents for the rest; 2 subagents hit usage limits but had already written conforming files (verified on disk). |
 
 ## 12. Next Action (for Claude across sessions)
 

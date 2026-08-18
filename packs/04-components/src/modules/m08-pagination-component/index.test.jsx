@@ -1,9 +1,39 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import { Pagination } from "./index.jsx";
+import { MemoryRouter } from "react-router-dom";
 
-describe("m08 — pagination component", () => {
+// The WHOLE SearchResults mini-app (navbar + paged results + a second route).
+import App from "./index.jsx";
+// The reusable feature, imported DIRECTLY as a controlled component so we can
+// assert the windowing/clamping and onChange calls deterministically.
+import { Pagination } from "./components/Pagination.jsx";
+
+function renderApp(initialEntries = ["/"]) {
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <App />
+    </MemoryRouter>
+  );
+}
+
+describe("m08 · SearchResults — app renders", () => {
+  it("renders navbar, home page and the pager", () => {
+    renderApp();
+    expect(screen.getByTestId("navbar")).toBeInTheDocument();
+    expect(screen.getByTestId("home-page")).toBeInTheDocument();
+    expect(screen.getByTestId("page-1")).toBeInTheDocument();
+  });
+
+  it("navigates to the Saved route via the navbar", async () => {
+    const user = userEvent.setup();
+    renderApp();
+    await user.click(screen.getByTestId("nav-saved"));
+    expect(await screen.findByTestId("saved-page")).toBeInTheDocument();
+  });
+});
+
+describe("m08 · SearchResults — pagination feature", () => {
   it("windows to 5 pages centered on current", () => {
     render(<Pagination totalPages={10} current={5} onChange={() => {}} />);
     // window centered on 5 => 3,4,5,6,7

@@ -1,9 +1,39 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import StarRating from "./index.tsx";
+import { MemoryRouter } from "react-router-dom";
 
-describe("m12 — [TS] star rating", () => {
+// The WHOLE RateWidget mini-app (navbar + rating + a second route), mounted
+// exactly like a user would see it.
+import App from "./index.tsx";
+// The feature under construction, imported DIRECTLY so we can drive hover /
+// click / value behaviour deterministically.
+import StarRating from "./components/StarRating.tsx";
+
+function renderApp(initialEntries = ["/"]) {
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <App />
+    </MemoryRouter>
+  );
+}
+
+describe("m12 · RateWidget — app renders", () => {
+  it("renders navbar and the home page", () => {
+    renderApp();
+    expect(screen.getByTestId("navbar")).toBeInTheDocument();
+    expect(screen.getByTestId("home-page")).toBeInTheDocument();
+  });
+
+  it("navigates to the History route via the navbar", async () => {
+    const user = userEvent.setup();
+    renderApp();
+    await user.click(screen.getByTestId("nav-history"));
+    expect(await screen.findByTestId("history-page")).toBeInTheDocument();
+  });
+});
+
+describe("m12 · RateWidget — [TS] star rating feature", () => {
   it("fills stars up to the current value", () => {
     render(<StarRating value={3} />);
     for (const n of [1, 2, 3]) {

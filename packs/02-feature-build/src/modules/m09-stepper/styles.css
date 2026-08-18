@@ -1,0 +1,174 @@
+/* CheckoutFlow mini-app styles — scoped-ish via .cf- prefixes. */
+
+.cf-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.cf-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.cf-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #0f766e;
+  white-space: nowrap;
+}
+
+.cf-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.cf-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.cf-nav-links a:hover {
+  color: #0f766e;
+}
+
+/* Pages */
+.cf-main {
+  min-height: 60vh;
+}
+.cf-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.cf-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.cf-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.cf-back,
+.cf-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #0f766e;
+  text-decoration: none;
+}
+
+/* Feature: checkout wizard */
+.cf-wizard {
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  padding: 20px;
+  background: #fff;
+  max-width: 420px;
+}
+.cf-step-indicator {
+  margin: 0 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f766e;
+}
+.cf-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+.cf-input {
+  padding: 8px 10px;
+  border: 1px solid #cbd2d9;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.cf-input:focus {
+  outline: 2px solid #0f766e;
+  outline-offset: 1px;
+}
+.cf-review p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+.cf-error {
+  margin: 8px 0 0;
+  color: crimson;
+  font-size: 12px;
+}
+.cf-wizard-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.cf-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #0f766e;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cf-btn:hover {
+  background: #0b5c55;
+}
+.cf-btn-ghost {
+  background: #fff;
+  color: #0f766e;
+  border: 1px solid #0f766e;
+}
+.cf-btn-ghost:hover {
+  background: #f0fdfa;
+}
+
+/* Confirmation after a placed order */
+.cf-confirmation {
+  margin-top: 20px;
+  border: 1px solid #c7f0d8;
+  background: #f0fdf4;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.cf-confirmation h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+/* Orders page */
+.cf-order-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cf-order-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eceef1;
+}
+.cf-order-meta {
+  color: #888;
+  font-size: 13px;
+}
+
+/* Footer */
+.cf-footer {
+  border-top: 1px solid #e2e6ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

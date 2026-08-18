@@ -1,0 +1,153 @@
+/* StayFinder mini-app styles — scoped-ish via .sf- prefixes. */
+
+.sf-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.sf-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.sf-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #0b8a72;
+  white-space: nowrap;
+}
+
+.sf-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.sf-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.sf-nav-links a:hover {
+  color: #0b8a72;
+}
+
+/* Pages */
+.sf-main {
+  min-height: 60vh;
+}
+.sf-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.sf-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.sf-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.sf-back,
+.sf-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #0b8a72;
+  text-decoration: none;
+}
+
+/* Feature: filter chips */
+.sf-feature-title {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+.sf-chip-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.sf-chip {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #0b8a72;
+  background: #fff;
+  color: #0b8a72;
+  font-size: 13px;
+  cursor: pointer;
+}
+.sf-chip.active {
+  background: #0b8a72;
+  color: #fff;
+}
+.sf-clear-all {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #c0392b;
+  background: #fff;
+  color: #c0392b;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Listing grid */
+.sf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+.sf-card {
+  display: block;
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+.sf-card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+.sf-card-body {
+  padding: 12px 14px;
+}
+.sf-card-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.sf-card-address {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #777;
+}
+.sf-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+}
+.sf-card-amenities {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #888;
+}
+
+/* Footer */
+.sf-footer {
+  border-top: 1px solid #e2e6ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

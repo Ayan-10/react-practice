@@ -1,33 +1,39 @@
-// SOLUTION — m01 Tabs.
+// SOLUTION — m01 DocsViewer tabs.
+// Copy this over components/Tabs.jsx to self-check.
 import { useState } from "react";
+import { DOCS_TABS } from "../data/docs.js";
 
-const DEFAULT_TABS = [
-  { id: "home", label: "Home", content: "Welcome home" },
-  { id: "profile", label: "Profile", content: "Your profile" },
-  { id: "settings", label: "Settings", content: "Settings panel" },
-];
+/**
+ * THE FEATURE — m01 DocsViewer tabs.
+ *
+ * `tabs` defaults to the local offline dataset so the feature renders on its
+ * own. Clicking a tab shows only that tab's content; the active tab gets a
+ * class containing "active".
+ *
+ * REQUIRED data-testids: tab-<id> (per tab), panel.
+ */
+export default function Tabs({ tabs = DOCS_TABS }) {
+  const [activeId, setActiveId] = useState(tabs[0]?.id);
 
-export default function Tabs({ tabs = DEFAULT_TABS }) {
-  const [active, setActive] = useState(tabs[0]?.id);
-  const activeTab = tabs.find((t) => t.id === active);
+  const active = tabs.find((t) => t.id === activeId) ?? tabs[0];
 
   return (
     <div>
       <h2>Tabs</h2>
-      <div className="tab-strip">
+      <div className="dv-tab-strip">
         {tabs.map((t) => (
           <button
             key={t.id}
             data-testid={`tab-${t.id}`}
-            className={`tab${t.id === active ? " active" : ""}`}
-            onClick={() => setActive(t.id)}
+            className={t.id === active?.id ? "dv-tab active" : "dv-tab"}
+            onClick={() => setActiveId(t.id)}
           >
             {t.label}
           </button>
         ))}
       </div>
-      <div className="panel" data-testid="panel">
-        {activeTab?.content}
+      <div className="dv-panel" data-testid="panel">
+        {active?.content}
       </div>
     </div>
   );

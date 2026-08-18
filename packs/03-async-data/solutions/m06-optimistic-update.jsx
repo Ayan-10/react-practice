@@ -1,18 +1,24 @@
-// SOLUTION — m06 Optimistic update with rollback.
+// SOLUTION — m06 SocialLikes optimistic update with rollback.
+// Copy this over components/LikeButton.jsx to self-check.
 import { useState } from "react";
+import { saveLike } from "../data/posts.js";
 
-export default function LikeButton({ save, initialLiked = false, initialCount = 0 }) {
+export default function LikeButton({
+  save = saveLike,
+  initialLiked = false,
+  initialCount = 0,
+}) {
   const [liked, setLiked] = useState(initialLiked);
   const [count, setCount] = useState(initialCount);
 
   async function toggle() {
     const prevLiked = liked;
     const prevCount = count;
-    const nextLiked = !liked;
+    const nextLiked = !prevLiked;
 
     // Optimistic: update UI right away.
     setLiked(nextLiked);
-    setCount((c) => c + (nextLiked ? 1 : -1));
+    setCount(nextLiked ? prevCount + 1 : prevCount - 1);
 
     try {
       await save(nextLiked);
@@ -24,12 +30,15 @@ export default function LikeButton({ save, initialLiked = false, initialCount = 
   }
 
   return (
-    <div>
-      <h2>Post</h2>
-      <button data-testid="like-btn" onClick={toggle}>
-        {liked ? "Liked" : "Like"}
-      </button>
-      <span data-testid="like-count" style={{ marginLeft: 8 }}>{count}</span>
-    </div>
+    <button
+      className={liked ? "sl-like-btn liked" : "sl-like-btn"}
+      data-testid="like-btn"
+      onClick={toggle}
+    >
+      {liked ? "♥ Liked" : "♡ Like"}
+      <span className="sl-like-count" data-testid="like-count">
+        {count}
+      </span>
+    </button>
   );
 }

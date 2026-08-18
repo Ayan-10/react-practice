@@ -1,0 +1,42 @@
+/* QuickCmd mini-app styles — scoped-ish via .km- prefixes. */
+
+.km-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.km-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.km-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #7048e8; white-space: nowrap; }
+.km-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.km-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.km-nav-links a:hover { color: #7048e8; }
+
+.km-main { padding: 20px; min-height: 60vh; }
+.km-page-title { margin: 0 0 4px; font-size: 22px; }
+.km-page-sub { margin: 0 0 16px; color: #6b7280; }
+.km-back { display: inline-block; margin-bottom: 12px; color: #7048e8; text-decoration: none; }
+
+.km-menu { max-width: 320px; }
+.km-selected-line { margin: 12px 0; color: #495057; }
+
+.km-list {
+  list-style: none; padding: 4px; margin: 8px 0 0; background: #fff;
+  border: 1px solid #e2e6ea; border-radius: 10px; outline: none;
+  box-shadow: 0 6px 20px rgba(20, 33, 43, .08);
+}
+.km-option {
+  padding: 8px 12px; border-radius: 6px; cursor: default;
+}
+.km-option.km-active { background: #ede9fe; color: #5f3dc4; font-weight: 600; }
+
+.km-shortcut-list { list-style: none; padding: 0; margin: 0; }
+.km-shortcut-item {
+  display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid #eceff2;
+}
+.km-kbd {
+  min-width: 96px; text-align: center; padding: 4px 8px; background: #f1f3f5;
+  border: 1px solid #dee2e6; border-radius: 6px; font-family: ui-monospace, monospace; font-size: 13px;
+}
+.km-shortcut-action { color: #495057; }
+
+.km-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

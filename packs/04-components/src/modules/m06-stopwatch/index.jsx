@@ -1,23 +1,10 @@
-import { useRef, useState } from "react";
-
-/**
- * MODULE m06 — Stopwatch. Read PROMPT.md.
- *
- * Count ticks (100ms each). start / stop / reset.
- */
-export default function Stopwatch() {
-  const [ticks, setTicks] = useState(0);
-  const timer = useRef(null);
-
-  // TODO: implement start (guard double-start), stop (clear), reset (0 + stop).
-
-  return (
-    <div>
-      <h2>Stopwatch</h2>
-      <p data-testid="elapsed">{ticks}</p>
-      <button data-testid="start">Start</button>
-      <button data-testid="stop">Stop</button>
-      <button data-testid="reset">Reset</button>
-    </div>
-  );
-}
+// Entry point for the m06 mini-app (GymTimer).
+// The whole project lives in this folder:
+//   App.jsx               – app root (layout + routes)
+//   components/           – Navbar, Stopwatch (👈 THE feature), Footer
+//   pages/                – Home, Workouts
+//   data/workouts.js      – local workouts dataset (offline)
+//   styles.css
+//
+// 👉 The feature to build lives in components/Stopwatch.jsx. Read PROMPT.md.
+export { default } from "./App.jsx";

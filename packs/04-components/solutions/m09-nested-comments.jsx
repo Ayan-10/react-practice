@@ -1,35 +1,31 @@
-// SOLUTION — m09 Nested comments (recursive tree + per-node collapse).
+// SOLUTION — m09 ForumThread nested comments (recursive tree + per-node collapse).
+// Copy this over components/Comments.jsx to self-check.
 import { useState } from "react";
+import { DEFAULT_TREE } from "../data/thread.js";
 
-const DEFAULT_TREE = [
-  {
-    id: 1,
-    text: "Root comment",
-    replies: [
-      { id: 2, text: "First reply", replies: [{ id: 4, text: "Nested reply" }] },
-      { id: 3, text: "Second reply" },
-    ],
-  },
-];
-
-function Comment({ node }) {
-  const [open, setOpen] = useState(true);
-  const hasReplies = Array.isArray(node.replies) && node.replies.length > 0;
+function Comment({ comment }) {
+  const [expanded, setExpanded] = useState(true);
+  const replies = comment.replies ?? [];
+  const hasReplies = replies.length > 0;
 
   return (
-    <div className="comment" style={{ marginLeft: 16 }}>
-      <div data-testid={`comment-${node.id}`}>
-        {node.text}
+    <div data-testid={`comment-${comment.id}`} className="ft-comment">
+      <div className="ft-comment-row">
         {hasReplies && (
-          <button data-testid={`toggle-${node.id}`} onClick={() => setOpen((o) => !o)}>
-            {open ? "−" : "+"}
+          <button
+            className="ft-toggle"
+            data-testid={`toggle-${comment.id}`}
+            onClick={() => setExpanded((e) => !e)}
+          >
+            {expanded ? "−" : "+"}
           </button>
         )}
+        <span className="ft-comment-text">{comment.text}</span>
       </div>
-      {hasReplies && open && (
-        <div className="replies">
-          {node.replies.map((child) => (
-            <Comment key={child.id} node={child} />
+      {hasReplies && expanded && (
+        <div className="ft-comment-children" style={{ marginLeft: 16 }}>
+          {replies.map((child) => (
+            <Comment key={child.id} comment={child} />
           ))}
         </div>
       )}
@@ -39,10 +35,9 @@ function Comment({ node }) {
 
 export default function Comments({ comments = DEFAULT_TREE }) {
   return (
-    <div>
-      <h2>Comments</h2>
+    <div className="ft-comments">
       {comments.map((c) => (
-        <Comment key={c.id} node={c} />
+        <Comment key={c.id} comment={c} />
       ))}
     </div>
   );

@@ -1,7 +1,14 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import DependentFetch from "./index.jsx";
+import { MemoryRouter } from "react-router-dom";
+
+// The WHOLE TeamDirectory mini-app (navbar + people + a second route),
+// mounted exactly like a user would see it.
+import App from "./index.jsx";
+// The feature under construction, imported DIRECTLY so we can inject mock
+// loaders (deterministic users + dependent posts).
+import DependentFetch from "./components/DependentFetch.jsx";
 
 const USERS = [
   { id: 1, name: "Ada" },
@@ -12,7 +19,33 @@ const POSTS = {
   2: [{ id: 13, title: "Computable" }],
 };
 
-describe("m08 — dependent fetch", () => {
+function renderApp(initialEntries = ["/"]) {
+  return render(
+    <MemoryRouter initialEntries={initialEntries}>
+      <App />
+    </MemoryRouter>
+  );
+}
+
+describe("m08 · TeamDirectory — app renders", () => {
+  it("renders navbar and the home page with the member selector", async () => {
+    renderApp();
+    expect(screen.getByTestId("navbar")).toBeInTheDocument();
+    expect(screen.getByTestId("home-page")).toBeInTheDocument();
+    expect(screen.getByTestId("user-select")).toBeInTheDocument();
+    // No member is selected yet, so the hint should show.
+    expect(screen.getByTestId("no-selection")).toBeInTheDocument();
+  });
+
+  it("navigates to the Org route via the navbar", async () => {
+    const user = userEvent.setup();
+    renderApp();
+    await user.click(screen.getByTestId("nav-org"));
+    expect(await screen.findByTestId("org-page")).toBeInTheDocument();
+  });
+});
+
+describe("m08 · TeamDirectory — dependent fetch feature", () => {
   it("loads users and shows a no-selection prompt", async () => {
     const loadUsers = vi.fn().mockResolvedValue(USERS);
     const loadPosts = vi.fn();
@@ -23,7 +56,7 @@ describe("m08 — dependent fetch", () => {
     expect(loadPosts).not.toHaveBeenCalled();
   });
 
-  it("loads posts for the selected user", async () => {
+  it("loads posts for the selected user and refetches on change", async () => {
     const user = userEvent.setup();
     const loadUsers = vi.fn().mockResolvedValue(USERS);
     const loadPosts = vi.fn((id) => Promise.resolve(POSTS[id]));

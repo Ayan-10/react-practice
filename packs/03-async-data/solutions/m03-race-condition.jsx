@@ -1,7 +1,8 @@
-// SOLUTION — m03 Race condition.
+// SOLUTION — m03 CityExplorer race condition. Copy over components/CityDetails.jsx to self-check.
 import { useEffect, useState } from "react";
+import { loadCity } from "../data/cities.js";
 
-export default function RaceDetails({ load }) {
+export default function CityDetails({ load = loadCity }) {
   const [id, setId] = useState(1);
   const [detail, setDetail] = useState("");
 
@@ -16,11 +17,17 @@ export default function RaceDetails({ load }) {
   }, [id, load]);
 
   return (
-    <div>
-      <h2>Details</h2>
-      <button data-testid="select-1" onClick={() => setId(1)}>Item 1</button>
-      <button data-testid="select-2" onClick={() => setId(2)}>Item 2</button>
-      <p data-testid="detail">{detail}</p>
-    </div>
+    <section className="ce-details">
+      <h2 className="ce-details-title">City Details</h2>
+      <div className="ce-details-controls">
+        <button className="ce-btn" data-testid="select-1" onClick={() => setId(1)}>
+          Paris
+        </button>
+        <button className="ce-btn" data-testid="select-2" onClick={() => setId(2)}>
+          Tokyo
+        </button>
+      </div>
+      <p className="ce-details-body" data-testid="detail">{detail}</p>
+    </section>
   );
 }

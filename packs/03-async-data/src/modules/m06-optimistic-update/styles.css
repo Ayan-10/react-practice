@@ -1,0 +1,110 @@
+/* SocialLikes mini-app styles — scoped-ish via .sl- prefixes. */
+
+.sl-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.sl-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.sl-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #7048e8;
+  white-space: nowrap;
+}
+
+.sl-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.sl-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.sl-nav-links a:hover {
+  color: #7048e8;
+}
+
+.sl-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.sl-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.sl-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.sl-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #7048e8;
+  text-decoration: none;
+}
+
+.sl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.sl-card {
+  border: 1px solid #e2e6ea;
+  border-radius: 10px;
+  padding: 14px;
+  background: #fff;
+}
+.sl-card-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.sl-card-author {
+  margin: 0 0 12px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.sl-like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #344054;
+}
+.sl-like-btn.liked {
+  border-color: #f03e3e;
+  color: #f03e3e;
+}
+.sl-like-count {
+  font-variant-numeric: tabular-nums;
+}
+
+.sl-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

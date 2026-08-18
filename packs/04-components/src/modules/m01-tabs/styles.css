@@ -1,0 +1,100 @@
+/* DocsViewer mini-app styles — scoped-ish via .dv- prefixes. */
+
+.dv-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.dv-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.dv-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #1c7ed6;
+  white-space: nowrap;
+}
+
+.dv-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.dv-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.dv-nav-links a:hover {
+  color: #1c7ed6;
+}
+
+.dv-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.dv-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.dv-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.dv-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #1c7ed6;
+  text-decoration: none;
+}
+
+.dv-tab-strip {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.dv-tab {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #344054;
+}
+.dv-tab.active {
+  border-color: #1c7ed6;
+  color: #1c7ed6;
+  background: #e7f5ff;
+}
+.dv-panel {
+  border: 1px solid #e2e6ea;
+  border-radius: 10px;
+  padding: 16px;
+  background: #fff;
+}
+
+.dv-releases {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.7;
+}
+
+.dv-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

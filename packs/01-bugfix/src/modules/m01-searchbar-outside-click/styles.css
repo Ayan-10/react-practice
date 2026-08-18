@@ -1,0 +1,196 @@
+/* HouseFinder mini-app styles — scoped-ish via .hf- prefixes. */
+
+.hf-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1a1a2e;
+}
+
+.hf-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e4e9;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.hf-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #e5175a;
+  white-space: nowrap;
+}
+
+.hf-nav-links {
+  display: flex;
+  gap: 16px;
+  white-space: nowrap;
+}
+.hf-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.hf-nav-links a:hover {
+  color: #e5175a;
+}
+
+/* Search bar + dropdown */
+.search-input {
+  padding: 9px 14px;
+  border: 1px solid #d0d3da;
+  border-radius: 999px;
+  font-size: 14px;
+  outline: none;
+}
+.search-input:focus {
+  border-color: #e5175a;
+}
+
+.results-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e2e4e9;
+  border-radius: 12px;
+  margin-top: 6px;
+  padding: 6px;
+  z-index: 30;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+.result-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+.result-row:hover {
+  background: #f6f7f9;
+}
+.result-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+.result-sub {
+  font-size: 12px;
+  color: #777;
+}
+.no-results {
+  padding: 10px;
+  color: #777;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Pages */
+.hf-main {
+  min-height: 60vh;
+}
+.hf-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.hf-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.hf-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.hf-back,
+.hf-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #e5175a;
+  text-decoration: none;
+}
+
+/* Listing grid */
+.house-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+.house-card {
+  display: block;
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.house-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+.house-card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+.house-card-body {
+  padding: 12px 14px;
+}
+.house-card-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.house-card-address {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #777;
+}
+.house-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+}
+.house-card-specs {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #888;
+}
+
+/* Detail */
+.detail-img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+.detail-meta {
+  display: flex;
+  gap: 18px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+/* Footer */
+.hf-footer {
+  border-top: 1px solid #e2e4e9;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

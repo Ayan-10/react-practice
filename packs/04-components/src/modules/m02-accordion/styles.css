@@ -1,0 +1,99 @@
+/* FaqPage mini-app styles — scoped-ish via .fq- prefixes. */
+
+.fq-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.fq-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.fq-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #0ca678;
+  white-space: nowrap;
+}
+
+.fq-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.fq-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.fq-nav-links a:hover {
+  color: #0ca678;
+}
+
+.fq-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.fq-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.fq-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.fq-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #0ca678;
+  text-decoration: none;
+}
+
+.fq-accordion-item {
+  border: 1px solid #e2e6ea;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+.fq-accordion-header {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: #f8f9fa;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #344054;
+}
+.fq-accordion-header:hover {
+  background: #eef2f5;
+}
+.fq-accordion-panel {
+  padding: 12px 14px;
+  border-top: 1px solid #e2e6ea;
+}
+
+.fq-contact {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+.fq-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

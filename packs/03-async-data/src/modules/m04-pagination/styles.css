@@ -1,0 +1,119 @@
+/* BlogList mini-app styles (prefix: bl-) */
+
+.bl-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #1a1a1a;
+}
+
+.bl-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+}
+
+.bl-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #111827;
+}
+
+.bl-nav {
+  display: flex;
+  gap: 16px;
+}
+
+.bl-nav-link {
+  text-decoration: none;
+  color: #2563eb;
+}
+
+.bl-nav-link:hover {
+  text-decoration: underline;
+}
+
+.bl-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.bl-home-title,
+.bl-about-title {
+  margin-top: 0;
+}
+
+.bl-postlist-title {
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.bl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.bl-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #fff;
+}
+
+.bl-card-title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.bl-card-excerpt {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.bl-pager {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.bl-btn {
+  padding: 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.bl-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bl-page-info {
+  color: #374151;
+}
+
+.bl-about-body {
+  max-width: 60ch;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.bl-back-link {
+  color: #2563eb;
+}
+
+.bl-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 0.85rem;
+}

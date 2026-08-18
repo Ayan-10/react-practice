@@ -1,0 +1,150 @@
+/* MovieRatings mini-app styles — scoped-ish via .mr- prefixes. */
+
+.mr-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1a1524;
+}
+
+.mr-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e5e2ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.mr-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #6c3fd4;
+  white-space: nowrap;
+}
+
+.mr-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.mr-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.mr-nav-links a:hover {
+  color: #6c3fd4;
+}
+
+/* Pages */
+.mr-main {
+  min-height: 60vh;
+}
+.mr-page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+.mr-page-title {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+.mr-page-sub {
+  margin: 0 0 20px;
+  color: #777;
+}
+.mr-page-hint {
+  margin: 18px 0 0;
+  color: #555;
+  font-size: 14px;
+}
+.mr-back,
+.mr-back:visited {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #6c3fd4;
+  text-decoration: none;
+}
+
+/* Featured movie + rating layout */
+.mr-featured {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* Feature: star rating widget */
+.mr-rating {
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: #fff;
+}
+.mr-rating-title {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+.mr-stars {
+  display: flex;
+  gap: 4px;
+}
+.mr-star {
+  user-select: none;
+  transition: transform 0.05s ease;
+}
+.mr-star.filled {
+  transform: scale(1.05);
+}
+.mr-rating-line {
+  margin: 12px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Movie grid + card */
+.mr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+.mr-card {
+  display: block;
+  border: 1px solid #eceef1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  max-width: 280px;
+}
+.mr-card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+.mr-card-body {
+  padding: 12px 14px;
+}
+.mr-card-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.mr-card-meta {
+  margin: 0;
+  font-size: 13px;
+  color: #777;
+}
+
+/* Footer */
+.mr-footer {
+  border-top: 1px solid #e5e2ea;
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  margin-top: 40px;
+}

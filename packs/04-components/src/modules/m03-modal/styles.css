@@ -1,0 +1,118 @@
+/* ImageGallery mini-app styles — scoped-ish via .ig- prefixes. */
+
+.ig-app {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #14212b;
+}
+
+.ig-navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.ig-brand {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: #e8590c;
+  white-space: nowrap;
+}
+
+.ig-nav-links {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.ig-nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.ig-nav-links a:hover {
+  color: #e8590c;
+}
+
+.ig-main {
+  padding: 20px;
+  min-height: 60vh;
+}
+
+.ig-page-title {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+.ig-page-sub {
+  margin: 0 0 16px;
+  color: #6b7280;
+}
+.ig-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #e8590c;
+  text-decoration: none;
+}
+
+.ig-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.ig-thumb {
+  border: 1px solid #e2e6ea;
+  border-radius: 8px;
+  padding: 28px 12px;
+  text-align: center;
+  background: #fff3bf;
+  font-weight: 600;
+  color: #5c3d00;
+}
+
+.ig-open-btn,
+.ig-close-btn {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #344054;
+}
+
+.ig-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.ig-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 260px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.ig-albums {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+.ig-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e2e6ea;
+  color: #6b7280;
+  font-size: 13px;
+}

@@ -1,0 +1,47 @@
+/* SnapGallery mini-app styles — scoped-ish via .cg- prefixes. */
+
+.cg-app { font-family: system-ui, -apple-system, sans-serif; color: #14212b; }
+
+.cg-navbar {
+  display: flex; align-items: center; gap: 16px; padding: 12px 20px;
+  border-bottom: 1px solid #e2e6ea; background: #fff; position: sticky; top: 0; z-index: 20;
+}
+.cg-brand { font-weight: 700; font-size: 18px; text-decoration: none; color: #8338ec; white-space: nowrap; }
+.cg-nav-links { display: flex; gap: 16px; margin-left: auto; white-space: nowrap; }
+.cg-nav-links a { text-decoration: none; color: #444; font-weight: 500; }
+.cg-nav-links a:hover { color: #8338ec; }
+
+.cg-main { padding: 20px; min-height: 60vh; }
+.cg-page-title { margin: 0 0 4px; font-size: 22px; }
+.cg-page-sub { margin: 0 0 16px; color: #6b7280; }
+.cg-back { display: inline-block; margin-bottom: 12px; color: #8338ec; text-decoration: none; }
+
+.cg-carousel { max-width: 520px; }
+.cg-stage { display: flex; align-items: stretch; gap: 10px; }
+.cg-slide {
+  flex: 1; min-height: 220px; border-radius: 12px; color: #fff; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
+  font-size: 18px; text-shadow: 0 1px 2px rgba(0,0,0,.35);
+}
+.cg-arrow {
+  width: 44px; border: 1px solid #d0d5dd; background: #fff; border-radius: 10px;
+  font-size: 22px; line-height: 1; color: #14212b;
+}
+.cg-arrow:hover { border-color: #8338ec; color: #8338ec; }
+
+.cg-index { text-align: center; margin: 10px 0; color: #6b7280; font-variant-numeric: tabular-nums; }
+
+.cg-dots { display: flex; justify-content: center; gap: 8px; }
+.cg-dot {
+  width: 12px; height: 12px; padding: 0; border-radius: 50%;
+  border: 1px solid #c0c6cf; background: #fff;
+}
+.cg-dot.is-active { background: #8338ec; border-color: #8338ec; }
+
+.cg-album-list { list-style: none; padding: 0; margin: 0; }
+.cg-album-item {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 10px 0; border-bottom: 1px solid #eceff2;
+}
+
+.cg-footer { padding: 16px 20px; border-top: 1px solid #e2e6ea; color: #6b7280; font-size: 13px; }

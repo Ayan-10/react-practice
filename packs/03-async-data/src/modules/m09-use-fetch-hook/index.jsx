@@ -1,37 +1,10 @@
-import { useEffect, useState } from "react";
-import { fetchUsers } from "../../shared/api.js";
-
-/**
- * MODULE m09 — useFetch custom hook. Read PROMPT.md.
- *
- * Implement useFetch(fn) -> { data, loading, error }.
- */
-export function useFetch(fn) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // TODO: run fn() on mount / when fn changes; manage data/loading/error;
-  //       ignore results after unmount.
-
-  return { data, loading, error };
-}
-
-export default function UserList({ loadUsers = fetchUsers }) {
-  const { data, loading, error } = useFetch(loadUsers);
-
-  // TODO: render loading / error / list of user-item.
-
-  return (
-    <div>
-      <h2>Users</h2>
-      <div data-testid="user-list" className="grid">
-        {(data || []).map((u) => (
-          <div key={u.id} className="card" data-testid="user-item">
-            {u.name}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+// Entry point for the m09 mini-app (CountryStats).
+// The whole project lives in this folder:
+//   App.jsx                – app root (layout + routes)
+//   components/            – Navbar, UserList + useFetch (👈 BUILD here), Footer
+//   pages/                 – Home, About
+//   data/countries.js      – local dataset + default loader (offline)
+//   styles.css
+//
+// 👉 The feature to build lives in components/UserList.jsx. Read PROMPT.md.
+export { default } from "./App.jsx";
