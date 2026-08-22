@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import M01 from "./modules/m01-tabs/index.jsx";
 import M02 from "./modules/m02-accordion/index.jsx";
@@ -36,10 +36,10 @@ function Menu() {
       <ul className="module-menu">
         {MODULES.map((m) => (
           <li key={m.path}>
-            <Link to={m.path}>
+            <a href={`/${m.path}`}>
               {m.title}
               <small>{m.topic}</small>
-            </Link>
+            </a>
           </li>
         ))}
       </ul>
@@ -48,21 +48,19 @@ function Menu() {
 }
 
 export default function App() {
+  const path = window.location.pathname;
+  const active = MODULES.find(
+    (m) => path === `/${m.path}` || path.startsWith(`/${m.path}/`)
+  );
+
+  if (!active) return <Menu />;
+
   return (
-    <Routes>
-      <Route path="/" element={<Menu />} />
-      {MODULES.map((m) => (
-        <Route
-          key={m.path}
-          path={`${m.path}/*`}
-          element={
-            <div className="app-shell">
-              <Link className="back-link" to="/">← All modules</Link>
-              {m.el}
-            </div>
-          }
-        />
-      ))}
-    </Routes>
+    <BrowserRouter basename={`/${active.path}`}>
+      <div className="app-shell">
+        <a className="back-link" href="/">← All modules</a>
+        {active.el}
+      </div>
+    </BrowserRouter>
   );
 }
