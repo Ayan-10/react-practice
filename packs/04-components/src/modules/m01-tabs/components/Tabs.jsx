@@ -1,4 +1,4 @@
-import { useState } from "react";
+// TODO: implement DocsViewer tabs behavior — see PROMPT.md
 import { DOCS_TABS } from "../data/docs.js";
 
 /**
@@ -11,9 +11,7 @@ import { DOCS_TABS } from "../data/docs.js";
  * REQUIRED data-testids: tab-<id> (per tab), panel.
  */
 export default function Tabs({ tabs = DOCS_TABS }) {
-  const [activeId, setActiveId] = useState(tabs[0]?.id);
-
-  const active = tabs.find((t) => t.id === activeId) ?? tabs[0];
+  // TODO: track the active tab id with state (default to the first tab).
 
   return (
     <div>
@@ -23,15 +21,17 @@ export default function Tabs({ tabs = DOCS_TABS }) {
           <button
             key={t.id}
             data-testid={`tab-${t.id}`}
-            className={t.id === active?.id ? "dv-tab active" : "dv-tab"}
-            onClick={() => setActiveId(t.id)}
+            className="dv-tab"
+            onClick={() => {
+              // TODO: set the active tab id on click.
+            }}
           >
             {t.label}
           </button>
         ))}
       </div>
       <div className="dv-panel" data-testid="panel">
-        {active?.content}
+        {/* TODO: render only the active tab's content here. */}
       </div>
     </div>
   );

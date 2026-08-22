@@ -15,25 +15,9 @@ export default function GifSearch({ search = searchGifs }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    const q = query.trim();
-    if (!q) {
-      setResults([]);
-      return;
-    }
-
-    let active = true;
-    const id = setTimeout(() => {
-      search(q).then((list) => {
-        if (active) setResults(list);
-      });
-    }, 300);
-
-    return () => {
-      active = false;
-      clearTimeout(id);
-    };
-  }, [query, search]);
+  // TODO: debounce `query` by 300ms, then call search(q) and store the
+  // results. Skip the call (and clear results) when the trimmed query is
+  // empty. Clean up the timeout on unmount/query change.
 
   return (
     <div className="gs-search">

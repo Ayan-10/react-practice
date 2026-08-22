@@ -15,24 +15,15 @@ export default function Stopwatch() {
   const [ticks, setTicks] = useState(0);
   const timer = useRef(null);
 
-  function start() {
-    if (timer.current !== null) return; // guard double-start
-    timer.current = setInterval(() => {
-      setTicks((t) => t + 1);
-    }, 100);
-  }
+  // TODO: implement start() (begin a 100ms setInterval that increments
+  // ticks, held in `timer`; guard against double-start), stop() (clear the
+  // interval if running, preserving the current value), and reset() (stop,
+  // then set ticks back to 0).
+  function start() {}
 
-  function stop() {
-    if (timer.current !== null) {
-      clearInterval(timer.current);
-      timer.current = null;
-    }
-  }
+  function stop() {}
 
-  function reset() {
-    stop();
-    setTicks(0);
-  }
+  function reset() {}
 
   return (
     <div className="gt-stopwatch">

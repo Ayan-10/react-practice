@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { loadUsers as defaultLoadUsers } from "../data/users.ts";
 
 export type User = { id: number; name: string };
@@ -18,29 +18,15 @@ export type FetchState<T> = {
  * unmount are ignored (an `alive` flag guards the async setState).
  */
 export function useFetch<T>(fn: () => Promise<T>): FetchState<T> {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [data] = useState<T | null>(null);
+  const [loading] = useState<boolean>(true);
+  const [error] = useState<Error | null>(null);
 
-  useEffect(() => {
-    let alive = true;
-    setLoading(true);
-    setError(null);
-    fn()
-      .then((result) => {
-        if (!alive) return;
-        setData(result);
-        setLoading(false);
-      })
-      .catch((err: Error) => {
-        if (!alive) return;
-        setError(err);
-        setLoading(false);
-      });
-    return () => {
-      alive = false;
-    };
-  }, [fn]);
+  // TODO: run `fn()` on mount / when `fn` changes (in a useEffect). On
+  // success, store the result in `data` and stop loading. On failure, store
+  // the error and stop loading. Guard against setting state after unmount
+  // with an `alive` flag.
+  void fn;
 
   return { data, loading, error };
 }

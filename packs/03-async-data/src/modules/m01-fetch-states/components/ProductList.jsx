@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// TODO: implement fetch states (loading / error / empty / data) — see PROMPT.md
 import { loadSneakers } from "../data/sneakers.js";
 
 /**
@@ -6,56 +6,19 @@ import { loadSneakers } from "../data/sneakers.js";
  *
  * `load` returns a promise resolving to { products, total }. It is injected as a
  * prop so tests can supply deterministic mocks; it defaults to the local
- * offline loader so the mini-app renders real data.
- *
- * Render exactly ONE of: loading / error / empty / product-list.
+ * offline loader.
  *
  * TODO: track loading + error state.
  * TODO: call load() on mount; on success store products, on failure set error;
  *       always stop loading when done. Use an `active` cleanup flag.
- * TODO: return the loading / error / empty branches BEFORE the list.
+ * TODO: render exactly ONE of loading / error / empty / product-list.
  */
 export default function ProductList({ load = loadSneakers }) {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    let active = true;
-    setLoading(true);
-    setError(null);
-    load()
-      .then(({ products: list }) => {
-        if (!active) return;
-        setProducts(list);
-        setLoading(false);
-      })
-      .catch(() => {
-        if (!active) return;
-        setError("Something went wrong");
-        setLoading(false);
-      });
-    return () => {
-      active = false;
-    };
-  }, [load]);
-
-  if (loading) return <p data-testid="loading">Loading…</p>;
-  if (error) return <p data-testid="error">{error}</p>;
-  if (products.length === 0)
-    return <p data-testid="empty">No products found.</p>;
-
+  // TODO: implement the fetch-states behavior described in PROMPT.md.
   return (
     <div className="ss-listing">
       <h2 className="ss-feature-title">Sneakers</h2>
-      <div data-testid="product-list" className="ss-grid">
-        {products.map((p) => (
-          <div key={p.id} className="ss-card" data-testid="product-item">
-            <h3 className="ss-card-title">{p.title}</h3>
-            <p className="ss-card-meta">${p.price}</p>
-          </div>
-        ))}
-      </div>
+      <p>Nothing yet.</p>
     </div>
   );
 }

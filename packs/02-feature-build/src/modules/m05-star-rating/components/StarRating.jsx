@@ -22,32 +22,24 @@ export default function StarRating({ max = 5, onChange = () => {} }) {
   const [selected, setSelected] = useState(0);
   const [hovered, setHovered] = useState(0);
 
-  const active = hovered || selected;
-
-  function handleClick(n) {
-    setSelected(n);
-    onChange(n);
-  }
-
   return (
     <div className="mr-rating card" style={{ maxWidth: 320 }}>
       <h2 className="mr-rating-title">Your rating</h2>
-      <div className="mr-stars" onMouseLeave={() => setHovered(0)}>
-        {Array.from({ length: max }, (_, i) => i + 1).map((n) => {
-          const filled = n <= active;
-          return (
-            <span
-              key={n}
-              data-testid={`star-${n}`}
-              className={filled ? "mr-star filled" : "mr-star"}
-              style={{ cursor: "pointer", fontSize: 28, color: filled ? "#f5a623" : "#ccc" }}
-              onClick={() => handleClick(n)}
-              onMouseEnter={() => setHovered(n)}
-            >
-              ★
-            </span>
-          );
-        })}
+      <div className="mr-stars">
+        {/* TODO: for each star n in 1..max, mark it "filled" (className
+            includes "filled") when n <= (hovered || selected). On click, set
+            selected to n and call onChange(n). On hover, set hovered to n; on
+            leaving the row, reset hovered to 0. */}
+        {Array.from({ length: max }, (_, i) => i + 1).map((n) => (
+          <span
+            key={n}
+            data-testid={`star-${n}`}
+            className="mr-star"
+            style={{ cursor: "pointer", fontSize: 28, color: "#ccc" }}
+          >
+            ★
+          </span>
+        ))}
       </div>
       <p className="mr-rating-line">
         Rating: <span data-testid="rating-value">{selected}</span>

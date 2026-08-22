@@ -10,10 +10,12 @@ import { loadTasks } from "../data/tasks.js";
  * check off a task, delete a DIFFERENT task above it, and the checkmark
  * suddenly appears on the WRONG task.
  *
- * BUG: this list uses the array INDEX as the React `key`. When a task is
+ * 🐞 BUG: this list uses the array INDEX as the React `key`. When a task is
  * removed, every row below it shifts up one index, so React matches the old
  * component instances (and their checkbox state) to the wrong tasks. The
  * per-row state "leaks" to a neighbour.
+ *
+ * // TODO (fix): use a stable unique key (task.id), not the array index.
  *
  * Everything else in this project already works — only edit this component.
  *
@@ -29,9 +31,9 @@ export default function TaskList() {
 
   return (
     <ul className="tb-task-list" data-testid="task-list">
-      {tasks.map((task) => (
+      {tasks.map((task, index) => (
         <TaskRow
-          key={task.id}
+          key={index}
           task={task}
           onRemove={() => remove(task.id)}
         />

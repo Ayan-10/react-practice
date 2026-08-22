@@ -7,12 +7,14 @@ import { INITIAL_PROFILE } from "../data/profile.js";
  * SettingsForm lets you edit your display name and email, with a live preview
  * of how the profile card will read.
  *
- * TWO BUGS, both classic "controlled input" mistakes:
+ * 🐞 BUG: TWO classic "controlled input" mistakes:
  *   1. `email` starts as `undefined` in state, so React renders the email field
  *      as an UNCONTROLLED input (and warns in the console). It should be "".
  *   2. `handleChange` hard-codes the `name` key, so typing in the EMAIL field
  *      wrongly overwrites `name` — the email never updates and the preview is
  *      wrong.
+ *
+ * // TODO (fix): controlled email (empty-string initial) + use e.target.name as the key.
  *
  * Everything else in this project already works — only edit this component.
  *
@@ -20,17 +22,13 @@ import { INITIAL_PROFILE } from "../data/profile.js";
  *   name, email, preview, save, saved-msg
  */
 export default function SettingsForm({ onSave }) {
-  const [form, setForm] = useState({ name: INITIAL_PROFILE.name, email: "" });
+  const [form, setForm] = useState({ name: INITIAL_PROFILE.name, email: undefined });
   const [saved, setSaved] = useState(false);
 
   function handleChange(e) {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { value } = e.target;
+    setForm((prev) => ({ ...prev, name: value }));
   }
-
-  // TODO (fix):
-  //   1. Start email as "" (never undefined) so both inputs are controlled.
-  //   2. Update the field that changed: setForm(prev => ({ ...prev, [name]: value })).
 
   function handleSave() {
     onSave?.(form);

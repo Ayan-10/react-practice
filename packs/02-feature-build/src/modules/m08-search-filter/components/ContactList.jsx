@@ -18,9 +18,9 @@ export default function ContactList() {
   const [contacts] = useState(CONTACTS);
   const [query, setQuery] = useState("");
 
-  const filtered = contacts.filter((c) =>
-    c.name.toLowerCase().includes(query.toLowerCase())
-  );
+  // TODO: filter `contacts` by a case-insensitive substring match of `query`
+  // against each contact's name.
+  const filtered = contacts;
 
   return (
     <div className="ca-feature" data-testid="contact-feature">

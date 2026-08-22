@@ -1,4 +1,4 @@
-import { Routes, Route, Link, MemoryRouter } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 import M01 from "./modules/m01-filter-chips/index.jsx";
 import M02 from "./modules/m02-currency-converter/index.jsx";
@@ -54,11 +54,7 @@ export default function App() {
           element={
             <div className="app-shell">
               <Link className="back-link" to="/">← All modules</Link>
-              {/* Each module is a self-contained mini-app that renders its own
-                  <Routes> with relative links (to="/", to="/saved", …), so we
-                  give it its own MemoryRouter to keep that navigation internal —
-                  it never collides with the pack's own URL. */}
-              <MemoryRouter initialEntries={["/"]}>{m.el}</MemoryRouter>
+              {m.el}
             </div>
           }
         />

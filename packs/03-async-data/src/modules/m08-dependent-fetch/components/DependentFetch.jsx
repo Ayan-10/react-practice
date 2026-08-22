@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { loadUsers as defaultLoadUsers, loadPosts as defaultLoadPosts } from "../data/team.js";
 
 /**
@@ -21,29 +21,10 @@ export default function DependentFetch({
   const [selected, setSelected] = useState("");
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    let alive = true;
-    loadUsers().then((list) => {
-      if (alive) setUsers(list);
-    });
-    return () => {
-      alive = false;
-    };
-  }, [loadUsers]);
-
-  useEffect(() => {
-    if (!selected) {
-      setPosts([]);
-      return;
-    }
-    let alive = true;
-    loadPosts(selected).then((list) => {
-      if (alive) setPosts(list);
-    });
-    return () => {
-      alive = false;
-    };
-  }, [selected, loadPosts]);
+  // TODO: on mount, call loadUsers() and store the list.
+  // TODO: whenever `selected` changes, call loadPosts(selected) and store
+  // the result (clear posts when nothing is selected). Use an `alive`
+  // cleanup flag in both effects to ignore stale responses.
 
   return (
     <div className="td-feature">

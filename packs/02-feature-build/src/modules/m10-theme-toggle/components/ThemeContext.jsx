@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext } from "react";
 
 /**
  * FEATURE TO BUILD — Theme toggle via Context (no prop drilling).
@@ -23,20 +23,17 @@ import { createContext, useContext, useState } from "react";
 export const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("light");
-  const toggle = () => setTheme((t) => (t === "light" ? "dark" : "light"));
-  return (
-    <ThemeContext.Provider value={{ theme, toggle }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  // TODO: hold theme state ("light" | "dark") and a toggle that flips it,
+  // then provide { theme, toggle } through ThemeContext.Provider so
+  // descendants (like the Navbar) can read/flip it without prop drilling.
+  return <>{children}</>;
 }
 
 export function useTheme() {
-  // TODO: return useContext(ThemeContext) once the provider supplies a value.
+  // TODO: return useContext(ThemeContext) once the provider actually
+  // supplies a value above.
   //
   // STUB: safe default so the app still renders. Theme is frozen at "light"
   // and toggle is a no-op, so the toggle feature test fails.
-  const ctx = useContext(ThemeContext);
-  return ctx ?? { theme: "light", toggle: () => {} };
+  return { theme: "light", toggle: () => {} };
 }

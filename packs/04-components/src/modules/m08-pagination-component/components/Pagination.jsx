@@ -11,11 +11,9 @@ import { useState } from "react";
  * containing "active").
  */
 export function Pagination({ totalPages, current, onChange }) {
-  const WINDOW = 5;
-  const size = Math.min(WINDOW, totalPages);
-  let start = current - Math.floor(WINDOW / 2);
-  start = Math.max(1, Math.min(start, totalPages - size + 1));
-  const pages = Array.from({ length: size }, (_, i) => start + i);
+  // TODO: compute a sliding window of up to 5 page numbers centered on
+  // `current`, clamped to [1, totalPages] so it never runs off either end.
+  const pages = [current];
 
   return (
     <div className="sr-pagination">

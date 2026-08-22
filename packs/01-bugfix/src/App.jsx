@@ -1,4 +1,4 @@
-import { Routes, Route, Link, MemoryRouter } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 // Each module exports a default React component. Register it here so it
 // shows up in the dev menu and gets a route. Tests import modules directly,
@@ -57,11 +57,7 @@ export default function App() {
           element={
             <div className="app-shell">
               <Link className="back-link" to="/">← All modules</Link>
-              {/* Each module is a self-contained mini-app. It renders its own
-                  <Routes> and uses absolute links (to="/", to="/saved", …), so
-                  we give it its own MemoryRouter to keep that navigation
-                  internal — it never collides with the pack's own URL. */}
-              <MemoryRouter initialEntries={["/"]}>{m.el}</MemoryRouter>
+              {m.el}
             </div>
           }
         />

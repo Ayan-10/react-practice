@@ -20,11 +20,9 @@ function Comment({ comment }) {
     <div data-testid={`comment-${comment.id}`} className="ft-comment">
       <div className="ft-comment-row">
         {hasReplies && (
-          <button
-            className="ft-toggle"
-            data-testid={`toggle-${comment.id}`}
-            onClick={() => setExpanded((e) => !e)}
-          >
+          // TODO: onClick should flip `expanded` so collapsing hides this
+          // node's subtree (and only this node's — siblings stay untouched).
+          <button className="ft-toggle" data-testid={`toggle-${comment.id}`}>
             {expanded ? "−" : "+"}
           </button>
         )}

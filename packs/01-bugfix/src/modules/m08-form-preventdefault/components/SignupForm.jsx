@@ -8,10 +8,12 @@ import { makeSubscriber, isValidEmail } from "../data/subscribers.js";
  * email and press "Subscribe", their address is added to the "Newest
  * subscribers" list and a success message shows — all in-place.
  *
- * BUG: the submit handler never calls e.preventDefault(). In a real browser the
- * native form submit fires and the page RELOADS, throwing away the new state.
- * The handler must call e.preventDefault() FIRST so the JS owns the submit and
- * the page never reloads.
+ * 🐞 BUG: the submit handler never calls e.preventDefault(). In a real browser
+ * the native form submit fires and the page RELOADS, throwing away the new
+ * state. The handler must call e.preventDefault() FIRST so the JS owns the
+ * submit and the page never reloads.
+ *
+ * // TODO (fix): call e.preventDefault() at the top of the submit handler.
  *
  * Everything else in this project already works — only edit this component.
  *
@@ -25,8 +27,6 @@ export default function SignupForm({ subscribers, onSubscribe }) {
   const [added, setAdded] = useState(null);
 
   function handleSubmit(e) {
-    e.preventDefault();
-
     if (!isValidEmail(email)) {
       setError("Please enter a valid email address.");
       return;

@@ -30,32 +30,19 @@ export default function TodoList() {
   const [text, setText] = useState("");
   const [filter, setFilter] = useState("all"); // all | active | completed
 
-  function addTodo() {
-    const trimmed = text.trim();
-    if (!trimmed) return;
-    setTodos((prev) => [
-      ...prev,
-      { id: "todo-" + Date.now(), text: trimmed, done: false },
-    ]);
-    setText("");
-  }
+  // TODO: implement addTodo (append a new { id, text, done: false } built
+  // from the trimmed input, ignore empty/whitespace-only, clear the input),
+  // toggle (flip a todo's done flag by id), and remove (delete a todo by id).
+  function addTodo() {}
 
-  function toggle(id) {
-    setTodos((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
-    );
-  }
+  function toggle(id) {}
 
-  function remove(id) {
-    setTodos((prev) => prev.filter((t) => t.id !== id));
-  }
+  function remove(id) {}
 
-  const visible = todos.filter((t) => {
-    if (filter === "active") return !t.done;
-    if (filter === "completed") return t.done;
-    return true;
-  });
-  const itemsLeft = todos.filter((t) => !t.done).length;
+  // TODO: derive `visible` from `todos` based on `filter`
+  // (all/active/completed) and `itemsLeft` as the count of not-done todos.
+  const visible = todos;
+  const itemsLeft = todos.length;
 
   return (
     <div className="dp-feature" data-testid="todo-feature">

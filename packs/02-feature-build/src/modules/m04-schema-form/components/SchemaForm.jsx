@@ -37,33 +37,11 @@ export default function SchemaForm({
     setValues((prev) => ({ ...prev, [name]: value }));
   }
 
+  // TODO: on submit, prevent default, validate every field (required + email
+  // format), setErrors and bail out if any are invalid, otherwise clear
+  // errors and call onSubmit with the coerced payload (numbers -> Number).
   function handleSubmit(e) {
     e.preventDefault();
-    const nextErrors = {};
-    for (const field of schema) {
-      const raw = String(values[field.name] ?? "").trim();
-      if (field.required && raw === "") {
-        nextErrors[field.name] = `${field.label} is required`;
-        continue;
-      }
-      if (field.type === "email" && raw !== "" && !raw.includes("@")) {
-        nextErrors[field.name] = "Invalid email";
-      }
-    }
-
-    if (Object.keys(nextErrors).length > 0) {
-      setErrors(nextErrors);
-      return;
-    }
-
-    setErrors({});
-    const payload = Object.fromEntries(
-      schema.map((field) => {
-        const raw = values[field.name];
-        return [field.name, field.type === "number" ? Number(raw) : raw];
-      })
-    );
-    onSubmit(payload);
   }
 
   return (

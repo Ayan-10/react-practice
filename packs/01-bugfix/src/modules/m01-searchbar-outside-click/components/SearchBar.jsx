@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { searchHouses } from "../data/houses.js";
 
 /**
@@ -20,7 +20,6 @@ export default function SearchBar() {
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
   const searchRef = useRef(null);
-  const location = useLocation();
   const navigate = useNavigate();
 
   async function handleChange(e) {
@@ -36,19 +35,12 @@ export default function SearchBar() {
     }
   }
 
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [location.pathname]);
+  // TODO (fix): the dropdown opens on typing but NOTHING ever closes it.
+  //   1. Add a useEffect that attaches a "mousedown" listener on `document`;
+  //      if the click target is NOT inside `searchRef.current`, setOpen(false).
+  //      Remember to remove the listener in the effect cleanup.
+  //   2. Add a second useEffect keyed on the route (useLocation().pathname)
+  //      that calls setOpen(false) whenever the route changes.
 
   return (
     <div

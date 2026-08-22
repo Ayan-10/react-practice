@@ -19,19 +19,9 @@ export default function BookList() {
   const [books] = useState(BOOKS);
   const [sort, setSort] = useState("price-asc");
 
-  const sorted = [...books].sort((a, b) => {
-    switch (sort) {
-      case "price-desc":
-        return b.price - a.price;
-      case "rating-desc":
-        return b.rating - a.rating;
-      case "title-asc":
-        return a.title.localeCompare(b.title);
-      case "price-asc":
-      default:
-        return a.price - b.price;
-    }
-  });
+  // TODO: sort a COPY of `books` by `sort` ("price-asc" default, "price-desc",
+  // "rating-desc", "title-asc" via localeCompare). Never mutate `books`.
+  const sorted = books;
 
   return (
     <div className="bs-feature">

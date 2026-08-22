@@ -1,0 +1,97 @@
+/* PhotoWall mini-app styles (prefix: pw-) */
+
+.pw-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #1a1a1a;
+}
+
+.pw-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #fafafa;
+}
+
+.pw-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #111827;
+}
+
+.pw-nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.pw-nav-link {
+  text-decoration: none;
+  color: #2563eb;
+}
+
+.pw-nav-link:hover {
+  text-decoration: underline;
+}
+
+.pw-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.pw-home-title,
+.pw-albums-title {
+  margin-top: 0;
+}
+
+.pw-home-sub {
+  color: #6b7280;
+}
+
+.pw-grid-title {
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.pw-grid,
+.pw-album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.pw-tile {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #fff;
+}
+
+.pw-load-more {
+  margin-top: 16px;
+  padding: 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.pw-load-more:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pw-back-link {
+  color: #2563eb;
+}
+
+.pw-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 0.85rem;
+}

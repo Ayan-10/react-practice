@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { loadCoins } from "../data/coins.js";
 
 /**
@@ -17,26 +17,14 @@ import { loadCoins } from "../data/coins.js";
  */
 export default function RetryList({ load = loadCoins }) {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function fetchData() {
-    setLoading(true);
-    setError(null);
-    try {
-      const { products: list } = await load();
-      setProducts(list);
-    } catch {
-      setError("Failed to load coins");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // TODO: implement fetchData() — set loading true, clear error, await
+  // load(), store the products on success or setError(...) on failure,
+  // always clear loading. Call it once on mount, and again from the Retry
+  // button's onClick below.
+  async function fetchData() {}
 
   if (loading) return <p data-testid="loading">Loading…</p>;
 

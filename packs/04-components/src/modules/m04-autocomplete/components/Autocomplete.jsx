@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { loadCommands } from "../data/commands.js";
 
 /**
@@ -22,23 +22,9 @@ export default function Autocomplete({ getSuggestions = loadCommands }) {
   const [highlight, setHighlight] = useState(0);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (!open) return;
-    const q = query.trim();
-    if (!q) {
-      setOptions([]);
-      return;
-    }
-    let active = true;
-    getSuggestions(q).then((list) => {
-      if (!active) return;
-      setOptions(list);
-      setHighlight(0);
-    });
-    return () => {
-      active = false;
-    };
-  }, [query, open, getSuggestions]);
+  // TODO: whenever `open`/`query` change, call getSuggestions(query.trim())
+  // (skip when empty) and store the results, resetting `highlight` to 0.
+  // Use an `active` cleanup flag to ignore stale responses.
 
   function select(value) {
     setQuery(value);
@@ -51,19 +37,9 @@ export default function Autocomplete({ getSuggestions = loadCommands }) {
     setOpen(true);
   }
 
-  function onKeyDown(e) {
-    if (!open || options.length === 0) return;
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setHighlight((h) => Math.min(options.length - 1, h + 1));
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setHighlight((h) => Math.max(0, h - 1));
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      select(options[highlight]);
-    }
-  }
+  // TODO: on ArrowDown/ArrowUp move `highlight` within bounds; on Enter call
+  // select(options[highlight]). No-op when the list is closed/empty.
+  function onKeyDown() {}
 
   const showList = open && options.length > 0;
 

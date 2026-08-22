@@ -23,23 +23,10 @@ export default function LikeButton({
   const [liked, setLiked] = useState(initialLiked);
   const [count, setCount] = useState(initialCount);
 
-  async function toggle() {
-    const prevLiked = liked;
-    const prevCount = count;
-    const nextLiked = !prevLiked;
-
-    // Optimistically update the UI right away.
-    setLiked(nextLiked);
-    setCount(nextLiked ? prevCount + 1 : prevCount - 1);
-
-    try {
-      await save(nextLiked);
-    } catch {
-      // Roll back on failure.
-      setLiked(prevLiked);
-      setCount(prevCount);
-    }
-  }
+  // TODO: flip `liked` and adjust `count` IMMEDIATELY (optimistic), then call
+  // save(nextLiked). If it rejects, roll both `liked` and `count` back to
+  // their previous values.
+  async function toggle() {}
 
   return (
     <button

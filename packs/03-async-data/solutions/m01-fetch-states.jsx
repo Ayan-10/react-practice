@@ -1,8 +1,9 @@
-// SOLUTION — m01 Fetch states.
+// SOLUTION — m01 SneakerShop fetch states.
+// Copy this over components/ProductList.jsx to self-check.
 import { useEffect, useState } from "react";
-import { fetchProducts } from "../../shared/api.js";
+import { loadSneakers } from "../data/sneakers.js";
 
-export default function ProductList({ load = fetchProducts }) {
+export default function ProductList({ load = loadSneakers }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -31,11 +32,11 @@ export default function ProductList({ load = fetchProducts }) {
   if (products.length === 0) return <p data-testid="empty">No products</p>;
 
   return (
-    <div>
-      <h2>Products</h2>
-      <div data-testid="product-list" className="grid">
+    <div className="ss-listing">
+      <h2 className="ss-feature-title">Sneakers</h2>
+      <div data-testid="product-list" className="ss-grid">
         {products.map((p) => (
-          <div key={p.id} className="card" data-testid="product-item">
+          <div key={p.id} className="ss-card" data-testid="product-item">
             <h3>{p.title}</h3>
             <p>${p.price}</p>
           </div>

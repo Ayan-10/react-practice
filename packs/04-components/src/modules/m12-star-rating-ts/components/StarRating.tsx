@@ -23,7 +23,9 @@ export default function StarRating({
 }: StarRatingProps) {
   const [hovered, setHovered] = useState<number | null>(null);
 
-  const active = hovered ?? value;
+  // TODO: derive `active` from `hovered ?? value` (so hovering star n
+  // previews n filled) and call `onChange?.(n)` on click below.
+  const active = value;
   const stars = Array.from({ length: count }, (_, i) => i + 1);
 
   return (
@@ -36,7 +38,7 @@ export default function StarRating({
             className={n <= active ? "rw-star filled" : "rw-star"}
             onMouseEnter={() => setHovered(n)}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => onChange?.(n)}
+            onClick={() => {}}
           >
             ★
           </button>

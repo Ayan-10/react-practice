@@ -24,27 +24,15 @@ export default function CheckoutWizard({ onSubmit = () => {} }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
-  function next() {
-    if (step === 1 && name.trim() === "") {
-      setError("Name is required");
-      return;
-    }
-    if (step === 2 && !email.includes("@")) {
-      setError("A valid email is required");
-      return;
-    }
-    setError("");
-    setStep((s) => s + 1);
-  }
+  // TODO: implement next() (validate the current step — non-empty name on
+  // step 1, email containing "@" on step 2 — setError and stay on invalid,
+  // otherwise clear the error and advance), back() (go to the previous step,
+  // clear any error), and handleSubmit() (call onSubmit({ name, email })).
+  function next() {}
 
-  function back() {
-    setError("");
-    setStep((s) => s - 1);
-  }
+  function back() {}
 
-  function handleSubmit() {
-    onSubmit({ name, email });
-  }
+  function handleSubmit() {}
 
   return (
     <div className="cf-wizard">

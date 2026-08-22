@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { PRODUCTS, CATEGORIES, filterProducts } from "../data/products.js";
 
 /**
@@ -8,14 +8,15 @@ import { PRODUCTS, CATEGORIES, filterProducts } from "../data/products.js";
  * minimum price. Whenever the filters change, an effect recomputes a short
  * "summary" line AND reports the filtered products back up to the page.
  *
- * BUG: the effect depends on a `filters` OBJECT that is re-created as a brand
+ * 🐞 BUG: the effect depends on a `filters` OBJECT that is re-created as a brand
  * new literal on EVERY render. React compares dependencies by reference, so the
  * object always looks "new" → the effect runs every render → it setStates →
  * that re-renders → the effect runs again … an infinite loop. You'll see
  * `render-count` climb without anyone touching the controls.
  *
- * Fix it so the effect only runs when the filter VALUES actually change
- * (`category` or `minPrice`), not on every render.
+ * // TODO (fix): make the effect only run when the filter VALUES actually change
+ * (`category` or `minPrice`), not on every render — e.g. depend on the primitive
+ * values `[category, minPrice]`, or memoize the object with useMemo.
  *
  * DO NOT change or remove any existing data-testid attributes:
  *   category, min-price, summary, render-count
@@ -32,12 +33,13 @@ export default function ProductFilters({ onFiltersChange }) {
   const runs = useRef(0);
   const CAP = 25;
 
-  // FIX: memoize the object so it only changes when the primitive filter
-  // VALUES change, instead of being re-created on every render.
-  const filters = useMemo(() => ({ category, minPrice }), [category, minPrice]);
+  // 🐞 BUG: this object literal is re-created fresh on EVERY render, so it is a
+  // new reference each time. Using it as the effect dependency below makes the
+  // effect run every render → infinite loop.
+  const filters = { category, minPrice };
 
-  // TODO: Make this effect depend on the primitive filter VALUES instead of the
-  //       `filters` object. Either:
+  // TODO (fix): Make this effect depend on the primitive filter VALUES instead of
+  //       the `filters` object. Either:
   //         useEffect(() => { ... }, [category, minPrice]);
   //       or memoize the object:
   //         const filters = useMemo(() => ({ category, minPrice }), [category, minPrice]);

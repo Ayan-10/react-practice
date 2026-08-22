@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { loadCountries } from "../data/countries.js";
 
 /**
@@ -15,33 +14,10 @@ import { loadCountries } from "../data/countries.js";
  * REQUIRED data-testids: loading, error, user-list, user-item.
  */
 export function useFetch(fn) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    let alive = true;
-    setLoading(true);
-    setError(null);
-    fn()
-      .then((result) => {
-        if (alive) {
-          setData(result);
-          setLoading(false);
-        }
-      })
-      .catch((err) => {
-        if (alive) {
-          setError(err);
-          setLoading(false);
-        }
-      });
-    return () => {
-      alive = false;
-    };
-  }, [fn]);
-
-  return { data, loading, error };
+  // TODO: implement using useState + useEffect. On mount (and whenever `fn`
+  // changes) set loading, clear error, call fn(), and store the resolved
+  // data or the caught error. Guard against setting state after unmount.
+  return { data: null, loading: false, error: null };
 }
 
 export default function UserList({ loadUsers = loadCountries }) {

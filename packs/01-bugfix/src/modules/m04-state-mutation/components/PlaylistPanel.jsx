@@ -8,12 +8,12 @@ import { SONGS } from "../data/songs.js";
  * (right). Clicking "+ Add" on a song should append it to the playlist and the
  * count in the navbar should go up. Clicking "×" should remove it.
  *
- * BUG: the add/remove handlers MUTATE the existing `playlist` array in place
+ * 🐞 BUG: the add/remove handlers MUTATE the existing `playlist` array in place
  * (`.push`, `.splice`) and then hand the SAME array reference back to
  * `setPlaylist`. Because the reference never changes, React bails out of the
  * re-render and the UI never updates — songs seem to vanish.
  *
- * Everything else in this project already works — only edit this component.
+ * // TODO (fix): update state immutably (new array)
  *
  * DO NOT change or remove any existing data-testid attributes:
  *   library-grid, playlist, playlist-item, playlist-count,
@@ -21,11 +21,18 @@ import { SONGS } from "../data/songs.js";
  */
 export default function PlaylistPanel({ playlist, setPlaylist }) {
   function addSong(song) {
-    setPlaylist((prev) => [...prev, song]);
+    // 🐞 BUG: mutate the same array and pass the SAME reference back. React
+    // compares by reference, sees no change, and bails out — the UI never updates.
+    // TODO (fix): update state immutably (new array), e.g. setPlaylist([...playlist, song]).
+    playlist.push(song);
+    setPlaylist(playlist);
   }
 
   function removeSong(index) {
-    setPlaylist((prev) => prev.filter((_, i) => i !== index));
+    // 🐞 BUG: splice mutates in place and hands back the SAME reference — no re-render.
+    // TODO (fix): update state immutably (new array), e.g. playlist.filter((_, i) => i !== index).
+    playlist.splice(index, 1);
+    setPlaylist(playlist);
   }
 
   return (

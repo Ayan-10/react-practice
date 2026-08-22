@@ -23,7 +23,10 @@ type TabsProps = {
 export default function Tabs({ tabs = DEFAULT_TABS }: TabsProps) {
   const [activeId, setActiveId] = useState<string>(tabs[0]?.id);
 
-  const active = tabs.find((t) => t.id === activeId) ?? tabs[0];
+  // TODO: derive `active` from `activeId` (falling back to the first tab)
+  // and wire the button onClick below to setActiveId(t.id) so clicking
+  // switches the visible panel.
+  const active = tabs[0];
 
   return (
     <div className="se-tabs">

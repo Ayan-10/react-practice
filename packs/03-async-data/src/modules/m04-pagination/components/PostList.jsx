@@ -4,60 +4,30 @@ import PostCard from "./PostCard.jsx";
 
 const PAGE_SIZE = 2;
 
-/**
- * FEATURE (STUB) — m04 BlogList pagination.
- *
- * `load({ limit, skip })` resolves { products, total }. Implement the paging
- * logic below so the feature tests pass. Copy over the completed component
- * from solutions/m04-pagination.jsx to self-check.
- */
+// TODO: implement pagination — see PROMPT.md
+//
+// `load({ limit, skip })` resolves { products, total }. Implement:
+//   - track the current page (1-based) in state
+//   - fetch the current page on mount and whenever the page changes
+//   - render page-info as "Page {page} of {totalPages}"
+//   - Prev/Next buttons that change the page; disable Prev on page 1 and
+//     Next on the last page
+// Required data-testids: product-list, prev, page-info, next (already wired
+// below — keep them).
 export default function PostList({ load = loadPosts }) {
-  const [page, setPage] = useState(1);
-  const [products, setProducts] = useState([]);
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    let active = true;
-    const skip = (page - 1) * PAGE_SIZE;
-    load({ limit: PAGE_SIZE, skip }).then(({ products: list, total: t }) => {
-      if (!active) return;
-      setProducts(list);
-      setTotal(t);
-    });
-    return () => {
-      active = false;
-    };
-  }, [page, load]);
-
-  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-
   return (
     <div className="bl-postlist">
       <h2 className="bl-postlist-title">Posts</h2>
-      <div data-testid="product-list" className="bl-grid">
-        {products.map((p) => (
-          <PostCard key={p.id} post={p} />
-        ))}
-      </div>
+      <div data-testid="product-list" className="bl-grid"></div>
 
       <div className="bl-pager">
-        <button
-          data-testid="prev"
-          className="bl-btn"
-          disabled={page <= 1}
-          onClick={() => setPage((p) => Math.max(1, p - 1))}
-        >
+        <button data-testid="prev" className="bl-btn" disabled>
           Prev
         </button>
         <span data-testid="page-info" className="bl-page-info">
-          Page {page} of {totalPages}
+          Page 1 of 1
         </span>
-        <button
-          data-testid="next"
-          className="bl-btn"
-          disabled={page >= totalPages}
-          onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-        >
+        <button data-testid="next" className="bl-btn" disabled>
           Next
         </button>
       </div>

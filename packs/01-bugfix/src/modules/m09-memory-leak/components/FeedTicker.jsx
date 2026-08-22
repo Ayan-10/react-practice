@@ -8,7 +8,7 @@ import { subscribe, SEED_EVENTS } from "../data/feed.js";
  * (an interval-driven pub/sub in data/feed.js) that pushes a new event every
  * second and prepends it to local state.
  *
- * BUG (memory leak / setState-after-unmount): the effect starts the
+ * 🐞 BUG (memory leak / setState-after-unmount): the effect starts the
  * subscription but NEVER cleans it up. When this component unmounts (toggle it
  * off, or navigate to the Archive route), the interval keeps firing and keeps
  * calling `setEvents` on an unmounted component — a classic leak. It also means
@@ -23,11 +23,13 @@ export default function FeedTicker() {
   const [events, setEvents] = useState(SEED_EVENTS);
 
   useEffect(() => {
-    const unsubscribe = subscribe((evt) => {
+    // 🐞 BUG: subscribe on mount but never unsubscribe — the effect returns
+    // nothing, so the interval keeps firing after unmount (leak).
+    subscribe((evt) => {
       setEvents((prev) => [evt, ...prev].slice(0, 8));
     }, 1000);
 
-    return () => unsubscribe();
+    // TODO (fix): return a cleanup from the effect that unsubscribes on unmount.
   }, []);
 
   return (

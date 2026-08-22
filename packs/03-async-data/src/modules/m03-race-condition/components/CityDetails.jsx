@@ -7,22 +7,20 @@ import { loadCity } from "../data/cities.js";
  * Clicking select-1 / select-2 changes the selected city id. An effect calls
  * load(id) and renders the result in data-testid="detail".
  *
- * BUG: the effect applies the load result UNCONDITIONALLY, so a slow earlier
- * request can overwrite a fast later one. Fix = ignore stale responses via an
- * `active` cleanup flag. See PROMPT.md.
+ * 🐞 BUG: the effect applies the load result UNCONDITIONALLY, so a slow
+ * earlier request can overwrite a fast later one.
+ * TODO (fix): ignore stale responses via an `active` cleanup flag (set it
+ * false in the effect's cleanup and guard the `setDetail` call with it).
+ * See PROMPT.md.
  */
 export default function CityDetails({ load = loadCity }) {
   const [id, setId] = useState(1);
   const [detail, setDetail] = useState("");
 
   useEffect(() => {
-    let active = true;
     load(id).then((value) => {
-      if (active) setDetail(value);
+      setDetail(value);
     });
-    return () => {
-      active = false;
-    };
   }, [id, load]);
 
   return (

@@ -1,10 +1,11 @@
-// SOLUTION — m05 Infinite scroll / load more.
+// SOLUTION — m05 PhotoWall infinite scroll.
+// Copy this over components/PhotoGrid.jsx to self-check.
 import { useEffect, useState } from "react";
-import { fetchProducts } from "../../shared/api.js";
+import { loadPhotos } from "../data/photos.js";
 
 const PAGE_SIZE = 2;
 
-export default function InfiniteList({ load = fetchProducts }) {
+export default function PhotoGrid({ load = loadPhotos }) {
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
 
@@ -22,18 +23,22 @@ export default function InfiniteList({ load = fetchProducts }) {
   const hasMore = total === 0 ? false : items.length < total;
 
   return (
-    <div>
-      <h2>Products</h2>
-      <div data-testid="product-list" className="grid">
+    <div className="pw-grid-wrap">
+      <h2 className="pw-grid-title">Photos</h2>
+      <div data-testid="product-list" className="pw-grid">
         {items.map((p) => (
-          <div key={p.id} className="card" data-testid="product-item">
+          <div key={p.id} className="pw-tile" data-testid="product-item">
             {p.title}
           </div>
         ))}
       </div>
 
       {hasMore ? (
-        <button data-testid="load-more" onClick={() => loadBatch(items.length)}>
+        <button
+          data-testid="load-more"
+          className="pw-load-more"
+          onClick={() => loadBatch(items.length)}
+        >
           Load more
         </button>
       ) : (

@@ -19,15 +19,15 @@ export default function TimerPanel() {
 
   useEffect(() => {
     if (!running) return;
-    // TODO (fix): this interval reads `count` from the closure at the time the
-    //             effect ran (the moment you pressed Start). Because `count`
-    //             was 0 then, it forever computes `0 + 1` and gets stuck at 1.
+    // 🐞 BUG: this interval reads `count` from the closure captured the moment
+    //         the effect ran (when you pressed Start). Because `count` was 0
+    //         then, it forever computes `0 + 1` and gets stuck at 1.
     //
-    //             Use the FUNCTIONAL updater `setCount((c) => c + 1)` so the
+    // TODO (fix): use the FUNCTIONAL updater `setCount((c) => c + 1)` so the
     //             callback always sees the latest value — no stale closure.
     //             (An alternative is to keep the latest count in a ref.)
     const id = setInterval(() => {
-      setCount((c) => c + 1);
+      setCount(count + 1);
     }, 1000);
     return () => clearInterval(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps

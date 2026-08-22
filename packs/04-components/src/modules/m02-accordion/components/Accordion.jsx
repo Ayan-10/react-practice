@@ -1,4 +1,4 @@
-import { useState } from "react";
+// TODO: implement FaqPage accordion behavior — see PROMPT.md
 import { FAQ_ITEMS } from "../data/faqs.js";
 
 /**
@@ -10,18 +10,10 @@ import { FAQ_ITEMS } from "../data/faqs.js";
  * REQUIRED data-testids: header-<id> (per item), panel-<id> (open panels).
  */
 export default function Accordion({ items = FAQ_ITEMS, multi = false }) {
-  const [openIds, setOpenIds] = useState(() => new Set());
+  // TODO: track which panel ids are open (respecting `multi`).
 
   function toggle(id) {
-    setOpenIds((prev) => {
-      const next = new Set(multi ? prev : []);
-      if (prev.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
+    // TODO: open/close the panel for `id`.
   }
 
   return (
@@ -36,11 +28,7 @@ export default function Accordion({ items = FAQ_ITEMS, multi = false }) {
           >
             {item.title}
           </button>
-          {openIds.has(item.id) && (
-            <div data-testid={`panel-${item.id}`} className="fq-accordion-panel">
-              {item.body}
-            </div>
-          )}
+          {/* TODO: render <div data-testid={`panel-${item.id}`}> when open. */}
         </div>
       ))}
     </div>

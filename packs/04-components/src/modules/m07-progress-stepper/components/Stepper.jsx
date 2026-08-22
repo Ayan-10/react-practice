@@ -15,7 +15,9 @@ export default function Stepper({ steps = DEFAULT_STEPS }) {
   const [index, setIndex] = useState(0);
 
   const lastIndex = steps.length - 1;
-  const percent = lastIndex === 0 ? 100 : (index / lastIndex) * 100;
+  // TODO: compute `percent` as index / lastIndex * 100 (100 when there's
+  // only one step).
+  const percent = 0;
 
   return (
     <div className="ow-stepper">
@@ -33,19 +35,16 @@ export default function Stepper({ steps = DEFAULT_STEPS }) {
         />
       </div>
       <div className="ow-controls">
-        <button
-          className="ow-btn"
-          data-testid="back"
-          disabled={index === 0}
-          onClick={() => setIndex((i) => Math.max(0, i - 1))}
-        >
+        {/* TODO: Back should decrement `index` (clamped to 0) and be
+            disabled at index 0. Next should increment `index` (clamped to
+            lastIndex) and be disabled at lastIndex. */}
+        <button className="ow-btn" data-testid="back" disabled={index === 0}>
           Back
         </button>
         <button
           className="ow-btn"
           data-testid="next"
           disabled={index === lastIndex}
-          onClick={() => setIndex((i) => Math.min(lastIndex, i + 1))}
         >
           Next
         </button>

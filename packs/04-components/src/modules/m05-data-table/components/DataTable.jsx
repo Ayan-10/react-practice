@@ -16,33 +16,15 @@ export default function DataTable({ rows = SALES_ROWS }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
 
-  function onSort(key) {
-    if (sortKey === key) {
-      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
-    } else {
-      setSortKey(key);
-      setSortDir("asc");
-    }
-  }
+  // TODO: implement onSort(key) — first click on a column sorts ascending,
+  // a second click on the SAME column flips to descending, clicking a
+  // different column resets to ascending on that column.
+  function onSort() {}
 
-  const filtered = rows.filter((r) =>
-    r.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
-  const visible = [...filtered];
-  if (sortKey) {
-    visible.sort((a, b) => {
-      const av = a[sortKey];
-      const bv = b[sortKey];
-      let cmp;
-      if (typeof av === "string") {
-        cmp = av.localeCompare(bv);
-      } else {
-        cmp = av - bv;
-      }
-      return sortDir === "asc" ? cmp : -cmp;
-    });
-  }
+  // TODO: filter `rows` by a case-insensitive substring match of `filter`
+  // against each row's name, then (if a sortKey is set) sort a copy by that
+  // key/direction (localeCompare for strings, numeric subtraction otherwise).
+  const visible = rows;
 
   return (
     <div>

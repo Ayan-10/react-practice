@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// TODO: implement ImageGallery modal (lightbox) behavior — see PROMPT.md
 
 /**
  * THE FEATURE — m03 ImageGallery modal (lightbox).
@@ -10,16 +10,7 @@ import { useEffect, useState } from "react";
  * REQUIRED data-testids: open-btn, backdrop, modal, close-btn.
  */
 export default function Modal() {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-    function onKeyDown(e) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  // TODO: track open state; close on Close button, backdrop click, and Escape.
 
   return (
     <div>
@@ -27,33 +18,14 @@ export default function Modal() {
       <button
         className="ig-open-btn"
         data-testid="open-btn"
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          // TODO: open the modal.
+        }}
       >
         Open
       </button>
 
-      {open && (
-        <div
-          data-testid="backdrop"
-          className="ig-modal-backdrop"
-          onClick={() => setOpen(false)}
-        >
-          <div
-            data-testid="modal"
-            className="ig-modal"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <p>Modal content</p>
-            <button
-              className="ig-close-btn"
-              data-testid="close-btn"
-              onClick={() => setOpen(false)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      {/* TODO: when open, render backdrop + modal (data-testid backdrop/modal/close-btn). */}
     </div>
   );
 }
