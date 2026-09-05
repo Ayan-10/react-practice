@@ -24,15 +24,15 @@ export default function PlaylistPanel({ playlist, setPlaylist }) {
     // 🐞 BUG: mutate the same array and pass the SAME reference back. React
     // compares by reference, sees no change, and bails out — the UI never updates.
     // TODO (fix): update state immutably (new array), e.g. setPlaylist([...playlist, song]).
-    playlist.push(song);
-    setPlaylist(playlist);
+    // playlist.push(song);
+    setPlaylist([...playlist, song]);
   }
 
   function removeSong(index) {
     // 🐞 BUG: splice mutates in place and hands back the SAME reference — no re-render.
     // TODO (fix): update state immutably (new array), e.g. playlist.filter((_, i) => i !== index).
     playlist.splice(index, 1);
-    setPlaylist(playlist);
+    setPlaylist([...playlist]);
   }
 
   return (

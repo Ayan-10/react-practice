@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { PRODUCTS, CATEGORIES, filterProducts } from "../data/products.js";
 
 /**
@@ -36,7 +36,8 @@ export default function ProductFilters({ onFiltersChange }) {
   // 🐞 BUG: this object literal is re-created fresh on EVERY render, so it is a
   // new reference each time. Using it as the effect dependency below makes the
   // effect run every render → infinite loop.
-  const filters = { category, minPrice };
+  // const filters = { category, minPrice };
+  const filters = useMemo(() => ({ category, minPrice }), [category, minPrice]);
 
   // TODO (fix): Make this effect depend on the primitive filter VALUES instead of
   //       the `filters` object. Either:
@@ -57,7 +58,10 @@ export default function ProductFilters({ onFiltersChange }) {
     );
     onFiltersChange(matches);
     setRenderCount((c) => (c < CAP ? c + 1 : c));
-  }, [filters]);
+  }, 
+  // [category, minPrice]
+   [filters] 
+);
 
   return (
     <div className="pf-filters" data-testid="product-filters">

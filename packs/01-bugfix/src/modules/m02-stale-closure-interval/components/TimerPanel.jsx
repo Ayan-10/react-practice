@@ -27,7 +27,7 @@ export default function TimerPanel() {
     //             callback always sees the latest value — no stale closure.
     //             (An alternative is to keep the latest count in a ref.)
     const id = setInterval(() => {
-      setCount(count + 1);
+      setCount((c) => c + 1);
     }, 1000);
     return () => clearInterval(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps

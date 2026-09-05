@@ -33,7 +33,7 @@ export default function TaskList() {
     <ul className="tb-task-list" data-testid="task-list">
       {tasks.map((task, index) => (
         <TaskRow
-          key={index}
+          key={task.id}
           task={task}
           onRemove={() => remove(task.id)}
         />

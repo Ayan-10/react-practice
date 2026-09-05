@@ -38,7 +38,7 @@ export default function WeatherPanel({ city }) {
     // TODO (fix): add the selected city to the dependency array: `}, [city]);`
     //             so the weather refetches whenever the selected city changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [city]);
 
   return (
     <div className="wd-panel" data-testid="weather-panel">
