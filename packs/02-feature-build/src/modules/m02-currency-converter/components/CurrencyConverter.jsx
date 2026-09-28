@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { fetchRate } from "../../../shared/api.js";
 import { CURRENCIES } from "../data/currencies.js";
@@ -15,9 +15,27 @@ export default function CurrencyConverter() {
   const [amount, setAmount] = useState(1);
   const [from, setFrom] = useState("USD");
   const [to, setTo] = useState("EUR");
+  const [rate, setRate] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+
+  useEffect(() => {
+
+    setLoading(true);
+    fetchRate(from, to).then((rate) => {
+
+      setRate(rate);
+      setLoading(false);
+
+    })
+
+  }, [from, to])
 
   // TODO: fetch the exchange rate for {from -> to} and compute the result.
-  const converted = 0;
+  const converted = rate == null ? 0 : amount * rate;
+
+
+
 
   return (
     <div className="tw-feature">

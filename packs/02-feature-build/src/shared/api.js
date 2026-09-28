@@ -95,10 +95,11 @@ export async function searchProducts(query) {
  */
 export async function fetchRate(from, to) {
   try {
-    const res = await fetch(`https://api.frankfurter.app/latest?from=${from}&to=${to}`);
+    const res = await fetch(`https://allratestoday.com/api/rate?source=${from}&target=${to}`);
     if (!res.ok) throw new Error("Bad response");
     const data = await res.json();
-    return data.rates[to];
+    console.log("fetchRate", from, to, data.rate);
+    return data.rate;
   } catch {
     return 1;
   }

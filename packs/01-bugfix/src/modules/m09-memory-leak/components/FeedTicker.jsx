@@ -29,6 +29,8 @@ export default function FeedTicker() {
       setEvents((prev) => [evt, ...prev].slice(0, 8));
     }, 1000);
 
+    return () => unsubscribe(); // ✅ FIX: cleanup on unmount to stop the interval and release the subscription
+
     // TODO (fix): return a cleanup from the effect that unsubscribes on unmount.
   }, []);
 

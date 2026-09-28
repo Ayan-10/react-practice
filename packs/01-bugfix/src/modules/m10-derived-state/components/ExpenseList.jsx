@@ -31,12 +31,14 @@ export default function ExpenseList() {
 
   // 🐞 BUG: derived data stored in state — only recomputed in handleCategory,
   // so it goes stale whenever `expenses` changes (e.g. on Add).
-  const [filtered, setFiltered] = useState(() =>
-    filterByCategory(EXPENSES, "All")
-  );
-  const [total, setTotal] = useState(() =>
-    sumAmount(filterByCategory(EXPENSES, "All"))
-  );
+  // const [filtered, setFiltered] = useState(() =>
+  //   filterByCategory(EXPENSES, "All")
+  // );
+  // const [total, setTotal] = useState(() =>
+  //   sumAmount(filterByCategory(EXPENSES, "All"))
+  // );
+  const filtered = filterByCategory(expenses, category);
+  const total = sumAmount(filtered);
 
   // TODO (fix): derive filtered list & total during render instead of storing
   // them in state.

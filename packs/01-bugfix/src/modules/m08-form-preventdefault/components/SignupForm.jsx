@@ -27,6 +27,8 @@ export default function SignupForm({ subscribers, onSubscribe }) {
   const [added, setAdded] = useState(null);
 
   function handleSubmit(e) {
+    e.preventDefault()
+    
     if (!isValidEmail(email)) {
       setError("Please enter a valid email address.");
       return;

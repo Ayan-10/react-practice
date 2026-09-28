@@ -33,16 +33,38 @@ export default function TodoList() {
   // TODO: implement addTodo (append a new { id, text, done: false } built
   // from the trimmed input, ignore empty/whitespace-only, clear the input),
   // toggle (flip a todo's done flag by id), and remove (delete a todo by id).
-  function addTodo() {}
+  function addTodo() {
+    const trimmed = text.trim();
+    if (trimmed) {
+      const newTodo = {
+        id: Date.now().toString(),
+        text: trimmed,
+        done: false,
+      }
+      setTodos([...todos, newTodo]);
+      setText("");
+    }
+  }
 
-  function toggle(id) {}
+  function toggle(id) {
+    setTodos((prev) => 
+        prev.map((todo) => (todo.id === id) ? { ...todo, done: !todo.done } : todo
+    ))
+  }
 
-  function remove(id) {}
+  function remove(id) {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  }
 
   // TODO: derive `visible` from `todos` based on `filter`
   // (all/active/completed) and `itemsLeft` as the count of not-done todos.
-  const visible = todos;
-  const itemsLeft = todos.length;
+  const visible = todos.filter((todo) => {
+    if(filter === "active") return !todo.done;
+    if(filter === "completed") return todo.done;
+    return true;
+  })
+
+  const itemsLeft = todos.filter((todo) => !todo.done).length;
 
   return (
     <div className="dp-feature" data-testid="todo-feature">
@@ -94,21 +116,21 @@ export default function TodoList() {
 
       <div className="dp-footer-row">
         <button
-          className="dp-tab"
+          className={`dp-tab` + (filter === "all" ? " active" : "")}
           data-testid="filter-all"
           onClick={() => setFilter("all")}
         >
           All
         </button>
         <button
-          className="dp-tab"
+          className={`dp-tab` + (filter === "active" ? " active" : "")}
           data-testid="filter-active"
           onClick={() => setFilter("active")}
         >
           Active
         </button>
         <button
-          className="dp-tab"
+          className={`dp-tab` + (filter === "completed" ? " active" : "")}
           data-testid="filter-completed"
           onClick={() => setFilter("completed")}
         >

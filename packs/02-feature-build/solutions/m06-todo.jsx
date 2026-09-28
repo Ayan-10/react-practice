@@ -89,14 +89,14 @@ export default function TodoList() {
           All
         </button>
         <button
-          className="dp-tab"
+          className={`dp-tab` + (filter === "active" ? " active" : "")}
           data-testid="filter-active"
           onClick={() => setFilter("active")}
         >
           Active
         </button>
         <button
-          className="dp-tab"
+          className={`dp-tab` + (filter === "completed" ? " completed" : "")}
           data-testid="filter-completed"
           onClick={() => setFilter("completed")}
         >

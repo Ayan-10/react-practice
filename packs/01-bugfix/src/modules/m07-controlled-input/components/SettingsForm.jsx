@@ -22,12 +22,12 @@ import { INITIAL_PROFILE } from "../data/profile.js";
  *   name, email, preview, save, saved-msg
  */
 export default function SettingsForm({ onSave }) {
-  const [form, setForm] = useState({ name: INITIAL_PROFILE.name, email: undefined });
+  const [form, setForm] = useState({ name: INITIAL_PROFILE.name, email: INITIAL_PROFILE.email }); // ❌ email starts as undefined, should be "" for controlled input
   const [saved, setSaved] = useState(false);
 
   function handleChange(e) {
     const { value } = e.target;
-    setForm((prev) => ({ ...prev, name: value }));
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value })); // ❌ hard-coded key, wrong for email
   }
 
   function handleSave() {
