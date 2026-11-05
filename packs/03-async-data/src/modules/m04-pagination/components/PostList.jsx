@@ -15,19 +15,47 @@ const PAGE_SIZE = 2;
 // Required data-testids: product-list, prev, page-info, next (already wired
 // below — keep them).
 export default function PostList({ load = loadPosts }) {
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    load({limit: PAGE_SIZE, skip: (page - 1) * PAGE_SIZE})
+    .then((data) => {
+      setPosts(data.products);
+      setTotalPages(Math.ceil(data.total / PAGE_SIZE));
+    });
+  }, [load, page]);
+
+  const handlePrev = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  }
+
   return (
     <div className="bl-postlist">
       <h2 className="bl-postlist-title">Posts</h2>
-      <div data-testid="product-list" className="bl-grid"></div>
+      <div data-testid="product-list" className="bl-grid">
+        {posts.map((post) => (
+          <PostCard key={post.id} post={post} />
+        ))}
+      </div>
 
       <div className="bl-pager">
-        <button data-testid="prev" className="bl-btn" disabled>
+        <button data-testid="prev" className="bl-btn" disabled={page === 1} onClick={handlePrev}>
           Prev
         </button>
         <span data-testid="page-info" className="bl-page-info">
-          Page 1 of 1
+          Page {page} of {totalPages}
         </span>
-        <button data-testid="next" className="bl-btn" disabled>
+        <button data-testid="next" className="bl-btn" disabled={page === totalPages} onClick={handleNext}>
           Next
         </button>
       </div>

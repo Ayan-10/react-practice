@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { loadStatus } from "../data/status.js";
 
 const INTERVAL = 1000;
@@ -25,6 +25,25 @@ export default function Poller({ load = loadStatus }) {
   // TODO: fetch once on mount, then every INTERVAL ms via setInterval. Update
   // `value` and increment `count` on each successful fetch. Clean up the
   // interval (and guard late resolutions with an `alive` flag) on unmount.
+
+  useEffect(() => {
+    let alive = true;  
+    function fetchData() {
+      load().then((data) => {
+        if (!alive) return;
+        setValue(data);
+        setCount((prevCount) => prevCount + 1);
+      });
+    }
+
+    fetchData(); // Initial fetch on mount
+    const intervalId = setInterval(fetchData, INTERVAL);
+
+    return () => {
+      alive = false;
+      clearInterval(intervalId);
+    };
+  }, [load]);
 
   return (
     <div className="sm-monitor">

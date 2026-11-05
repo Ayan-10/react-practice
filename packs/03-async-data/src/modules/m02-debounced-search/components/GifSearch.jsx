@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { searchGifs } from "../data/gifs.js";
+import useDebounce from "../hooks/useDebounce.js";
 
 /**
  * FEATURE — GifSearch (debounced search).
@@ -7,17 +8,23 @@ import { searchGifs } from "../data/gifs.js";
  * Debounce `query` by 300ms before calling `search(query)`, then render the
  * results. `search` is injected as a prop (defaults to the local `searchGifs`
  * helper) so tests can pass a mock alongside fake timers.
- *
- * STUB: this renders the input + results container but does NOT debounce or
- * call `search`. Implement it so the feature tests pass.
  */
 export default function GifSearch({ search = searchGifs }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const debouncedQuery = useDebounce(query, 300);
 
-  // TODO: debounce `query` by 300ms, then call search(q) and store the
-  // results. Skip the call (and clear results) when the trimmed query is
-  // empty. Clean up the timeout on unmount/query change.
+  useEffect(() => {
+    const trimmedQuery = debouncedQuery.trim();
+    if (trimmedQuery === "") {
+      setResults([]);
+      return;
+    }
+
+    search(trimmedQuery).then((data) => {
+      setResults(data);
+    });
+  }, [debouncedQuery, search]);
 
   return (
     <div className="gs-search">

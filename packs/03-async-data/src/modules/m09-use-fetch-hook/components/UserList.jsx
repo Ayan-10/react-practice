@@ -1,3 +1,4 @@
+import { use } from "react";
 import { loadCountries } from "../data/countries.js";
 
 /**
@@ -17,7 +18,38 @@ export function useFetch(fn) {
   // TODO: implement using useState + useEffect. On mount (and whenever `fn`
   // changes) set loading, clear error, call fn(), and store the resolved
   // data or the caught error. Guard against setting state after unmount.
-  return { data: null, loading: false, error: null };
+  
+  useEffect(() => {
+    let alive = true;
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await fn();
+        if (alive) {
+          setData(data);
+        }
+      } catch (err) {
+        if (alive) {
+          setError(err.message || "An error occurred");
+        }
+      } finally {
+        if (alive) {
+          setLoading(false);
+        }
+      }
+    };
+    fetchData();
+    return () => {
+      alive = false;
+    };
+  }, [fn]);
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  return { data, loading, error };
 }
 
 export default function UserList({ loadUsers = loadCountries }) {

@@ -20,7 +20,9 @@ export default function ContactList() {
 
   // TODO: filter `contacts` by a case-insensitive substring match of `query`
   // against each contact's name.
-  const filtered = contacts;
+  const filtered = [...contacts].filter((c)=> {
+    return c.name.toLowerCase().includes(query.toLowerCase());
+  });
 
   return (
     <div className="ca-feature" data-testid="contact-feature">

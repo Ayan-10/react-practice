@@ -18,9 +18,14 @@ export default function CityDetails({ load = loadCity }) {
   const [detail, setDetail] = useState("");
 
   useEffect(() => {
+    let active = true;
     load(id).then((value) => {
+      if (!active) return;
       setDetail(value);
     });
+    return () => {
+      active = false;
+    }
   }, [id, load]);
 
   return (

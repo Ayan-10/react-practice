@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState, useEffect } from "react";
 import { loadCoins } from "../data/coins.js";
 
 /**
@@ -24,7 +24,22 @@ export default function RetryList({ load = loadCoins }) {
   // load(), store the products on success or setError(...) on failure,
   // always clear loading. Call it once on mount, and again from the Retry
   // button's onClick below.
-  async function fetchData() {}
+  async function fetchData() {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await load();
+      setProducts(data.products);
+    } catch (err) {
+      setError(err.message || "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   if (loading) return <p data-testid="loading">Loading…</p>;
 

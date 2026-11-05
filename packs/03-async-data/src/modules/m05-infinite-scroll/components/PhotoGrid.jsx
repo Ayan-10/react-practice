@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { loadPhotos } from "../data/photos.js";
 
 const PAGE_SIZE = 2;
@@ -18,6 +18,16 @@ export default function PhotoGrid({ load = loadPhotos }) {
   // TODO: implement loadBatch(skip) that awaits load({ limit: PAGE_SIZE, skip })
   //       then APPENDS data.products to items and sets total.
 
+  const loadBatch = async (skip) => {
+    const data = await load({ limit: PAGE_SIZE, skip });
+    setItems((prev) => [...prev, ...data.products]);
+    setTotal(data.total);
+  }
+
+  useEffect(() => {
+    loadBatch(0);
+  }, [load]);
+
   const hasMore = total === 0 ? false : items.length < total;
 
   return (
@@ -33,7 +43,8 @@ export default function PhotoGrid({ load = loadPhotos }) {
 
       {/* TODO: render load-more (onClick loadBatch(items.length)) while hasMore,
           else render <p data-testid="end">No more</p>. */}
-      <button data-testid="load-more" className="pw-load-more">
+
+      <button data-testid="load-more" className="pw-load-more" onClick={() => loadBatch(items.length)} disabled={!hasMore}>
         Load more
       </button>
     </div>
